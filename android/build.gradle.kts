@@ -13,15 +13,17 @@ plugins {
     alias(antibytesCatalog.plugins.kmock)
 }
 
+val projectPackage = "org.acyb.sayit"
+
 kmock {
-    rootPackage = "tech.antibytes.project.example"
+    rootPackage = projectPackage
 }
 
 android {
-    namespace = "tech.antibytes.project.example"
+    namespace = projectPackage
 
     defaultConfig {
-        applicationId = "tech.antibytes.project.example.app"
+        applicationId = "${projectPackage}.app"
         versionCode = 1
         versionName = "1.0"
 
