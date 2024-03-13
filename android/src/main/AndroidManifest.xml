@@ -1,0 +1,24 @@
+<!--
+  ~ Copyright (c) 2024 Matthias Geisler (bitPogo) / All rights reserved.
+  ~
+  ~ Use of this source code is governed by Apache v2.0
+  -->
+
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <application
+        android:name="org.acyb.sayit.app.SayIt"
+        android:supportsRtl="true"
+        >
+        <activity
+            android:name="org.acyb.sayit.MainActivity"
+            android:exported="true"
+            android:windowSoftInputMode="adjustResize"
+            >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+    </application>
+</manifest>
