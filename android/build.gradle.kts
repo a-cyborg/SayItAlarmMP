@@ -73,9 +73,15 @@ dependencies {
 
     implementation(antibytesCatalog.android.appCompact.core)
 
+    implementation(antibytesCatalog.android.ktx.activity.compose)
     implementation(antibytesCatalog.android.compose.ui.core)
     implementation(antibytesCatalog.android.material.compose.core)
+
     implementation(antibytesCatalog.android.compose.foundation.core)
+
+    implementation(antibytesCatalog.android.material.core)
+    implementation(antibytesCatalog.android.material.compose.icons)
+    implementation(antibytesCatalog.android.material.compose.extendedIcons)
 
     testImplementation(antibytesCatalog.testUtils.core)
     testImplementation(antibytesCatalog.testUtils.coroutine)
