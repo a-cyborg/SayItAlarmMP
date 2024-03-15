@@ -75,6 +75,7 @@ dependencyResolutionManagement {
 include(
     ":kmp-lib",
     ":example-android-application",
+    ":android",
     // ":docs",
 )
 
