@@ -9,6 +9,7 @@ plugins {
 
     alias(antibytesCatalog.plugins.gradle.antibytes.androidApplicationConfiguration)
     alias(antibytesCatalog.plugins.gradle.antibytes.coverage)
+    alias(antibytesCatalog.plugins.test.roborazzi.gradle)
 
     alias(antibytesCatalog.plugins.kmock)
 }
@@ -89,6 +90,9 @@ dependencies {
     testImplementation(antibytesCatalog.kmock)
     testImplementation(antibytesCatalog.android.test.junit.core)
     testImplementation(antibytesCatalog.jvm.test.junit.junit4)
+
+    testImplementation(antibytesCatalog.android.test.roborazzi.compose)
+    testImplementation(antibytesCatalog.android.test.roborazzi.junit)
 
     // Debug
     debugImplementation(antibytesCatalog.android.compose.ui.tooling.core)
