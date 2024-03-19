@@ -6,13 +6,14 @@
 
 package org.acyb.sayit.app.molecule
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.statusBars
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import org.acyb.sayit.app.atom.TextTitleSubtle
+import androidx.compose.ui.unit.dp
+import org.acyb.sayit.app.atom.TitleCentered
 import org.acyb.sayit.app.token.Color
 
 @Composable
@@ -23,17 +24,12 @@ fun TopAppBarGlobal(
     thirdIcon: @Composable () -> Unit,
 ) {
     TopAppBar(
-        title = {
-            Column(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalAlignment = Alignment.CenterHorizontally,
-            ) {
-                TextTitleSubtle(text = title)
-            }
-        },
+        title = { TitleCentered(title = title) },
         navigationIcon = firstIcon,
         actions = { secondIcon(); thirdIcon() },
         backgroundColor = Color.Surface.light,
         contentColor = Color.Text.accent,
+        elevation = 0.dp,
+        modifier = Modifier.windowInsetsPadding(WindowInsets.statusBars),
     )
 }

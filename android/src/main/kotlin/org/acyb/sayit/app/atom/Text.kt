@@ -12,38 +12,11 @@ import org.acyb.sayit.app.token.Color
 import org.acyb.sayit.app.token.Font
 
 @Composable
-fun TextDisplayStandard(text: String) {
-    Text(
-        text = text,
-        color = Color.text.standard,
-        style = Font.display.s,
-    )
-}
-
-@Composable
-fun TextTitleStandard(text: String) {
-    Text(
-        text = text,
-        color = Color.text.standard,
-        style = Font.title.l,
-    )
-}
-
-@Composable
 fun TextTitleSubtle(text: String) {
     Text(
         text = text,
         color = Color.text.subtle,
         style = Font.title.l,
-    )
-}
-
-@Composable
-fun TextLabelStandard(text: String) {
-    Text(
-        text = text,
-        color = Color.text.standard,
-        style = Font.label.m,
     )
 }
 
@@ -61,6 +34,15 @@ fun TextBodyStandard(text: String) {
     Text(
         text = text,
         color = Color.text.standard,
-        style = Font.body.m
+        style = Font.body.l
+    )
+}
+
+@Composable
+fun TextHeadlineStandard(text: String) {
+    Text(
+        text = text,
+        color = Color.text.standard,
+        style = Font.headline.s
     )
 }

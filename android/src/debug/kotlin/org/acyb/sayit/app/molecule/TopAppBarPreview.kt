@@ -16,20 +16,8 @@ import org.acyb.sayit.app.token.Icon
 fun TopAppBarGlobalPreview() {
     TopAppBarGlobal(
         title = "SayIt",
-        firstIcon = {
-            IconButtonAccent(label = "Edit") {}
-        },
-        secondIcon = {
-            IconButtonAccent(
-                icon = Icon.add,
-                contentDescription = "Generic content description",
-            ) {}
-        },
-        thirdIcon = {
-            IconButtonAccent(
-                icon = Icon.Settings,
-                contentDescription = "Generic content description"
-            ) {}
-        },
+        firstIcon = { IconButtonAccent(label = "Edit") {} },
+        secondIcon = { IconButtonAccent(icon = Icon.add, contentDescription = "") {} },
+        thirdIcon = { IconButtonAccent(icon = Icon.Settings, contentDescription = "") {} },
     )
 }

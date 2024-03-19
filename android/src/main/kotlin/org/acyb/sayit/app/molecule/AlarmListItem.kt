@@ -20,10 +20,9 @@ import androidx.compose.ui.res.stringResource
 import org.acyb.sayit.R
 import org.acyb.sayit.app.atom.IconButtonAccent
 import org.acyb.sayit.app.atom.IconButtonDanger
-import org.acyb.sayit.app.atom.SpacerLarge
 import org.acyb.sayit.app.atom.SwitchStandard
 import org.acyb.sayit.app.atom.TextBodyStandard
-import org.acyb.sayit.app.atom.TextLabelStandard
+import org.acyb.sayit.app.atom.TextHeadlineStandard
 import org.acyb.sayit.app.token.Color
 import org.acyb.sayit.app.token.Icon
 
@@ -39,24 +38,23 @@ fun AlarmListItem(
     onEditClick: () -> Unit,
 ) {
     Row(
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.SpaceEvenly,
         modifier = Modifier
             .fillMaxWidth()
             .height(IntrinsicSize.Min)
             .background(Color.Surface.light),
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.SpaceEvenly,
     ) {
-        when (isEditMode) {
-            true -> DeleteIconButton { onDeleteClick() }
-            false -> SpacerLarge()
+        if (isEditMode) {
+            DeleteIconButton { onDeleteClick() }
         }
 
         Column(
             modifier = Modifier.weight(1f),
             verticalArrangement = Arrangement.Center,
         ) {
-            TextBodyStandard(text = time)
-            TextLabelStandard(text = "$label, $weeklyRepeat")
+            TextHeadlineStandard(text = time)
+            TextBodyStandard(text = "$label, $weeklyRepeat")
         }
 
         when (isEditMode) {

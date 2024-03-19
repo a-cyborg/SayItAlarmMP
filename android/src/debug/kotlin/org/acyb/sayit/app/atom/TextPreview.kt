@@ -11,33 +11,24 @@ import androidx.compose.ui.tooling.preview.Preview
 
 @Preview
 @Composable
-fun TextStandardDisplayPreview() {
-    TextDisplayStandard(text = "SayIt")
-}
-@Preview
-@Composable
-fun TextStandardTitlePreview() {
-    TextTitleStandard(text = "SayIt")
-}
-
-@Preview
-@Composable
-fun TextSubtleTitlePreview() {
+fun TextTitleSubtlePreview() {
     TextTitleSubtle(text = "SayIt")
 }
 
 @Preview
 @Composable
-fun TextStandardLabelPreview() {
-    TextLabelStandard(text = "SayIt")
-}
-@Preview
-@Composable
-fun TextAccentLabelPreview() {
+fun TextLabelAccentPreview() {
     TextLabelAccent(text = "SayIt")
 }
+
 @Preview
 @Composable
-fun TextStandardBodyPreview() {
+fun TextBodyStandardPreview() {
     TextBodyStandard(text = "SayIt")
+}
+
+@Preview
+@Composable
+fun TextHeadlineStandardPreview() {
+    TextHeadlineStandard(text = "SayIt")
 }
