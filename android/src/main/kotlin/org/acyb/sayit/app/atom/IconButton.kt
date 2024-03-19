@@ -18,7 +18,7 @@ fun IconButtonAccent(
     onClick: () -> Unit,
 ) {
     IconButton(onClick = onClick) {
-        TextAccentLabel(text = label)
+        TextLabelAccent(text = label)
     }
 }
 
