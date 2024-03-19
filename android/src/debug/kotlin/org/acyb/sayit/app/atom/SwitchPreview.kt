@@ -8,19 +8,15 @@ package org.acyb.sayit.app.atom
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
-import org.acyb.sayit.app.token.Icon
 
 @Preview
 @Composable
-fun TextIconButtonPreview() {
-    TopAppBarIcon(label = "Button") {}
+fun SwitchStandardCheckedPreview() {
+    SwitchStandard(checked = true) {}
 }
 
 @Preview
 @Composable
-fun IconButtonPreview() {
-    TopAppBarIcon(
-        icon = Icon.add,
-        contentDescription = "Generic content description",
-    ) {}
+fun SwitchStandardUncheckedPreview() {
+    SwitchStandard(checked = false) {}
 }

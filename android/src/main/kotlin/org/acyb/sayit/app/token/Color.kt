@@ -13,6 +13,11 @@ object Color {
             val light = ColorPalette.Secondary.Green.light
             val dark = ColorPalette.Secondary.Green.dark
         }
+
+        object Accent {
+            val light = ColorPalette.Primary.Aqua.light
+            val dark = ColorPalette.Primary.Aqua.dark
+        }
     }
 
     object Text {

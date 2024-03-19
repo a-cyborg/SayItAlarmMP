@@ -8,7 +8,7 @@ package org.acyb.sayit.app.molecule
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
-import org.acyb.sayit.app.atom.TopAppBarIcon
+import org.acyb.sayit.app.atom.IconButtonAccent
 import org.acyb.sayit.app.token.Icon
 
 @Preview
@@ -16,17 +16,17 @@ import org.acyb.sayit.app.token.Icon
 fun TopAppBarGlobalPreview() {
     TopAppBarGlobal(
         title = "SayIt",
-        firstItem = {
-            TopAppBarIcon(label = "Edit") {}
+        firstIcon = {
+            IconButtonAccent(label = "Edit") {}
         },
-        secondItem = {
-            TopAppBarIcon(
+        secondIcon = {
+            IconButtonAccent(
                 icon = Icon.add,
                 contentDescription = "Generic content description",
             ) {}
         },
-        thirdItem = {
-            TopAppBarIcon(
+        thirdIcon = {
+            IconButtonAccent(
                 icon = Icon.Settings,
                 contentDescription = "Generic content description"
             ) {}

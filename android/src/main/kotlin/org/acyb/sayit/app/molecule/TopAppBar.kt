@@ -13,15 +13,15 @@ import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import org.acyb.sayit.app.atom.TextSubtle
+import org.acyb.sayit.app.atom.TextSubtleTitle
 import org.acyb.sayit.app.token.Color
 
 @Composable
 fun TopAppBarGlobal(
     title: String,
-    firstItem: @Composable () -> Unit,
-    secondItem: @Composable () -> Unit,
-    thirdItem: @Composable () -> Unit,
+    firstIcon: @Composable () -> Unit,
+    secondIcon: @Composable () -> Unit,
+    thirdIcon: @Composable () -> Unit,
 ) {
     TopAppBar(
         title = {
@@ -29,16 +29,11 @@ fun TopAppBarGlobal(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
-                TextSubtle(text = title)
+                TextSubtleTitle(text = title)
             }
         },
-        navigationIcon = firstItem,
-        actions = {
-            Row {
-                secondItem()
-                thirdItem()
-            }
-        },
+        navigationIcon = firstIcon,
+        actions = { secondIcon(); thirdIcon() },
         backgroundColor = Color.Surface.light,
         contentColor = Color.Text.accent,
     )

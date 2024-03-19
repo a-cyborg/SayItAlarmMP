@@ -13,17 +13,17 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import org.acyb.sayit.app.token.Color
 
 @Composable
-fun TopAppBarIcon(
+fun IconButtonAccent(
     label: String,
     onClick: () -> Unit,
 ) {
     IconButton(onClick = onClick) {
-        TextAccent(text = label)
+        TextAccentLabel(text = label)
     }
 }
 
 @Composable
-fun TopAppBarIcon(
+fun IconButtonAccent(
     icon: ImageVector,
     contentDescription: String,
     enabled: Boolean = true,
@@ -36,7 +36,26 @@ fun TopAppBarIcon(
         Icon(
             imageVector = icon,
             contentDescription = contentDescription,
-            tint = if (enabled) Color.Text.accent else Color.Text.subtle
+            tint = if (enabled) Color.text.accent else Color.text.subtle
+        )
+    }
+}
+
+@Composable
+fun IconButtonDanger(
+    icon: ImageVector,
+    contentDescription: String,
+    enabled: Boolean = true,
+    onClick: () -> Unit,
+) {
+    IconButton(
+        onClick = onClick,
+        enabled = enabled,
+    ) {
+        Icon(
+            imageVector = icon,
+            contentDescription = contentDescription,
+            tint = if (enabled) Color.text.danger else Color.text.subtle
         )
     }
 }
