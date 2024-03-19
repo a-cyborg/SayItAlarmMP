@@ -7,13 +7,12 @@
 package org.acyb.sayit.app.molecule
 
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import org.acyb.sayit.app.atom.TextSubtleTitle
+import org.acyb.sayit.app.atom.TextTitleSubtle
 import org.acyb.sayit.app.token.Color
 
 @Composable
@@ -29,7 +28,7 @@ fun TopAppBarGlobal(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
-                TextSubtleTitle(text = title)
+                TextTitleSubtle(text = title)
             }
         },
         navigationIcon = firstIcon,
