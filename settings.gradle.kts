@@ -30,7 +30,7 @@ pluginManagement {
 }
 
 plugins {
-    id("tech.antibytes.gradle.dependency.settings") version "288f8da"
+    id("tech.antibytes.gradle.dependency.settings") version "283c93a"
 }
 
 includeBuild("setup")
@@ -74,7 +74,6 @@ dependencyResolutionManagement {
 
 include(
     ":kmp-lib",
-    ":example-android-application",
     ":android",
     // ":docs",
 )
@@ -83,4 +82,4 @@ buildCache {
     fullCache(rootDir)
 }
 
-rootProject.name = "template-project"
+rootProject.name = "SayItKMP"

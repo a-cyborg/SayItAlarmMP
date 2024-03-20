@@ -93,6 +93,9 @@ dependencies {
 
     testImplementation(antibytesCatalog.android.test.roborazzi.compose)
     testImplementation(antibytesCatalog.android.test.roborazzi.junit)
+    testImplementation(antibytesCatalog.android.test.roborazzi.core)
+    testImplementation(antibytesCatalog.android.test.robolectric)
+    testImplementation(antibytesCatalog.android.test.espresso.core)
 
     // Debug
     debugImplementation(antibytesCatalog.android.compose.ui.tooling.core)
