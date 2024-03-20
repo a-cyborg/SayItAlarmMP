@@ -7,7 +7,11 @@
 
 <resources>
     <string name="app_name">SayIt</string>
+    <!-- Label -->
+    <string name="edit">Edit</string>
     <!-- ContentDescription -->
+    <string name="action_add_alarm">Add alarm</string>
     <string name="action_delete_alarm">Delete alarm</string>
     <string name="action_edit_alarm">Edit alarm</string>
+    <string name="action_open_settings">Open settings</string>
 </resources>
