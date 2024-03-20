@@ -63,6 +63,24 @@ android {
             matchingFallbacks.add("release")
         }
     }
+
+    testOptions {
+        unitTests {
+            isIncludeAndroidResources = true
+            all {
+                // -Pscreenshot to filter screenshot tests
+                it.useJUnit {
+                    if (project.hasProperty("screenshot")) {
+                        includeCategories("io.github.takahirom.roborazzi.testing.category.ScreenshotTests")
+                    }
+                }
+            }
+        }
+    }
+}
+
+roborazzi {
+    outputDir.set(project.layout.projectDirectory.dir("src/test/snapshots/roborazzi/images"))
 }
 
 dependencies {
@@ -90,6 +108,8 @@ dependencies {
     testImplementation(antibytesCatalog.kmock)
     testImplementation(antibytesCatalog.android.test.junit.core)
     testImplementation(antibytesCatalog.jvm.test.junit.junit4)
+    testImplementation(antibytesCatalog.android.test.compose.core)
+    testImplementation(antibytesCatalog.android.test.compose.junit4Rule)
 
     testImplementation(antibytesCatalog.android.test.roborazzi.compose)
     testImplementation(antibytesCatalog.android.test.roborazzi.junit)
