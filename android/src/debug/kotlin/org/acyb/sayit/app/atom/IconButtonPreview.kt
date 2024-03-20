@@ -8,22 +8,33 @@ package org.acyb.sayit.app.atom
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
-import org.acyb.sayit.app.token.Icon
 
 @Preview
 @Composable
-fun IconButtonAccentTextPreview() {
-    IconButtonAccent(label = "Button") {}
+fun IconButtonAddPreview() {
+    IconButtonAdd {}
 }
 
 @Preview
 @Composable
-fun IconButtonAccentPreview() {
-    IconButtonAccent(icon = Icon.add, contentDescription = "") {}
+fun IconButtonDeletePreview() {
+    IconButtonDelete {}
 }
 
 @Preview
 @Composable
-fun IconButtonDangerPreview() {
-    IconButtonDanger(icon = Icon.delete, contentDescription = "") {}
+fun IconButtonEditPreview() {
+    IconButtonEdit {}
+}
+
+@Preview
+@Composable
+fun IconButtonEditTextPreview() {
+    IconButtonEditText {}
+}
+
+@Preview
+@Composable
+fun IconButtonSettingsPreview() {
+    IconButtonSettings {}
 }

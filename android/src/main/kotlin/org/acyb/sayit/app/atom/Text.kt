@@ -21,6 +21,15 @@ fun TextTitleSubtle(text: String) {
 }
 
 @Composable
+fun TextTitleStandard(text: String) {
+    Text(
+        text = text,
+        color = Color.text.standard,
+        style = Font.title.l,
+    )
+}
+
+@Composable
 fun TextLabelAccent(text: String) {
     Text(
         text = text,
@@ -35,6 +44,15 @@ fun TextBodyStandard(text: String) {
         text = text,
         color = Color.text.standard,
         style = Font.body.l
+    )
+}
+
+@Composable
+fun TextBodyStandardMedium(text: String) {
+    Text(
+        text = text,
+        color = Color.text.standard,
+        style = Font.body.m
     )
 }
 
