@@ -17,6 +17,13 @@ import org.robolectric.annotation.GraphicsMode
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
 @Config(sdk = [33])
 class TextSpec : RoborazziTest() {
+
+    @Test
+    fun `It renders TextDisplayStandard`() {
+        subjectUnderTest.setContent {
+            TextDisplayStandard(text = "DisplayStandard")
+        }
+    }
     @Test
     fun `It renders TextTitleSubtle`() {
         subjectUnderTest.setContent {

@@ -12,6 +12,15 @@ import org.acyb.sayit.app.token.Color
 import org.acyb.sayit.app.token.Font
 
 @Composable
+fun TextDisplayStandard(text: String) {
+    Text(
+        text = text,
+        color = Color.text.standard,
+        style = Font.display.l,
+    )
+}
+
+@Composable
 fun TextTitleSubtle(text: String) {
     Text(
         text = text,
