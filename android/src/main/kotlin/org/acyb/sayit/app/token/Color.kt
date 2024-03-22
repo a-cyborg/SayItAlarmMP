@@ -3,7 +3,33 @@ package org.acyb.sayit.app.token
 import androidx.compose.ui.graphics.Color
 
 object Color {
-    object Surface {
+    private var currentTheme: Theme = Theme.LIGHT
+    fun isDarkTheme(isDarkTheme: Boolean) {
+        if (isDarkTheme) {
+            currentTheme = Theme.DARK
+        }
+    }
+
+    val surface: SurfaceColorScheme = when (currentTheme) {
+        Theme.DARK -> SurfaceDark
+        Theme.LIGHT -> SurfaceLight
+    }
+
+    object SurfaceDark: SurfaceColorScheme{
+        override val standard = Surface.dark
+        override val moderate = Surface.moderate
+        override val success = Surface.Success.dark
+        override val accent = Surface.Accent.dark
+    }
+
+    object SurfaceLight: SurfaceColorScheme {
+        override val standard = Surface.standard
+        override val moderate = Surface.light
+        override val success = Surface.Success.light
+        override val accent = Surface.Accent.light
+    }
+
+    private object Surface {
         val standard = ColorPalette.white
         val light = ColorPalette.Secondary.Gray.light
         val dark = ColorPalette.Secondary.Gray.dark
@@ -79,3 +105,12 @@ object Color {
         }
     }
 }
+
+interface SurfaceColorScheme {
+    val standard: Color
+    val moderate: Color
+    val success: Color
+    val accent: Color
+}
+
+enum class Theme { LIGHT, DARK, }
