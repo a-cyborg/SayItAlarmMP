@@ -33,7 +33,7 @@ fun AlarmListItem(
         modifier = Modifier
             .fillMaxWidth()
             .height(IntrinsicSize.Min)
-            .background(Color.Surface.light),
+            .background(Color.surface.standard)
     ) {
         beforeContent()
 
