@@ -3,67 +3,75 @@ package org.acyb.sayit.app.token
 import androidx.compose.ui.graphics.Color
 
 object Color {
-    private var currentTheme: Theme = Theme.LIGHT
-    fun isDarkTheme(isDarkTheme: Boolean) {
-        if (isDarkTheme) {
-            currentTheme = Theme.DARK
-        }
+
+    private var _surface: SurfaceColorScheme = SurfaceLight
+    private var _text: TextColorScheme = TextLight
+    fun useDarkTheme() {
+        _surface = SurfaceDark
+        _text = TextDark
     }
 
-    val surface: SurfaceColorScheme = when (currentTheme) {
-        Theme.DARK -> SurfaceDark
-        Theme.LIGHT -> SurfaceLight
+    fun userLightTheme() {
+        _surface = SurfaceLight
+        _text = TextLight
     }
 
-    object SurfaceDark: SurfaceColorScheme{
-        override val standard = Surface.dark
-        override val moderate = Surface.moderate
-        override val success = Surface.Success.dark
-        override val accent = Surface.Accent.dark
+    object SurfaceLight : SurfaceColorScheme {
+        override val standard = ColorPalette.white
+        override val subtle = ColorPalette.Secondary.Gray.faded
+        override val strong = ColorPalette.Secondary.Gray.light
+        override val success = ColorPalette.Secondary.Green.light
+        override val accent = ColorPalette.Primary.Yellow.light
     }
 
-    object SurfaceLight: SurfaceColorScheme {
-        override val standard = Surface.standard
-        override val moderate = Surface.light
-        override val success = Surface.Success.light
-        override val accent = Surface.Accent.light
+    object SurfaceDark : SurfaceColorScheme {
+        override val standard = ColorPalette.Secondary.Gray.dark
+        override val subtle = ColorPalette.Secondary.Gray.medium
+        override val strong = ColorPalette.black
+        override val success = ColorPalette.Secondary.Green.dark
+        override val accent = ColorPalette.Primary.Yellow.dark
     }
 
-    private object Surface {
-        val standard = ColorPalette.white
-        val light = ColorPalette.Secondary.Gray.light
-        val dark = ColorPalette.Secondary.Gray.dark
-        val moderate = ColorPalette.Secondary.Gray.medium
+    val surface: SurfaceColorScheme
+        get() = _surface
 
-        object Success {
-            val light = ColorPalette.Secondary.Green.light
-            val dark = ColorPalette.Secondary.Green.dark
-        }
-
-        object Accent {
-            val light = ColorPalette.Primary.Aqua.light
-            val dark = ColorPalette.Primary.Aqua.dark
-        }
+    object TextLight : TextColorScheme {
+        override val standard = ColorPalette.black
+        override val subtle = ColorPalette.Secondary.Gray.medium
+        override val inverse = ColorPalette.white
+        override val success = ColorPalette.Secondary.Green.light
+        override val info = ColorPalette.Secondary.Blue.light
+        override val warning = ColorPalette.Secondary.Pink.light
+        override val danger = ColorPalette.Secondary.Red.light
+        override val accent = ColorPalette.Primary.Yellow.light
+        override val attention = ColorPalette.Primary.Aqua.light
     }
 
-    object Text {
-        val standard = ColorPalette.black
-        val subtle = ColorPalette.Secondary.Gray.medium
-        val inverse = ColorPalette.white
-        val success = ColorPalette.Secondary.Green.light
-        val info = ColorPalette.Secondary.Blue.light
-        val warning = ColorPalette.Secondary.Pink.light
-        val danger = ColorPalette.Secondary.Red.light
-        val accent = ColorPalette.Primary.Aqua.light
+    object TextDark : TextColorScheme {
+        override val standard = ColorPalette.white
+        override val subtle = ColorPalette.Secondary.Gray.faded
+        override val inverse = ColorPalette.black
+        override val success = ColorPalette.Secondary.Green.dark
+        override val info = ColorPalette.Secondary.Blue.dark
+        override val warning = ColorPalette.Secondary.Pink.dark
+        override val danger = ColorPalette.Secondary.Red.dark
+        override val accent = ColorPalette.Primary.Yellow.dark
+        override val attention = ColorPalette.Primary.Aqua.dark
     }
 
-    val text = Text
+    val text: TextColorScheme
+        get() = _text
 
-    private object ColorPalette {
+    object ColorPalette {
         val white = Color(0xFFFFFFFF)
         val black = Color(0xFF000000)
 
         object Primary {
+            object Yellow {
+                val light = Color(0xFFB57614)
+                val dark = Color(0xFFD79921)
+            }
+
             object Aqua {
                 val light = Color(0xFF427658)
                 val dark = Color(0xFF689D6A)
@@ -79,11 +87,6 @@ object Color {
             object Green {
                 val light = Color(0xFF79740E)
                 val dark = Color(0xFF98971A)
-            }
-
-            object Yellow {
-                val light = Color(0xFFB57614)
-                val dark = Color(0xFFD79921)
             }
 
             object Blue {
@@ -108,9 +111,20 @@ object Color {
 
 interface SurfaceColorScheme {
     val standard: Color
-    val moderate: Color
+    val subtle: Color
+    val strong: Color
     val success: Color
     val accent: Color
 }
 
-enum class Theme { LIGHT, DARK, }
+interface TextColorScheme {
+    val standard: Color
+    val subtle: Color
+    val inverse: Color
+    val success: Color
+    val info: Color
+    val warning: Color
+    val danger: Color
+    val accent: Color
+    val attention: Color
+}
