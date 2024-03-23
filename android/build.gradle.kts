@@ -69,11 +69,11 @@ android {
             isIncludeAndroidResources = true
             all {
                 // -Pscreenshot to filter screenshot tests
-                it.useJUnit {
+                /*it.useJUnit {
                     if (project.hasProperty("screenshot")) {
                         includeCategories("io.github.takahirom.roborazzi.testing.category.ScreenshotTests")
                     }
-                }
+                }*/
             }
         }
     }
@@ -106,8 +106,10 @@ dependencies {
     testImplementation(antibytesCatalog.testUtils.coroutine)
     testImplementation(antibytesCatalog.kfixture)
     testImplementation(antibytesCatalog.kmock)
-    testImplementation(antibytesCatalog.android.test.junit.core)
-    testImplementation(antibytesCatalog.jvm.test.junit.junit4)
+    testImplementation(antibytesCatalog.jvm.test.junit.runtime)
+    testImplementation(antibytesCatalog.jvm.test.junit.core)
+    testImplementation(platform(antibytesCatalog.jvm.test.junit.bom))
+    testImplementation(antibytesCatalog.jvm.test.junit.legacyEngineJunit4)
     testImplementation(antibytesCatalog.android.test.compose.core)
     testImplementation(antibytesCatalog.android.test.compose.junit4Rule)
 
@@ -130,4 +132,8 @@ dependencies {
     androidTestImplementation(antibytesCatalog.testUtils.core)
     androidTestImplementation(antibytesCatalog.kfixture)
     androidTestImplementation(antibytesCatalog.kmock)
+}
+
+tasks.withType<Test> {
+    useJUnitPlatform()
 }
