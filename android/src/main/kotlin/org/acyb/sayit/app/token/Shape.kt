@@ -13,4 +13,8 @@ object Shape {
     object PanelSection {
         val primary = RoundedCornerShape(13.dp)
     }
+
+    object Card {
+        val primary = RoundedCornerShape(16.dp)
+    }
 }
