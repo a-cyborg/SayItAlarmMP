@@ -19,8 +19,19 @@ fun IconButtonAdd(onClick: () -> Unit) {
     IconButton(onClick = onClick) {
         Icon(
             imageVector = Icon.add,
-            tint = Color.text.accent,
+            tint = Color.text.attention,
             contentDescription = stringResource(id = R.string.action_add_alarm),
+        )
+    }
+}
+
+@Composable
+fun IconButtonClose(onClick: () -> Unit) {
+    IconButton(onClick = onClick) {
+        Icon(
+            imageVector = Icon.close,
+            tint = Color.text.attention,
+            contentDescription = stringResource(id = R.string.action_close),
         )
     }
 }
@@ -41,8 +52,20 @@ fun IconButtonEdit(onClick: () -> Unit) {
     IconButton(onClick = onClick) {
         Icon(
             imageVector = Icon.editArrowRight,
-            tint = Color.text.accent,
+            tint = Color.text.attention,
             contentDescription = stringResource(id = R.string.action_edit_alarm),
+        )
+    }
+}
+
+
+@Composable
+fun IconButtonSettings(onClick: () -> Unit) {
+    IconButton(onClick = onClick) {
+        Icon(
+            imageVector = Icon.settings,
+            tint = Color.text.attention,
+            contentDescription = stringResource(id = R.string.action_open_settings),
         )
     }
 }
@@ -50,17 +73,13 @@ fun IconButtonEdit(onClick: () -> Unit) {
 @Composable
 fun IconButtonEditText(onClick: () -> Unit) {
     IconButton(onClick = onClick) {
-        TextLabelAccent(text = stringResource(id = R.string.edit))
+        TextLabelAttention(text = stringResource(id = R.string.edit))
     }
 }
 
 @Composable
-fun IconButtonSettings(onClick: () -> Unit) {
+fun IconButtonSaveText(onClick: () -> Unit) {
     IconButton(onClick = onClick) {
-        Icon(
-            imageVector = Icon.Settings,
-            tint = Color.text.accent,
-            contentDescription = stringResource(id = R.string.action_open_settings),
-        )
+        TextLabelAttention(text = stringResource(id = R.string.save))
     }
 }

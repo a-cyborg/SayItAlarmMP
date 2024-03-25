@@ -49,6 +49,29 @@ class IconButtonSpec : RoborazziTest() {
     }
 
     @Test
+    fun `It renders a IconButtonClose`() {
+        subjectUnderTest.setContent {
+            IconButtonClose {}
+        }
+    }
+
+    @Test
+    fun `Given IconButtonClose click is called it propagates the given action`() {
+        var hasBeenCalled = false
+
+        subjectUnderTest.setContent {
+            IconButtonClose {
+                hasBeenCalled = true
+            }
+        }
+        subjectUnderTest
+            .onNodeWithContentDescription(getString(R.string.action_close))
+            .performClick()
+
+        hasBeenCalled mustBe true
+    }
+
+    @Test
     fun `It renders a IconButtonDelete`() {
         subjectUnderTest.setContent {
             IconButtonDelete {}
@@ -136,6 +159,30 @@ class IconButtonSpec : RoborazziTest() {
 
         subjectUnderTest
             .onNodeWithContentDescription(getString(R.string.action_open_settings))
+            .performClick()
+
+        hasBeenCalled mustBe true
+    }
+
+    @Test
+    fun `It renders a IconButtonSaveText`() {
+        subjectUnderTest.setContent {
+            IconButtonSaveText {}
+        }
+    }
+
+    @Test
+    fun `Given IconButtonSaveText click is called it propagates the given action`() {
+        var hasBeenCalled = false
+
+        subjectUnderTest.setContent {
+            IconButtonSaveText {
+                hasBeenCalled = true
+            }
+        }
+
+        subjectUnderTest
+            .onNodeWithText(getString(R.string.save))
             .performClick()
 
         hasBeenCalled mustBe true
