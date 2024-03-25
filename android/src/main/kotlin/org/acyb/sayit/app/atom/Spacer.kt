@@ -13,6 +13,14 @@ import androidx.compose.ui.Modifier
 import org.acyb.sayit.app.token.Spacing
 
 @Composable
+fun SpacerExtraSmall() {
+    Spacer(modifier = Modifier.size(Spacing.xxxs))
+}
+@Composable
+fun SpacerMedium() {
+    Spacer(modifier = Modifier.size(Spacing.m))
+}
+@Composable
 fun SpacerLarge() {
     Spacer(modifier = Modifier.size(Spacing.l))
 }
