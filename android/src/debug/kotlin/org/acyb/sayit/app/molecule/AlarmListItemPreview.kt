@@ -10,6 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import org.acyb.sayit.app.atom.IconButtonDelete
 import org.acyb.sayit.app.atom.IconButtonEdit
+import org.acyb.sayit.app.token.Color
 
 @Preview
 @Composable
@@ -23,6 +24,27 @@ fun AlarmListItemPreview() {
 @Preview
 @Composable
 fun AlarmListItemEditModePreview() {
+    AlarmListItem(
+        time = "8:30",
+        weeklyRepeat = "Wakeup Call, Everyday",
+        beforeContent = { IconButtonDelete {} },
+        afterContent = { IconButtonEdit {} }
+    )
+}
+
+@Preview
+@Composable
+fun AlarmListItemDarkThemePreview() {
+    Color.useDarkTheme()
+    AlarmListItem(
+        time = "8:30",
+        weeklyRepeat = "Wakeup Call, Everyday",
+    )
+}
+
+@Preview
+@Composable
+fun AlarmListItemEditModeDarkThemePreview() {
     AlarmListItem(
         time = "8:30",
         weeklyRepeat = "Wakeup Call, Everyday",

@@ -16,6 +16,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import org.acyb.sayit.app.atom.SpacerMedium
 import org.acyb.sayit.app.atom.TextBodyStandardMedium
 import org.acyb.sayit.app.atom.TextTitleStandard
 import org.acyb.sayit.app.token.Color
@@ -36,6 +37,7 @@ fun AlarmListItem(
             .background(Color.surface.standard)
     ) {
         beforeContent()
+        SpacerMedium()
 
         Column(
             modifier = Modifier.weight(1f),
@@ -46,5 +48,6 @@ fun AlarmListItem(
         }
 
         afterContent()
+        SpacerMedium()
     }
 }
