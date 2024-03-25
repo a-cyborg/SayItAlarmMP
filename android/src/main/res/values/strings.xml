@@ -9,7 +9,9 @@
     <string name="app_name">SayIt</string>
     <!-- Label -->
     <string name="edit">Edit</string>
+    <string name="save">Save</string>
     <!-- ContentDescription -->
+    <string name="action_close">Close</string>
     <string name="action_add_alarm">Add alarm</string>
     <string name="action_delete_alarm">Delete alarm</string>
     <string name="action_edit_alarm">Edit alarm</string>
