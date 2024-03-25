@@ -42,7 +42,17 @@ fun TextTitleStandard(text: String) {
 fun TextLabelAccent(text: String) {
     Text(
         text = text,
-        color = Color.text.accent,
+        color = Color.text.attention,
+        style = Font.label.l,
+    )
+}
+
+
+@Composable
+fun TextLabelAttention(text: String) {
+    Text(
+        text = text,
+        color = Color.text.attention,
         style = Font.label.l,
     )
 }

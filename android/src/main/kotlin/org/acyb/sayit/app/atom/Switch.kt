@@ -20,8 +20,8 @@ fun SwitchStandard(
         checked = checked,
         onCheckedChange = onCheckedChange,
         colors = SwitchDefaults.colors(
-            checkedThumbColor = Color.surface.success,
-            checkedTrackColor = Color.surface.accent,
+            checkedThumbColor = Color.surface.attention,
+            checkedTrackColor = Color.surface.success,
             uncheckedThumbColor = Color.surface.strong,
             uncheckedTrackColor = Color.surface.subtle,
         )

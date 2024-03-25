@@ -12,7 +12,7 @@ import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
+import org.acyb.sayit.app.atom.SpacerExtraSmall
 import org.acyb.sayit.app.atom.TitleCentered
 import org.acyb.sayit.app.token.Color
 
@@ -21,15 +21,21 @@ fun TopAppBarGlobal(
     title: String,
     firstIcon: @Composable () -> Unit,
     secondIcon: @Composable () -> Unit,
-    thirdIcon: @Composable () -> Unit,
+    thirdIcon: @Composable () -> Unit = {},
 ) {
     TopAppBar(
         title = { TitleCentered(title = title) },
-        navigationIcon = firstIcon,
-        actions = { secondIcon(); thirdIcon() },
-        backgroundColor = Color.Surface.light,
-        contentColor = Color.Text.accent,
-        elevation = 0.dp,
-        modifier = Modifier.windowInsetsPadding(WindowInsets.statusBars),
+        navigationIcon = {
+            SpacerExtraSmall()
+            firstIcon()
+        },
+        actions = {
+            secondIcon()
+            thirdIcon()
+            SpacerExtraSmall()
+        },
+        backgroundColor = Color.surface.accent,
+        modifier = Modifier
+            .windowInsetsPadding(WindowInsets.statusBars),
     )
 }
