@@ -6,12 +6,13 @@ object Color {
 
     private var _surface: SurfaceColorScheme = SurfaceLight
     private var _text: TextColorScheme = TextLight
+
     fun useDarkTheme() {
         _surface = SurfaceDark
         _text = TextDark
     }
 
-    fun userLightTheme() {
+    fun useLightTheme() {
         _surface = SurfaceLight
         _text = TextLight
     }
@@ -22,6 +23,7 @@ object Color {
         override val strong = ColorPalette.Secondary.Gray.light
         override val success = ColorPalette.Secondary.Green.light
         override val accent = ColorPalette.Primary.Yellow.light
+        override val attention: Color = ColorPalette.Primary.Aqua.light
     }
 
     object SurfaceDark : SurfaceColorScheme {
@@ -30,6 +32,7 @@ object Color {
         override val strong = ColorPalette.black
         override val success = ColorPalette.Secondary.Green.dark
         override val accent = ColorPalette.Primary.Yellow.dark
+        override val attention: Color = ColorPalette.Primary.Aqua.dark
     }
 
     val surface: SurfaceColorScheme
@@ -115,6 +118,7 @@ interface SurfaceColorScheme {
     val strong: Color
     val success: Color
     val accent: Color
+    val attention: Color
 }
 
 interface TextColorScheme {

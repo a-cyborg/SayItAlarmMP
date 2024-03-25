@@ -17,39 +17,39 @@ class ColorSpec {
     fun `Color is initially in LightMode`(): List<DynamicTest> {
         return listOf(
             ColorModeTestSpec(
-                "test.standard",
+                "text.standard",
                 ColorPalette(0xFF000000)
             ) { Color.text.standard },
             ColorModeTestSpec(
-                "test.subtle",
+                "text.subtle",
                 ColorPalette(0xFF7C6F64),
             ) { Color.text.subtle },
             ColorModeTestSpec(
-                "test.inverse",
+                "text.inverse",
                 ColorPalette(0xFFFFFFFF),
             ) { Color.text.inverse },
             ColorModeTestSpec(
-                "test.success",
+                "text.success",
                 ColorPalette(0xFF79740E),
             ) { Color.text.success },
             ColorModeTestSpec(
-                "test.info",
+                "text.info",
                 ColorPalette(0xFF076678),
             ) { Color.text.info },
             ColorModeTestSpec(
-                "test.warning",
+                "text.warning",
                 ColorPalette(0xFF8F3F71),
             ) { Color.text.warning },
             ColorModeTestSpec(
-                "test.danger",
+                "text.danger",
                 ColorPalette(0xFF9D0006),
             ) { Color.text.danger },
             ColorModeTestSpec(
-                "test.accent",
+                "text.accent",
                 ColorPalette(0xFFB57614),
             ) { Color.text.accent },
             ColorModeTestSpec(
-                "test.attention",
+                "text.attention",
                 ColorPalette(0xFF427658),
             ) { Color.text.attention },
         ).map { (descriptor, expected, actual) ->
@@ -61,44 +61,44 @@ class ColorSpec {
 
     @TestFactory
     fun `When useDarkMode is called it switches in DarkMode`(): List<DynamicTest> {
-        Color.userLightTheme()
+        Color.useLightTheme()
         Color.useDarkTheme()
 
         return listOf(
             ColorModeTestSpec(
-                "test.standard",
+                "text.standard",
                 ColorPalette(0xFFFFFFFF)
             ) { Color.text.standard },
             ColorModeTestSpec(
-                "test.subtle",
+                "text.subtle",
                 ColorPalette(0xFFA89984),
             ) { Color.text.subtle },
             ColorModeTestSpec(
-                "test.inverse",
+                "text.inverse",
                 ColorPalette(0xFF000000),
             ) { Color.text.inverse },
             ColorModeTestSpec(
-                "test.success",
+                "text.success",
                 ColorPalette(0xFF98971A),
             ) { Color.text.success },
             ColorModeTestSpec(
-                "test.info",
+                "text.info",
                 ColorPalette(0xFF458588),
             ) { Color.text.info },
             ColorModeTestSpec(
-                "test.warning",
+                "text.warning",
                 ColorPalette(0xFFB16286),
             ) { Color.text.warning },
             ColorModeTestSpec(
-                "test.danger",
+                "text.danger",
                 ColorPalette(0xFFCC241D),
             ) { Color.text.danger },
             ColorModeTestSpec(
-                "test.accent",
+                "text.accent",
                 ColorPalette(0xFFD79921),
             ) { Color.text.accent },
             ColorModeTestSpec(
-                "test.attention",
+                "text.attention",
                 ColorPalette(0xFF689D6A),
             ) { Color.text.attention },
         ).map { (descriptor, expected, actual) ->
@@ -111,45 +111,45 @@ class ColorSpec {
     @TestFactory
     fun `When useLightMode is called it switches in LightMode`(): List<DynamicTest> {
         Color.useDarkTheme()
-        Color.userLightTheme()
+        Color.useLightTheme()
 
         return listOf(
             ColorModeTestSpec(
-                "test.standard",
+                "text.standard",
                 ColorPalette(0xFF000000)
             ) { Color.text.standard },
             ColorModeTestSpec(
-                "test.subtle",
+                "text.subtle",
                 ColorPalette(0xFF7C6F64),
             ) { Color.text.subtle },
             ColorModeTestSpec(
-                "test.inverse",
+                "text.inverse",
                 ColorPalette(0xFFFFFFFF),
             ) { Color.text.inverse },
             ColorModeTestSpec(
-                "test.success",
+                "text.success",
                 ColorPalette(0xFF79740E),
             ) { Color.text.success },
             ColorModeTestSpec(
-                "test.info",
+                "text.info",
                 ColorPalette(0xFF076678),
             ) { Color.text.info },
             ColorModeTestSpec(
-                "test.warning",
+                "text.warning",
                 ColorPalette(0xFF8F3F71),
             ) { Color.text.warning },
             ColorModeTestSpec(
-                "test.danger",
+                "text.danger",
                 ColorPalette(0xFF9D0006),
             ) { Color.text.danger },
             ColorModeTestSpec(
-                "test.accent",
+                "text.accent",
                 ColorPalette(0xFFB57614),
             ) { Color.text.accent },
             ColorModeTestSpec(
-                "test.attention",
+                "text.attention",
                 ColorPalette(0xFF427658),
-            ) { Color.text.attention },
+            ) { Color.text.attention }, // TODO: Add surface after decide final surface color
         ).map { (descriptor, expected, actual) ->
             dynamicTest("Color.$descriptor is initially in LightMode") {
                 actual() mustBe expected
