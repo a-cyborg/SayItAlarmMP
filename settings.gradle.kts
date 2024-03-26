@@ -75,6 +75,7 @@ dependencyResolutionManagement {
 include(
     ":kmp-lib",
     ":android",
+    ":entity",
     // ":docs",
 )
 
