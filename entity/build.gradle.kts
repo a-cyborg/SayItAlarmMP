@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2024 Mima Kang / All rights reserved.
+ *
+ * Use of this source code is governed by Apache v2.0
+ */
+
 import tech.antibytes.gradle.configuration.sourcesets.iosx
 
 plugins {
@@ -8,20 +14,13 @@ plugins {
 
 val projectPackage = "org.acyb.sayit.entity"
 
-java {
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
-}
-
 android {
     namespace = projectPackage
 }
 
 kotlin {
     androidTarget()
-
     jvm()
-
     iosx()
 
     sourceSets {
