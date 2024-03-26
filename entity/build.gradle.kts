@@ -20,7 +20,6 @@ android {
 
 kotlin {
     androidTarget()
-    jvm()
     iosx()
 
     sourceSets {
