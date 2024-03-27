@@ -76,6 +76,8 @@ include(
     ":kmp-lib",
     ":android",
     ":entity",
+    ":presentation",
+    ":presentation:viewmodel",
     // ":docs",
 )
 

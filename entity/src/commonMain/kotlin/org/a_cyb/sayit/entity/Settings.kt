@@ -19,7 +19,7 @@ enum class Theme {
     DARK
 }
 
-data class Setting(
+data class Settings(
     val timeOut: TimeOut,
     val snooze: Snooze,
     val theme: Theme,
