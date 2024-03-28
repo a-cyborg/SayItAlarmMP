@@ -14,7 +14,7 @@ import kotlin.test.Test
 class SetSnoozeCommandSpec {
     @Test
     fun `It fulfils Command`() {
-        SetSnoozeCommand(Snooze(5)) fulfils SettingsCommandContract.Command::class
+        SetSnoozeCommand(Snooze(5)) fulfils CommandContract.Command::class
     }
 
     @Test
@@ -30,7 +30,7 @@ class SetSnoozeCommandSpec {
     }
 }
 
-object SetSnoozeReceiverFake : SettingsCommandContract.CommandReceiver.SetSnooze {
+object SetSnoozeReceiverFake : SettingsCommandContract.SetSnooze {
     var hasBeenCalled: Boolean = false
     override fun setSnooze(snooze: Snooze) {
         hasBeenCalled = true

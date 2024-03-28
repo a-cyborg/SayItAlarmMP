@@ -14,7 +14,7 @@ import kotlin.test.Test
 class SetTimeOutCommandSpec {
     @Test
     fun `It fulfils Command`() {
-        SetTimeOutCommand(TimeOut(33)) fulfils SettingsCommandContract.Command::class
+        SetTimeOutCommand(TimeOut(33)) fulfils CommandContract.Command::class
     }
 
     @Test
@@ -30,7 +30,7 @@ class SetTimeOutCommandSpec {
     }
 }
 
-object SetTimeOutReceiverFake : SettingsCommandContract.CommandReceiver.SetTimeOut {
+object SetTimeOutReceiverFake : SettingsCommandContract.SetTimeOut {
     var hasBeenCalled: Boolean = false
     override fun setTimeOut(timeOut: TimeOut) {
         hasBeenCalled = true

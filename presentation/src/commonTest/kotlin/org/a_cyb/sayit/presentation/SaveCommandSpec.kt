@@ -13,7 +13,7 @@ import kotlin.test.Test
 class SaveCommandSpec {
     @Test
     fun `It fulfils Command`() {
-        SaveCommand fulfils SettingsCommandContract.Command::class
+        SaveCommand fulfils CommandContract.Command::class
     }
 
     @Test
@@ -29,7 +29,7 @@ class SaveCommandSpec {
     }
 }
 
-object SaveCommandReceiverFake : SettingsCommandContract.CommandReceiver.Save {
+object SaveCommandReceiverFake : SettingsCommandContract.Save {
     var hasBeenCalled: Boolean = false
     override fun save() {
         hasBeenCalled = true

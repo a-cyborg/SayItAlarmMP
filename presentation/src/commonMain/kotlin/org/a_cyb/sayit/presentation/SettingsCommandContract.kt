@@ -10,45 +10,35 @@ import org.a_cyb.sayit.entity.Snooze
 import org.a_cyb.sayit.entity.TimeOut
 
 interface SettingsCommandContract {
-    sealed interface CommandReceiver {
-        fun interface SetTimeOut : CommandReceiver {
-            fun setTimeOut(timeOut: TimeOut)    // [Q] Should I use Int instead of TimeOut value?
-        }
-
-        fun interface SetSnooze : CommandReceiver {
-            fun setSnooze(snooze: Snooze)
-        }
-
-        fun interface Save : CommandReceiver {
-            fun save()
-        }
+    fun interface SetTimeOut : CommandContract.CommandReceiver {
+        fun setTimeOut(timeOut: TimeOut)
     }
 
-    interface Command<T : CommandReceiver> {
-        fun execute(receiver: T)
+    fun interface SetSnooze : CommandContract.CommandReceiver {
+        fun setSnooze(snooze: Snooze)
     }
 
-    interface CommandExecutor {
-        fun <T : CommandReceiver> runCommand(command: Command<T>)
+    fun interface Save : CommandContract.CommandReceiver {
+        fun save()
     }
 }
 
 data class SetTimeOutCommand(val timeOut: TimeOut) :
-    SettingsCommandContract.Command<SettingsCommandContract.CommandReceiver.SetTimeOut> {
-    override fun execute(receiver: SettingsCommandContract.CommandReceiver.SetTimeOut) {
+    CommandContract.Command<SettingsCommandContract.SetTimeOut> {
+    override fun execute(receiver: SettingsCommandContract.SetTimeOut) {
         receiver.setTimeOut(timeOut)
     }
 }
 
 data class SetSnoozeCommand(val snooze: Snooze) :
-    SettingsCommandContract.Command<SettingsCommandContract.CommandReceiver.SetSnooze> {
-    override fun execute(receiver: SettingsCommandContract.CommandReceiver.SetSnooze) {
+    CommandContract.Command<SettingsCommandContract.SetSnooze> {
+    override fun execute(receiver: SettingsCommandContract.SetSnooze) {
         receiver.setSnooze(snooze)
     }
 }
 
-data object SaveCommand : SettingsCommandContract.Command<SettingsCommandContract.CommandReceiver.Save> {
-    override fun execute(receiver: SettingsCommandContract.CommandReceiver.Save) {
+data object SaveCommand : CommandContract.Command<SettingsCommandContract.Save> {
+    override fun execute(receiver: SettingsCommandContract.Save) {
         receiver.save()
     }
 }

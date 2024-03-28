@@ -9,11 +9,10 @@ package org.a_cyb.sayit.presentation
 import kotlinx.coroutines.flow.StateFlow
 import org.a_cyb.sayit.entity.Theme
 import org.a_cyb.sayit.presentation.SettingsCommandContract.*
-import org.a_cyb.sayit.presentation.SettingsCommandContract.CommandReceiver.*
 
 interface SettingsContract {
 
-    interface SettingsViewModel : SetTimeOut, SetSnooze, Save, CommandExecutor {
+    interface SettingsViewModel : SetTimeOut, SetSnooze, Save, CommandContract.CommandExecutor {
         val settingsState: StateFlow<SettingsState>
     }
 
