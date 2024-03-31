@@ -78,6 +78,7 @@ include(
     ":entity",
     ":presentation",
     ":presentation:viewmodel",
+    ":presentation:interactor",
     // ":docs",
 )
 
