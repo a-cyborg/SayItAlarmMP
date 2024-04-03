@@ -23,15 +23,13 @@ interface SettingsCommandContract {
     }
 }
 
-data class SetTimeOutCommand(val timeOut: TimeOut) :
-    CommandContract.Command<SettingsCommandContract.SetTimeOut> {
+data class SetTimeOutCommand(val timeOut: TimeOut) : CommandContract.Command<SettingsCommandContract.SetTimeOut> {
     override fun execute(receiver: SettingsCommandContract.SetTimeOut) {
         receiver.setTimeOut(timeOut)
     }
 }
 
-data class SetSnoozeCommand(val snooze: Snooze) :
-    CommandContract.Command<SettingsCommandContract.SetSnooze> {
+data class SetSnoozeCommand(val snooze: Snooze) : CommandContract.Command<SettingsCommandContract.SetSnooze> {
     override fun execute(receiver: SettingsCommandContract.SetSnooze) {
         receiver.setSnooze(snooze)
     }

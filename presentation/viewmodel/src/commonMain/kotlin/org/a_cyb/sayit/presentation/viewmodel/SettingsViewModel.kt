@@ -21,7 +21,7 @@ import org.a_cyb.sayit.presentation.interactor.InteractorContract.SettingsIntera
 
 internal class SettingsViewModel(
     private val interactor: SettingsInteractorContract,
-) : SettingsContract.SettingsViewModel, Vm() {
+) : SettingsContract.SettingsViewModel, ViewModel() {
 
     private var _settingsState: MutableStateFlow<SettingsContract.SettingsState> =
         MutableStateFlow(SettingsContract.Initial)

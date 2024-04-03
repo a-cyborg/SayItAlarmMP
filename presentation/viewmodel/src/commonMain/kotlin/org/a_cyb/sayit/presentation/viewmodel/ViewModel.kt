@@ -8,6 +8,6 @@ package org.a_cyb.sayit.presentation.viewmodel
 
 import kotlinx.coroutines.CoroutineScope
 
-internal expect abstract class Vm constructor() {
+internal expect abstract class ViewModel constructor() {
     protected val scope: CoroutineScope
 }

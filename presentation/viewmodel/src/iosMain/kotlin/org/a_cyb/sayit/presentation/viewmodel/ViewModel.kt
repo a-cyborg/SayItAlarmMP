@@ -9,6 +9,7 @@ package org.a_cyb.sayit.presentation.viewmodel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 
-internal actual abstract class Vm actual constructor() {
-    protected actual val scope: CoroutineScope = CoroutineScope(Dispatchers.Main)
+internal actual abstract class ViewModel actual constructor() {
+    protected actual val scope: CoroutineScope
+        get() = CoroutineScope(Dispatchers.Main)
 }
