@@ -4,7 +4,7 @@
  * Use of this source code is governed by Apache v2.0
  */
 
-package org.acyb.sayit.app.atom
+package org.acyb.sayit.app.molecule
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import org.acyb.sayit.app.RoborazziTest
@@ -16,11 +16,13 @@ import org.robolectric.annotation.GraphicsMode
 @RunWith(AndroidJUnit4::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
 @Config(sdk = [33])
-class TitleSpec : RoborazziTest() {
+class InfoTextCardSpec : RoborazziTest() {
     @Test
-    fun `It renders TitleCentered`() {
+    fun `It renders InfoTextCard`() {
         subjectUnderTest.setContent {
-            TitleCentered(title = "TitleCentered")
+            InfoTextCard(
+                text = "TextCardStandardHeadline"
+            )
         }
     }
 }
