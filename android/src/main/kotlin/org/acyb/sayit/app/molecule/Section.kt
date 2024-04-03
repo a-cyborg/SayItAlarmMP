@@ -10,7 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import org.acyb.sayit.R
 import org.acyb.sayit.app.atom.SectionRowClickable
-import org.acyb.sayit.app.atom.TextDisplayStandard
+import org.acyb.sayit.app.atom.TextDisplayStandardLarge
 
 @Composable
 fun TimeSection(
@@ -21,6 +21,6 @@ fun TimeSection(
         contentDescription = stringResource(id = R.string.action_set_alarm_time),
         onClick = onClick
     ) {
-        TextDisplayStandard(text = time)
+        TextDisplayStandardLarge(text = time)
     }
 }

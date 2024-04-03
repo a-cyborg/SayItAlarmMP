@@ -21,7 +21,7 @@ class CardSpec : RoborazziTest() {
     fun `It renders CardStandard with given content`() {
         subjectUnderTest.setContent {
             CardStandard {
-                TextDisplayStandard(text = "SayIt")
+                TextDisplayStandardLarge(text = "SayIt")
             }
         }
     }

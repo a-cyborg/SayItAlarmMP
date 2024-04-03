@@ -21,34 +21,28 @@ class TextSpec : RoborazziTest() {
     @Test
     fun `It renders TextDisplayStandard`() {
         subjectUnderTest.setContent {
-            TextDisplayStandard(text = "DisplayStandard")
-        }
-    }
-    @Test
-    fun `It renders TextTitleSubtle`() {
-        subjectUnderTest.setContent {
-            TextTitleSubtle(text = "TitleSubtle")
+            TextDisplayStandardLarge(text = "DisplayStandard")
         }
     }
 
     @Test
     fun `It renders TextTitleStandard`() {
         subjectUnderTest.setContent {
-            TextTitleStandard(text = "TitleStandard")
+            TextTitleStandardLarge(text = "TitleStandard")
         }
     }
 
     @Test
-    fun `It renders TextLabelAccent`() {
+    fun `It renders TextLabelAttentionLarge`() {
         subjectUnderTest.setContent {
-            TextLabelAccent(text = "LabelAccent")
+            TextLabelAttentionLarge(text = "Label")
         }
     }
 
     @Test
-    fun `It renders TextBodyStandard`() {
+    fun `It renders TextBodyStandardLarge`() {
         subjectUnderTest.setContent {
-            TextBodyStandard(text = "BodyStandard")
+            TextBodyStandardLarge(text = "BodyStandard")
         }
     }
 

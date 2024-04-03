@@ -101,6 +101,7 @@ dependencies {
     implementation(antibytesCatalog.android.material.core)
     implementation(antibytesCatalog.android.material.compose.icons)
     implementation(antibytesCatalog.android.material.compose.extendedIcons)
+    implementation(antibytesCatalog.android.material3.core)
 
     testImplementation(antibytesCatalog.testUtils.core)
     testImplementation(antibytesCatalog.testUtils.coroutine)

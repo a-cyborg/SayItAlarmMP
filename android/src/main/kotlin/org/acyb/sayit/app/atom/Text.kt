@@ -12,7 +12,7 @@ import org.acyb.sayit.app.token.Color
 import org.acyb.sayit.app.token.Font
 
 @Composable
-fun TextDisplayStandard(text: String) {
+fun TextDisplayStandardLarge(text: String) {
     Text(
         text = text,
         color = Color.text.standard,
@@ -21,16 +21,16 @@ fun TextDisplayStandard(text: String) {
 }
 
 @Composable
-fun TextTitleSubtle(text: String) {
+fun TextHeadlineStandard(text: String) {
     Text(
         text = text,
-        color = Color.text.subtle,
-        style = Font.title.l,
+        color = Color.text.standard,
+        style = Font.headline.s
     )
 }
 
 @Composable
-fun TextTitleStandard(text: String) {
+fun TextTitleStandardLarge(text: String) {
     Text(
         text = text,
         color = Color.text.standard,
@@ -39,17 +39,7 @@ fun TextTitleStandard(text: String) {
 }
 
 @Composable
-fun TextLabelAccent(text: String) {
-    Text(
-        text = text,
-        color = Color.text.attention,
-        style = Font.label.l,
-    )
-}
-
-
-@Composable
-fun TextLabelAttention(text: String) {
+fun TextLabelAttentionLarge(text: String) {
     Text(
         text = text,
         color = Color.text.attention,
@@ -58,7 +48,7 @@ fun TextLabelAttention(text: String) {
 }
 
 @Composable
-fun TextBodyStandard(text: String) {
+fun TextBodyStandardLarge(text: String) {
     Text(
         text = text,
         color = Color.text.standard,
@@ -72,14 +62,5 @@ fun TextBodyStandardMedium(text: String) {
         text = text,
         color = Color.text.standard,
         style = Font.body.m
-    )
-}
-
-@Composable
-fun TextHeadlineStandard(text: String) {
-    Text(
-        text = text,
-        color = Color.text.standard,
-        style = Font.headline.s
     )
 }

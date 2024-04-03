@@ -8,14 +8,14 @@ package org.acyb.sayit.app.molecule
 
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.statusBars
-import androidx.compose.foundation.layout.windowInsetsPadding
-import androidx.compose.material.TopAppBar
+import androidx.compose.material3.CenterAlignedTopAppBar
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.TopAppBarColors
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import org.acyb.sayit.app.atom.SpacerExtraSmall
-import org.acyb.sayit.app.atom.TitleCentered
+import org.acyb.sayit.app.atom.TextHeadlineStandard
 import org.acyb.sayit.app.token.Color
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TopAppBarGlobal(
     title: String,
@@ -23,19 +23,17 @@ fun TopAppBarGlobal(
     secondIcon: @Composable () -> Unit,
     thirdIcon: @Composable () -> Unit = {},
 ) {
-    TopAppBar(
-        title = { TitleCentered(title = title) },
-        navigationIcon = {
-            SpacerExtraSmall()
-            firstIcon()
-        },
-        actions = {
-            secondIcon()
-            thirdIcon()
-            SpacerExtraSmall()
-        },
-        backgroundColor = Color.surface.accent,
-        modifier = Modifier
-            .windowInsetsPadding(WindowInsets.statusBars),
+    CenterAlignedTopAppBar(
+        title = { TextHeadlineStandard(text = title) },
+        navigationIcon = { firstIcon() },
+        actions = { secondIcon(); thirdIcon() },
+        windowInsets = WindowInsets.statusBars,
+        colors = TopAppBarColors(
+            containerColor = Color.surface.standard,
+            navigationIconContentColor = Color.text.accent,
+            actionIconContentColor = Color.text.accent,
+            scrolledContainerColor = Color.surface.standard,
+            titleContentColor = Color.surface.standard,
+        ),
     )
 }

@@ -58,7 +58,6 @@ fun IconButtonEdit(onClick: () -> Unit) {
     }
 }
 
-
 @Composable
 fun IconButtonSettings(onClick: () -> Unit) {
     IconButton(onClick = onClick) {
@@ -73,13 +72,13 @@ fun IconButtonSettings(onClick: () -> Unit) {
 @Composable
 fun IconButtonEditText(onClick: () -> Unit) {
     IconButton(onClick = onClick) {
-        TextLabelAttention(text = stringResource(id = R.string.edit))
+        TextLabelAttentionLarge(text = stringResource(id = R.string.edit))
     }
 }
 
 @Composable
 fun IconButtonSaveText(onClick: () -> Unit) {
     IconButton(onClick = onClick) {
-        TextLabelAttention(text = stringResource(id = R.string.save))
+        TextLabelAttentionLarge(text = stringResource(id = R.string.save))
     }
 }

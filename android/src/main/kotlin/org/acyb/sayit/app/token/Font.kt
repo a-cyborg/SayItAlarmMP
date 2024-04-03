@@ -1,12 +1,20 @@
 package org.acyb.sayit.app.token
 
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
+import org.acyb.sayit.R
 
 object Font {
-    private val base = TextStyle(fontFamily = FontFamily.Monospace)
+    private val aliceFontFamily = FontFamily(
+        Font(R.font.alice_regular, FontWeight.Normal)
+    )
+    private val angkorFontFamily = FontFamily(
+        Font(R.font.angkor_regular, FontWeight.Normal)
+    )
+    private val base = TextStyle(fontFamily = aliceFontFamily)
 
     object Display {
         val l = base.copy(
@@ -18,8 +26,8 @@ object Font {
 
         val m = base.copy(
             fontWeight = FontWeight.Bold,
-            fontSize = 45.sp,
-            lineHeight = 52.sp,
+            fontSize = 43.sp,
+            lineHeight = 50.sp,
             letterSpacing = 0.sp
         )
 
@@ -83,11 +91,12 @@ object Font {
     val title = Title
 
     object Label {
+        private val base = TextStyle(fontFamily = angkorFontFamily)
+
         val l = base.copy(
-            fontWeight = FontWeight.ExtraBold,
-            fontSize = 16.sp,   // 14.sp
-            lineHeight = 23.sp,
-            letterSpacing = 0.1.sp
+            fontSize = 14.sp,
+            lineHeight = 18.sp,
+            letterSpacing = 0.0.sp
         )
 
         val m = base.copy(
