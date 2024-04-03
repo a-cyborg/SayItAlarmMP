@@ -14,6 +14,10 @@ object Font {
     private val angkorFontFamily = FontFamily(
         Font(R.font.angkor_regular, FontWeight.Normal)
     )
+    private val outfitFontFamily = FontFamily(
+        Font(R.font.outfit_light, FontWeight.Light),
+        Font(R.font.outfit_regular, FontWeight.Normal)
+    )
     private val base = TextStyle(fontFamily = aliceFontFamily)
 
     object Display {
@@ -115,21 +119,21 @@ object Font {
     val label = Label
 
     object Body {
-        private val bodyBase = base.copy(fontWeight = FontWeight.Medium)
+        private val base = TextStyle(fontFamily = outfitFontFamily)
 
-        val l = bodyBase.copy(
+        val l = base.copy(
             fontSize = 16.sp,
             lineHeight = 24.sp,
             letterSpacing = 0.5.sp
         )
 
-        val m = bodyBase.copy(
+        val m = base.copy(
             fontSize = 14.sp,
             lineHeight = 20.sp,
             letterSpacing = 0.25.sp
         )
 
-        val s = bodyBase.copy(
+        val s = base.copy(
             fontSize = 12.sp,
             lineHeight = 16.sp,
             letterSpacing = 0.4.sp
