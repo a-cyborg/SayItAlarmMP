@@ -21,7 +21,7 @@ fun CardStandard(content: @Composable () -> Unit) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = Spacing.m, vertical = Spacing.m),
+            .padding(Spacing.s),
         shape = Shape.Card.primary,
         backgroundColor = Color.surface.standard,
         elevation = Elevation.firstLevel,

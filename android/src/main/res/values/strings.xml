@@ -7,6 +7,8 @@
 
 <resources>
     <string name="app_name">SayIt</string>
+    <!--Informational Text -->
+    <string name="info_next_alarm_time">After %s hours and %s minutes,\n the alarm will go off.</string>
     <!-- Label -->
     <string name="edit">Edit</string>
     <string name="save">Save</string>

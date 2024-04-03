@@ -12,7 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
-import org.acyb.sayit.app.atom.CardStandard
+import org.acyb.sayit.app.atom.CardSubtle
 
 @Composable
 fun DialogStandard(
@@ -24,7 +24,7 @@ fun DialogStandard(
         onDismissRequest = onDismiss,
         properties = DialogProperties(usePlatformDefaultWidth = false),
     ) {
-        CardStandard {
+        CardSubtle {
             topAppBar()
 
             Box(modifier = Modifier.fillMaxSize()) {

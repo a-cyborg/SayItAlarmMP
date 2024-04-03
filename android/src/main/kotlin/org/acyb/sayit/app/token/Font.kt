@@ -67,7 +67,6 @@ object Font {
 
     object Title {
         val l = base.copy(
-            fontWeight = FontWeight.ExtraBold,
             fontSize = 22.sp,
             lineHeight = 28.sp,
             letterSpacing = 0.sp
