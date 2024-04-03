@@ -17,11 +17,21 @@ import org.robolectric.annotation.GraphicsMode
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
 @Config(sdk = [33])
 class CardSpec : RoborazziTest() {
+
     @Test
     fun `It renders CardStandard with given content`() {
         subjectUnderTest.setContent {
             CardStandard {
-                TextDisplayStandardLarge(text = "SayIt")
+                TextDisplayStandardLarge(text = "CardStandard")
+            }
+        }
+    }
+
+    @Test
+    fun `It renders CardSubtle with given content`() {
+        subjectUnderTest.setContent {
+            CardSubtle {
+                TextDisplayStandardLarge(text = "CardSubtle")
             }
         }
     }

@@ -21,10 +21,23 @@ fun CardStandard(content: @Composable () -> Unit) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
+            .padding(horizontal = Spacing.m, vertical = Spacing.m),
+        shape = Shape.Card.primary,
+        backgroundColor = Color.surface.standard,
+        elevation = Elevation.firstLevel,
+    ) {
+        content()
+    }
+}
+@Composable
+fun CardSubtle(content: @Composable () -> Unit) {
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
             .padding(horizontal = Spacing.m, vertical = Spacing.l),
         shape = Shape.Card.primary,
         backgroundColor = Color.surface.subtle,
-        elevation = Elevation.thirdLevel,
+        elevation = Elevation.secondLevel,
     ) {
         content()
     }
