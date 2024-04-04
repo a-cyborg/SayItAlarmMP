@@ -17,8 +17,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import org.acyb.sayit.app.atom.SpacerMedium
-import org.acyb.sayit.app.atom.TextBodyStandardMedium
-import org.acyb.sayit.app.atom.TextTitleStandardLarge
+import org.acyb.sayit.app.atom.TextBodyStandardLarge
+import org.acyb.sayit.app.atom.TextHeadlineStandardLarge
 import org.acyb.sayit.app.token.Color
 
 @Composable
@@ -43,10 +43,10 @@ fun AlarmListItem(
             modifier = Modifier.weight(1f),
             verticalArrangement = Arrangement.Center,
         ) {
-            TextTitleStandardLarge(text = time)
-            TextBodyStandardMedium(text = weeklyRepeat)
+            TextHeadlineStandardLarge(text = time)
+            TextBodyStandardLarge(text = weeklyRepeat)
+            SpacerMedium()
         }
-
         afterContent()
         SpacerMedium()
     }

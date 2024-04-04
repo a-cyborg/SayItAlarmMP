@@ -30,7 +30,7 @@ class AlarmListItemSpec : RoborazziTest() {
     }
 
     @Test
-    fun `It renders AlarmListItem on edit mode`() {
+    fun `It renders AlarmListItem with before and after contents`() {
         subjectUnderTest.setContent {
             AlarmListItem(
                 time = "8:30",
