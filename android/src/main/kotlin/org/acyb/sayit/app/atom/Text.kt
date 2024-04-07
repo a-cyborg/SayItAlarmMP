@@ -21,7 +21,16 @@ fun TextDisplayStandardLarge(text: String) {
 }
 
 @Composable
-fun TextHeadlineStandard(text: String) {
+fun TextHeadlineStandardLarge(text: String) {
+    Text(
+        text = text,
+        color = Color.text.standard,
+        style = Font.headline.l
+    )
+}
+
+@Composable
+fun TextHeadlineStandardSmall(text: String) {
     Text(
         text = text,
         color = Color.text.standard,

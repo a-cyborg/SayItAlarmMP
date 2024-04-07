@@ -56,7 +56,7 @@ class TextSpec : RoborazziTest() {
     @Test
     fun `It renders TextHeadlineStandard`() {
         subjectUnderTest.setContent {
-            TextHeadlineStandard(text = "HeadlineStandard")
+            TextHeadlineStandardSmall(text = "HeadlineStandard")
         }
     }
 }

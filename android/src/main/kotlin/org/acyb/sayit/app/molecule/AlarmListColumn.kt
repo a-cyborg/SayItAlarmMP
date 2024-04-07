@@ -17,7 +17,7 @@ import org.acyb.sayit.R
 import org.acyb.sayit.app.atom.DividerStandard
 import org.acyb.sayit.app.atom.SpacerMedium
 import org.acyb.sayit.app.atom.SpacerSmall
-import org.acyb.sayit.app.atom.TextHeadlineStandard
+import org.acyb.sayit.app.atom.TextHeadlineStandardSmall
 import org.acyb.sayit.app.token.Color
 
 @Composable
@@ -30,7 +30,7 @@ fun AlarmListColumn(
         item {
             Row {
                 SpacerMedium()
-                TextHeadlineStandard(text = stringResource(id = R.string.alarms))
+                TextHeadlineStandardSmall(text = stringResource(id = R.string.alarms))
             }
             SpacerSmall()
         }
