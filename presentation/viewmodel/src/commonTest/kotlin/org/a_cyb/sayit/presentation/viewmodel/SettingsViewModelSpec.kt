@@ -123,14 +123,24 @@ class SettingsViewModelSpec {
     }
 
     @Test
-    fun `Given runCommand is called it executes the given Command`() {
+    fun `Given runCommand is called it executes the given Command`() = runTest {
         // Given
-        val command = SetTimeOutCommand(timeOut = TimeOut(30))
+        val command = SetTimeOutCommand(TimeOut(70))
+        interactor.reset(Result.success(settings))
 
         // When
-        SettingsViewModel(interactor).runCommand(command)
+        val viewModel = SettingsViewModel(interactor)
 
-        // Then
-        interactor.invoked mustBe InvocationType.SET_TIME_OUT
+        viewModel.settingsState.test {
+            viewModel.runCommand(command)
+
+            advanceUntilIdle()
+
+            // // Then
+            skipItems(1) // Initial
+            skipItems(1) // Result
+
+            interactor.invoked mustBe InvocationType.SET_TIME_OUT
+        }
     }
 }

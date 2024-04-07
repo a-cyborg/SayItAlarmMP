@@ -63,10 +63,7 @@ internal class SettingsViewModel(
         return if (exception == null || !exception.isKnownError()) {
             SettingsContract.Error
         } else {
-            SettingsContract.ErrorWithDetail(
-                (exception as SettingsInteractorContract.SettingsException)
-                    .toUISettingsData()
-            )
+            exception.toErrorWithDetail()
         }
     }
 
@@ -75,8 +72,13 @@ internal class SettingsViewModel(
             errorType != SettingsInteractorContract.ErrorType.UNIDENTIFIED
     }
 
-    private fun SettingsInteractorContract.SettingsException.toUISettingsData():
-        SettingsContract.UISettingsData {
+    private fun Throwable.toErrorWithDetail(): SettingsContract.SettingsState {
+        return SettingsContract.ErrorWithDetail(
+            (this as SettingsInteractorContract.SettingsException).toUISettingsData()
+        )
+    }
+
+    private fun SettingsInteractorContract.SettingsException.toUISettingsData(): SettingsContract.UISettingsData {
         val data = value.toUISettingsData()
 
         return when (errorType) {
@@ -100,7 +102,11 @@ internal class SettingsViewModel(
         }
     }
 
-    override fun setSnooze(snooze: Snooze) {}
+    override fun setSnooze(snooze: Snooze) {
+        scope.launch {
+            interactor.setSnooze(snooze, this)
+        }
+    }
 
     override fun save() {}
 
