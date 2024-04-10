@@ -8,107 +8,114 @@ package org.a_cyb.sayit.presentation.viewmodel
 
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.update
-import kotlinx.coroutines.launch
 import org.a_cyb.sayit.entity.Settings
 import org.a_cyb.sayit.entity.Snooze
+import org.a_cyb.sayit.entity.Theme
 import org.a_cyb.sayit.entity.TimeOut
 import org.a_cyb.sayit.presentation.CommandContract
 import org.a_cyb.sayit.presentation.SettingsContract
-import org.a_cyb.sayit.presentation.interactor.InteractorContract.SettingsInteractorContract
+import org.a_cyb.sayit.presentation.SettingsContract.Error
+import org.a_cyb.sayit.presentation.SettingsContract.Initial
+import org.a_cyb.sayit.presentation.SettingsContract.InvalidTimeInput
+import org.a_cyb.sayit.presentation.SettingsContract.SettingsState
+import org.a_cyb.sayit.presentation.SettingsContract.SettingsStateWithContent
+import org.a_cyb.sayit.presentation.SettingsContract.TimeInput
+import org.a_cyb.sayit.presentation.SettingsContract.ValidTimeInput
+import org.a_cyb.sayit.presentation.interactor.SettingsInteractorContract
 
 internal class SettingsViewModel(
     private val interactor: SettingsInteractorContract,
 ) : SettingsContract.SettingsViewModel, ViewModel() {
 
-    private var _settingsState: MutableStateFlow<SettingsContract.SettingsState> =
-        MutableStateFlow(SettingsContract.Initial)
-    override val settingsState: StateFlow<SettingsContract.SettingsState> = _settingsState
+    private var _state: MutableStateFlow<SettingsState> = MutableStateFlow(Initial)
+    override val state: StateFlow<SettingsState> = _state.asStateFlow()
 
     init {
-        interactor.settingsData
+        interactor.settings
             .onEach(::updateState)
             .launchIn(scope)
     }
 
     private fun updateState(settingsResult: Result<Settings>) {
-        _settingsState.update { settingsResult.toUIState() }
+        _state.update { settingsResult.toState() }
     }
 
-    private fun Result<Settings>.toUIState(): SettingsContract.SettingsState {
-        return if (isFailure) {
-            toError()
+    private fun Result<Settings>.toState(): SettingsState =
+        if (isFailure) {
+            exceptionOrNull().toError()
         } else {
-            toLoaded()
+            getOrThrow().toStateWithContent()
         }
-    }
 
-    private fun Result<Settings>.toLoaded(): SettingsContract.SettingsState {
-        return SettingsContract.Loaded(getOrThrow().toUISettingsData())
-    }
+    private fun Throwable?.toError(): SettingsState =
+        Error(message = this?.message ?: "")
 
-    private fun Settings.toUISettingsData(): SettingsContract.UISettingsData {
-        return SettingsContract.UISettingsData(
-            timeOut = SettingsContract.ValidTimeInput(timeOut.timeOut),
-            snooze = SettingsContract.ValidTimeInput(snooze.snooze),
+    private fun Settings.toStateWithContent(): SettingsStateWithContent =
+        SettingsStateWithContent(
+            timeOut = timeOut.toValidatedTimeInput(),
+            snooze = snooze.toValidatedTimeInput(),
             theme = theme,
         )
-    }
 
-    private fun Result<Settings>.toError(): SettingsContract.SettingsState {
-        val exception = exceptionOrNull()
-
-        return if (exception == null || !exception.isKnownError()) {
-            SettingsContract.Error
+    private fun TimeOut.toValidatedTimeInput(): TimeInput =
+        if (timeOut !in (30..300)) {
+            InvalidTimeInput(timeOut)
         } else {
-            exception.toErrorWithDetail()
+            ValidTimeInput(timeOut)
         }
-    }
 
-    private fun Throwable.isKnownError(): Boolean {
-        return this is SettingsInteractorContract.InteractorError &&
-            errorType != SettingsInteractorContract.ErrorType.UNIDENTIFIED
-    }
-
-    private fun Throwable.toErrorWithDetail(): SettingsContract.SettingsState {
-        return SettingsContract.ErrorWithDetail(
-            (this as SettingsInteractorContract.SettingsException).toUISettingsData()
-        )
-    }
-
-    private fun SettingsInteractorContract.SettingsException.toUISettingsData(): SettingsContract.UISettingsData {
-        val data = value.toUISettingsData()
-
-        return when (errorType) {
-            SettingsInteractorContract.ErrorType.INVALID_TIMEOUT_INPUT -> {
-                val timeOut = data.timeOut.value
-                data.copy(timeOut = SettingsContract.InvalidTimeInput(timeOut, ""))
-            }
-
-            SettingsInteractorContract.ErrorType.INVALID_SNOOZE_INPUT -> {
-                val snooze = data.snooze.value
-                data.copy(snooze = SettingsContract.InvalidTimeInput(snooze, ""))
-            }
-
-            else -> data
+    private fun Snooze.toValidatedTimeInput(): TimeInput =
+        if (snooze !in (5..60)) {
+            InvalidTimeInput(snooze)
+        } else {
+            ValidTimeInput(snooze)
         }
-    }
+
+    private fun resolveSettingsStateWithContent(): SettingsStateWithContent =
+        if (state.value !is SettingsStateWithContent) {
+            throw IllegalStateException("Unable to resolve the settings state with content.")
+        } else {
+            state.value as SettingsStateWithContent
+        }
 
     override fun setTimeOut(timeOut: TimeOut) {
-        scope.launch {
-            interactor.setTimeOut(timeOut, this)
+        _state.update {
+            resolveSettingsStateWithContent()
+                .copy(timeOut = timeOut.toValidatedTimeInput())
         }
     }
 
     override fun setSnooze(snooze: Snooze) {
-        scope.launch {
-            interactor.setSnooze(snooze, this)
+        _state.update {
+            resolveSettingsStateWithContent()
+                .copy(snooze = snooze.toValidatedTimeInput())
         }
     }
 
-    override fun save() {}
+    override fun setTheme(theme: Theme) {
+        _state.update {
+            resolveSettingsStateWithContent()
+                .copy(theme = theme)
+        }
+    }
+
+    override fun save() {
+        interactor.save(
+            settings = resolveSettingsStateWithContent().toSettings(),
+            scope = scope
+        )
+    }
+
+    private fun SettingsStateWithContent.toSettings() =
+        Settings(
+            timeOut = TimeOut(timeOut.input),
+            snooze = Snooze(snooze.input),
+            theme = theme
+        )
 
     override fun <T : CommandContract.CommandReceiver> runCommand(command: CommandContract.Command<T>) {
         @Suppress("UNCHECKED_CAST")
