@@ -10,34 +10,28 @@ import kotlinx.coroutines.flow.StateFlow
 import org.a_cyb.sayit.entity.Theme
 import org.a_cyb.sayit.presentation.SettingsCommandContract.Save
 import org.a_cyb.sayit.presentation.SettingsCommandContract.SetSnooze
+import org.a_cyb.sayit.presentation.SettingsCommandContract.SetTheme
 import org.a_cyb.sayit.presentation.SettingsCommandContract.SetTimeOut
 
 interface SettingsContract {
-    interface SettingsViewModel : SetTimeOut, SetSnooze, Save, CommandContract.CommandExecutor {
-        val settingsState: StateFlow<SettingsState>
+    interface SettingsViewModel : SetTimeOut, SetSnooze, SetTheme, Save, CommandContract.CommandExecutor {
+        val state: StateFlow<SettingsState>
     }
 
     interface SettingsState
     data object Initial : SettingsState
-    data object Error : SettingsState
+    data class Error(val message: String) : SettingsState
 
-    sealed interface SettingsStateWithContent : SettingsState {
-        val data: UISettingsData
+    interface TimeInput {
+        val input: Int
     }
 
-    data class Loaded(override val data: UISettingsData) : SettingsStateWithContent
-    data class ErrorWithDetail(override val data: UISettingsData) : SettingsStateWithContent
+    data class ValidTimeInput(override val input: Int) : TimeInput
+    data class InvalidTimeInput(override val input: Int) : TimeInput
 
-    data class UISettingsData(
+    data class SettingsStateWithContent(
         val timeOut: TimeInput,
         val snooze: TimeInput,
         val theme: Theme,
-    )
-
-    interface TimeInput {
-        val value: Int
-    }
-
-    data class ValidTimeInput(override val value: Int) : TimeInput
-    data class InvalidTimeInput(override val value: Int, val explanation: String) : TimeInput
+    ) : SettingsState
 }
