@@ -13,7 +13,9 @@ import kotlinx.coroutines.launch
 import org.a_cyb.sayit.entity.Settings
 import org.a_cyb.sayit.presentation.interactor.SettingsInteractorContract
 
-class SettingsInteractorFake() : SettingsInteractorContract {
+class SettingsInteractorFake(
+    private val initialSettings: Settings,
+) : SettingsInteractorContract {
 
     private val _settings: MutableSharedFlow<Result<Settings>> = MutableSharedFlow()
     override val settings: SharedFlow<Result<Settings>> = _settings
@@ -21,6 +23,12 @@ class SettingsInteractorFake() : SettingsInteractorContract {
     fun emitResult(result: Result<Settings>, scope: CoroutineScope) {
         scope.launch {
             _settings.emit(result)
+        }
+    }
+
+    override fun load(scope: CoroutineScope) {
+        scope.launch {
+            _settings.emit(Result.success(initialSettings))
         }
     }
 

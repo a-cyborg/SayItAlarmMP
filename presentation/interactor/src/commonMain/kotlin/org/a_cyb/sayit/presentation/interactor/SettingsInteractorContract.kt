@@ -13,5 +13,6 @@ import org.a_cyb.sayit.entity.Settings
 interface SettingsInteractorContract {
     val settings: SharedFlow<Result<Settings>>
 
+    fun load(scope: CoroutineScope)
     fun save(settings: Settings, scope: CoroutineScope)
 }

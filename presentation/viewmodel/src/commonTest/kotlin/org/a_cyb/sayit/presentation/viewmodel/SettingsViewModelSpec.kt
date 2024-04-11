@@ -10,6 +10,7 @@ import app.cash.turbine.test
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.StandardTestDispatcher
+import kotlinx.coroutines.test.TestScope
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.runTest
 import kotlinx.coroutines.test.setMain
@@ -37,18 +38,19 @@ import kotlin.test.BeforeTest
 import kotlin.test.Test
 
 class SettingsViewModelSpec {
-    private val interactor = SettingsInteractorFake()
-    private val fixture = kotlinFixture()
-
     private val settingsDummy = Settings(
         timeOut = TimeOut(30),
         snooze = Snooze(15),
         theme = Theme.LIGHT,
     )
 
+    private val interactor = SettingsInteractorFake(settingsDummy)
+    private val fixture = kotlinFixture()
+
     @BeforeTest
     fun setup() {
         Dispatchers.setMain(StandardTestDispatcher())
+        interactor.emitResult(Result.failure(IllegalStateException()), TestScope())
     }
 
     @AfterTest
@@ -64,6 +66,21 @@ class SettingsViewModelSpec {
     @Test
     fun `It is in the initial state`() {
         SettingsViewModel(interactor).state.value mustBe Initial
+    }
+
+    @Test
+    fun `It initializes load settings`() = runTest {
+        val viewModel = SettingsViewModel(interactor)
+
+        viewModel.state.test {
+            skipItems(1)
+
+            awaitItem() mustBe SettingsStateWithContent(
+                timeOut = ValidTimeInput(settingsDummy.timeOut.timeOut),
+                snooze = ValidTimeInput(settingsDummy.snooze.snooze),
+                theme = settingsDummy.theme
+            )
+        }
     }
 
     @Test
