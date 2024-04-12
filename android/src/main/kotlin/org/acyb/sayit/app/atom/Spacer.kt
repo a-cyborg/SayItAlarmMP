@@ -16,10 +16,12 @@ import org.acyb.sayit.app.token.Spacing
 fun SpacerSmall() {
     Spacer(modifier = Modifier.size(Spacing.s))
 }
+
 @Composable
 fun SpacerMedium() {
     Spacer(modifier = Modifier.size(Spacing.m))
 }
+
 @Composable
 fun SpacerLarge() {
     Spacer(modifier = Modifier.size(Spacing.l))

@@ -36,7 +36,7 @@ class AlarmListItemSpec : RoborazziTest() {
                 time = "8:30",
                 weeklyRepeat = "Wakeup Call, Everyday",
                 beforeContent = { IconButtonDelete {} },
-                afterContent = { IconButtonEdit {} }
+                afterContent = { IconButtonEdit {} },
             )
         }
     }

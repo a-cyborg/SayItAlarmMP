@@ -35,7 +35,7 @@ class SectionRowSpec : RoborazziTest() {
                 contentDescription = "Test Click",
                 onClick = {
                     hasBeenCalled = true
-                }
+                },
             ) {}
         }
 

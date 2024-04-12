@@ -14,13 +14,13 @@ import kotlin.test.Test
 class SetSnoozeCommandSpec {
     @Test
     fun `It fulfils Command`() {
-        SetSnoozeCommand(Snooze(5)) fulfils CommandContract.Command::class
+        SetSnoozeCommand(5) fulfils CommandContract.Command::class
     }
 
     @Test
     fun `Given execute is called it runs setSnooze`() {
         // Given
-        val command = SetSnoozeCommand(Snooze(5))
+        val command = SetSnoozeCommand(5)
 
         // When
         command.execute(SetSnoozeReceiverFake)

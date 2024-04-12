@@ -48,7 +48,7 @@ class DialogSpec {
                         secondIcon = { IconButtonSaveText {} },
                     )
                 },
-                onDismiss = { }
+                onDismiss = { },
             ) {}
         }
 
@@ -73,7 +73,7 @@ class DialogSpec {
                 },
                 onDismiss = {
                     hasBeenCalled = true
-                }
+                },
             ) {}
         }
 

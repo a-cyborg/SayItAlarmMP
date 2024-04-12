@@ -12,5 +12,5 @@ import androidx.compose.ui.tooling.preview.Preview
 @Preview
 @Composable
 fun TimeSectionPreview() {
-    TimeSection(time = "8:30 AM"){}
+    TimeSection(time = "8:30 AM") {}
 }

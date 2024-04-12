@@ -19,7 +19,7 @@ fun TimeSection(
 ) {
     SectionRowClickable(
         contentDescription = stringResource(id = R.string.action_set_alarm_time),
-        onClick = onClick
+        onClick = onClick,
     ) {
         TextDisplayStandardLarge(text = time)
     }

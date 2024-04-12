@@ -16,7 +16,7 @@ value class Snooze(val snooze: Int)
 
 enum class Theme {
     LIGHT,
-    DARK
+    DARK,
 }
 
 data class Settings(

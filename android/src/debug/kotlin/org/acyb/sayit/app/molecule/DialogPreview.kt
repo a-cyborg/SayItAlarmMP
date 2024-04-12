@@ -22,6 +22,6 @@ fun DialogPreview() {
                 secondIcon = { IconButtonSaveText {} },
             )
         },
-        onDismiss = { }
+        onDismiss = { },
     ) {}
 }

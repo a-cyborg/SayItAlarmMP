@@ -7,6 +7,9 @@
 package org.a_cyb.sayit.presentation.viewmodel
 
 import app.cash.turbine.test
+import kotlin.test.AfterTest
+import kotlin.test.BeforeTest
+import kotlin.test.Test
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.StandardTestDispatcher
@@ -33,9 +36,6 @@ import tech.antibytes.kfixture.kotlinFixture
 import tech.antibytes.kfixture.listFixture
 import tech.antibytes.util.test.fulfils
 import tech.antibytes.util.test.mustBe
-import kotlin.test.AfterTest
-import kotlin.test.BeforeTest
-import kotlin.test.Test
 
 class SettingsViewModelSpec {
     private val settingsDummy = Settings(
@@ -78,7 +78,7 @@ class SettingsViewModelSpec {
             awaitItem() mustBe SettingsStateWithContent(
                 timeOut = ValidTimeInput(settingsDummy.timeOut.timeOut),
                 snooze = ValidTimeInput(settingsDummy.snooze.snooze),
-                theme = settingsDummy.theme
+                theme = settingsDummy.theme,
             )
         }
     }
@@ -87,7 +87,7 @@ class SettingsViewModelSpec {
     fun `Given setTimeOut called with valid input it sets state timeOut to ValidTimeInput`() = runTest {
         // Given
         val timeOuts: IntArray = fixture.fixture(
-            range = 30..300
+            range = 30..300,
         )
         val viewModel = SettingsViewModel(interactor)
 
@@ -104,7 +104,7 @@ class SettingsViewModelSpec {
                 awaitItem() mustBe SettingsStateWithContent(
                     timeOut = ValidTimeInput(timeOut),
                     snooze = ValidTimeInput(settingsDummy.snooze.snooze),
-                    theme = settingsDummy.theme
+                    theme = settingsDummy.theme,
                 )
             }
         }
@@ -115,7 +115,7 @@ class SettingsViewModelSpec {
         // Given
         val timeOuts: IntArray = fixture.fixture(
             (Int.MIN_VALUE..29),
-            (301..Int.MAX_VALUE)
+            (301..Int.MAX_VALUE),
         )
         val viewModel = SettingsViewModel(interactor)
 
@@ -132,7 +132,7 @@ class SettingsViewModelSpec {
                 awaitItem() mustBe SettingsStateWithContent(
                     timeOut = InvalidTimeInput(timeOut),
                     snooze = ValidTimeInput(settingsDummy.snooze.snooze),
-                    theme = settingsDummy.theme
+                    theme = settingsDummy.theme,
                 )
             }
         }
@@ -142,7 +142,7 @@ class SettingsViewModelSpec {
     fun `Given setSnooze called with valid input it sets state snooze to ValidTimeInput`() = runTest {
         // Given
         val snoozes: IntArray = fixture.fixture(
-            range = 5..60
+            range = 5..60,
         )
         val viewModel = SettingsViewModel(interactor)
 
@@ -159,7 +159,7 @@ class SettingsViewModelSpec {
                 awaitItem() mustBe SettingsStateWithContent(
                     timeOut = ValidTimeInput(settingsDummy.timeOut.timeOut),
                     snooze = ValidTimeInput(snooze),
-                    theme = settingsDummy.theme
+                    theme = settingsDummy.theme,
                 )
             }
         }
@@ -170,7 +170,7 @@ class SettingsViewModelSpec {
         // Given
         val snoozes: IntArray = fixture.fixture(
             Int.MIN_VALUE..4,
-            61..Int.MAX_VALUE
+            61..Int.MAX_VALUE,
         )
         val viewModel = SettingsViewModel(interactor)
 
@@ -187,7 +187,7 @@ class SettingsViewModelSpec {
                 awaitItem() mustBe SettingsStateWithContent(
                     timeOut = ValidTimeInput(settingsDummy.timeOut.timeOut),
                     snooze = InvalidTimeInput(snooze),
-                    theme = settingsDummy.theme
+                    theme = settingsDummy.theme,
                 )
             }
         }
@@ -212,7 +212,7 @@ class SettingsViewModelSpec {
                 awaitItem() mustBe SettingsStateWithContent(
                     timeOut = ValidTimeInput(settingsDummy.timeOut.timeOut),
                     snooze = ValidTimeInput(settingsDummy.snooze.snooze),
-                    theme = theme
+                    theme = theme,
                 )
             }
         }
@@ -245,7 +245,7 @@ class SettingsViewModelSpec {
                 interactor.settings.first().getOrThrow() mustBe Settings(
                     timeOut = TimeOut(timeOut),
                     snooze = Snooze(snooze),
-                    theme = theme
+                    theme = theme,
                 )
 
                 cancelAndIgnoreRemainingEvents()

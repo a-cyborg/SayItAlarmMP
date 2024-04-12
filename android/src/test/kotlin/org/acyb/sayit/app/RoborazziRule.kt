@@ -21,7 +21,7 @@ fun roborazziOf(
         captureRoot = szenario.onRoot(),
         options = RoborazziRule.Options(
             captureType = captureType,
-            outputDirectoryPath = "src/test/snapshots/roborazzi/images"
+            outputDirectoryPath = "src/test/snapshots/roborazzi/images",
         ),
     )
 }

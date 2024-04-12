@@ -29,6 +29,7 @@ fun CardStandard(content: @Composable () -> Unit) {
         content()
     }
 }
+
 @Composable
 fun CardSubtle(content: @Composable () -> Unit) {
     Card(

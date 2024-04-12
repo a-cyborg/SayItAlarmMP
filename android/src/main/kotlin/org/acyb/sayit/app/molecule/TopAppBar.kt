@@ -26,7 +26,10 @@ fun TopAppBarGlobal(
     CenterAlignedTopAppBar(
         title = { TextHeadlineStandardSmall(text = title) },
         navigationIcon = { firstIcon() },
-        actions = { secondIcon(); thirdIcon() },
+        actions = {
+            secondIcon()
+            thirdIcon()
+        },
         windowInsets = WindowInsets.statusBars,
         colors = TopAppBarColors(
             containerColor = Color.surface.standard,

@@ -112,7 +112,7 @@ internal class SettingsViewModel(
     override fun save() {
         interactor.save(
             settings = resolveSettingsStateWithContent().toSettings(),
-            scope = scope
+            scope = scope,
         )
     }
 
@@ -120,7 +120,7 @@ internal class SettingsViewModel(
         Settings(
             timeOut = TimeOut(timeOut.input),
             snooze = Snooze(snooze.input),
-            theme = theme
+            theme = theme,
         )
 
     override fun <T : CommandContract.CommandReceiver> runCommand(command: CommandContract.Command<T>) {

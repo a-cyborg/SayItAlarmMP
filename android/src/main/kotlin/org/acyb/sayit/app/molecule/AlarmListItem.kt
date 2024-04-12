@@ -26,7 +26,7 @@ fun AlarmListItem(
     time: String,
     weeklyRepeat: String,
     beforeContent: @Composable () -> Unit = {},
-    afterContent: @Composable () -> Unit = {}
+    afterContent: @Composable () -> Unit = {},
 ) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
@@ -34,7 +34,7 @@ fun AlarmListItem(
         modifier = Modifier
             .fillMaxWidth()
             .height(IntrinsicSize.Min)
-            .background(Color.surface.standard)
+            .background(Color.surface.standard),
     ) {
         beforeContent()
         SpacerMedium()

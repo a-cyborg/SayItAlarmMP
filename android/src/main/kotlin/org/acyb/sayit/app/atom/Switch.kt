@@ -24,6 +24,6 @@ fun SwitchStandard(
             checkedTrackColor = Color.surface.success,
             uncheckedThumbColor = Color.surface.strong,
             uncheckedTrackColor = Color.surface.subtle,
-        )
+        ),
     )
 }

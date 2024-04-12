@@ -22,10 +22,10 @@ import org.acyb.sayit.app.token.Color
 
 @Composable
 fun AlarmListColumn(
-    alarmListItems: List<@Composable () -> Unit>
+    alarmListItems: List<@Composable () -> Unit>,
 ) {
     LazyColumn(
-        modifier = Modifier.background(Color.surface.standard)
+        modifier = Modifier.background(Color.surface.standard),
     ) {
         item {
             Row {

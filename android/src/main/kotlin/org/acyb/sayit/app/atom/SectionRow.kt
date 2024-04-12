@@ -27,7 +27,7 @@ fun SectionRow(content: @Composable () -> Unit) {
             .fillMaxWidth()
             .background(
                 color = Color.surface.subtle,
-                shape = Shape.PanelSection.primary
+                shape = Shape.PanelSection.primary,
             )
             .padding(13.dp),
     ) {
@@ -47,7 +47,7 @@ fun SectionRowClickable(
             .fillMaxWidth()
             .background(
                 color = Color.surface.subtle,
-                shape = Shape.PanelSection.primary
+                shape = Shape.PanelSection.primary,
             )
             .padding(13.dp)
             .clickable(

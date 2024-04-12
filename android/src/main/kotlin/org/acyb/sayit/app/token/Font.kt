@@ -9,14 +9,14 @@ import org.acyb.sayit.R
 
 object Font {
     private val aliceFontFamily = FontFamily(
-        Font(R.font.alice_regular, FontWeight.Normal)
+        Font(R.font.alice_regular, FontWeight.Normal),
     )
     private val angkorFontFamily = FontFamily(
-        Font(R.font.angkor_regular, FontWeight.Normal)
+        Font(R.font.angkor_regular, FontWeight.Normal),
     )
     private val outfitFontFamily = FontFamily(
         Font(R.font.outfit_light, FontWeight.Light),
-        Font(R.font.outfit_regular, FontWeight.Normal)
+        Font(R.font.outfit_regular, FontWeight.Normal),
     )
     private val base = TextStyle(fontFamily = aliceFontFamily)
 
@@ -25,21 +25,21 @@ object Font {
             fontWeight = FontWeight.Bold,
             fontSize = 57.sp,
             lineHeight = 64.sp,
-            letterSpacing = (-0.25).sp
+            letterSpacing = (-0.25).sp,
         )
 
         val m = base.copy(
             fontWeight = FontWeight.Bold,
             fontSize = 43.sp,
             lineHeight = 50.sp,
-            letterSpacing = 0.sp
+            letterSpacing = 0.sp,
         )
 
         val s = base.copy(
             fontWeight = FontWeight.SemiBold,
             fontSize = 36.sp,
             lineHeight = 44.sp,
-            letterSpacing = 0.sp
+            letterSpacing = 0.sp,
         )
     }
 
@@ -51,19 +51,19 @@ object Font {
         val l = headlineBase.copy(
             fontSize = 32.sp,
             lineHeight = 40.sp,
-            letterSpacing = 0.sp
+            letterSpacing = 0.sp,
         )
 
         val m = headlineBase.copy(
             fontSize = 28.sp,
             lineHeight = 36.sp,
-            letterSpacing = 0.sp
+            letterSpacing = 0.sp,
         )
 
         val s = headlineBase.copy(
             fontSize = 24.sp,
             lineHeight = 32.sp,
-            letterSpacing = 0.sp
+            letterSpacing = 0.sp,
         )
     }
 
@@ -73,21 +73,21 @@ object Font {
         val l = base.copy(
             fontSize = 22.sp,
             lineHeight = 28.sp,
-            letterSpacing = 0.sp
+            letterSpacing = 0.sp,
         )
 
         val m = base.copy(
             fontWeight = FontWeight.Medium,
             fontSize = 16.sp,
             lineHeight = 24.sp,
-            letterSpacing = 0.15.sp
+            letterSpacing = 0.15.sp,
         )
 
         val s = base.copy(
             fontWeight = FontWeight.Medium,
             fontSize = 14.sp,
             lineHeight = 20.sp,
-            letterSpacing = 0.1.sp
+            letterSpacing = 0.1.sp,
         )
     }
 
@@ -99,20 +99,20 @@ object Font {
         val l = base.copy(
             fontSize = 14.sp,
             lineHeight = 18.sp,
-            letterSpacing = 0.0.sp
+            letterSpacing = 0.0.sp,
         )
 
         val m = base.copy(
             fontWeight = FontWeight.Medium,
             fontSize = 12.sp,
             lineHeight = 16.sp,
-            letterSpacing = 0.5.sp
+            letterSpacing = 0.5.sp,
         )
 
         val s = base.copy(
             fontSize = 11.sp,
             lineHeight = 16.sp,
-            letterSpacing = 0.5.sp
+            letterSpacing = 0.5.sp,
         )
     }
 
@@ -124,19 +124,19 @@ object Font {
         val l = base.copy(
             fontSize = 16.sp,
             lineHeight = 24.sp,
-            letterSpacing = 0.5.sp
+            letterSpacing = 0.5.sp,
         )
 
         val m = base.copy(
             fontSize = 14.sp,
             lineHeight = 20.sp,
-            letterSpacing = 0.25.sp
+            letterSpacing = 0.25.sp,
         )
 
         val s = base.copy(
             fontSize = 12.sp,
             lineHeight = 16.sp,
-            letterSpacing = 0.4.sp
+            letterSpacing = 0.4.sp,
         )
     }
 

@@ -14,13 +14,13 @@ import kotlin.test.Test
 class SetTimeOutCommandSpec {
     @Test
     fun `It fulfils Command`() {
-        SetTimeOutCommand(TimeOut(33)) fulfils CommandContract.Command::class
+        SetTimeOutCommand(33) fulfils CommandContract.Command::class
     }
 
     @Test
     fun `Given execute is called it runs setTimeOut`() {
         // Given
-        val command = SetTimeOutCommand(TimeOut(33))
+        val command = SetTimeOutCommand(33)
 
         // When
         command.execute(SetTimeOutReceiverFake)

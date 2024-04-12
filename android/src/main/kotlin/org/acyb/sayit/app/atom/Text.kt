@@ -25,7 +25,7 @@ fun TextHeadlineStandardLarge(text: String) {
     Text(
         text = text,
         color = Color.text.standard,
-        style = Font.headline.l
+        style = Font.headline.l,
     )
 }
 
@@ -34,7 +34,7 @@ fun TextHeadlineStandardSmall(text: String) {
     Text(
         text = text,
         color = Color.text.standard,
-        style = Font.headline.s
+        style = Font.headline.s,
     )
 }
 
@@ -61,7 +61,7 @@ fun TextBodyStandardLarge(text: String) {
     Text(
         text = text,
         color = Color.text.standard,
-        style = Font.body.l
+        style = Font.body.l,
     )
 }
 
@@ -70,6 +70,6 @@ fun TextBodyStandardMedium(text: String) {
     Text(
         text = text,
         color = Color.text.standard,
-        style = Font.body.m
+        style = Font.body.m,
     )
 }

@@ -28,7 +28,7 @@ fun AlarmListItemEditModePreview() {
         time = "8:30",
         weeklyRepeat = "Wakeup Call, Everyday",
         beforeContent = { IconButtonDelete {} },
-        afterContent = { IconButtonEdit {} }
+        afterContent = { IconButtonEdit {} },
     )
 }
 
@@ -49,6 +49,6 @@ fun AlarmListItemEditModeDarkThemePreview() {
         time = "8:30",
         weeklyRepeat = "Wakeup Call, Everyday",
         beforeContent = { IconButtonDelete {} },
-        afterContent = { IconButtonEdit {} }
+        afterContent = { IconButtonEdit {} },
     )
 }

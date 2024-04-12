@@ -6,11 +6,11 @@
 
 package org.acyb.sayit.app.token
 
+import androidx.compose.ui.graphics.Color as ColorPalette
 import org.junit.jupiter.api.DynamicTest
 import org.junit.jupiter.api.DynamicTest.dynamicTest
 import org.junit.jupiter.api.TestFactory
 import tech.antibytes.util.test.mustBe
-import androidx.compose.ui.graphics.Color as ColorPalette
 
 class ColorSpec {
     @TestFactory

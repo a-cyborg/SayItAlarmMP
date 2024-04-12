@@ -21,7 +21,7 @@ class InfoTextCardSpec : RoborazziTest() {
     fun `It renders InfoTextCard`() {
         subjectUnderTest.setContent {
             InfoTextCard(
-                text = "TextCardStandardHeadline"
+                text = "TextCardStandardHeadline",
             )
         }
     }

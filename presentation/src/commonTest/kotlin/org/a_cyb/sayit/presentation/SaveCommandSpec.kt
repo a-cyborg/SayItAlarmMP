@@ -6,9 +6,9 @@
 
 package org.a_cyb.sayit.presentation
 
+import kotlin.test.Test
 import tech.antibytes.util.test.fulfils
 import tech.antibytes.util.test.mustBe
-import kotlin.test.Test
 
 class SaveCommandSpec {
     @Test
