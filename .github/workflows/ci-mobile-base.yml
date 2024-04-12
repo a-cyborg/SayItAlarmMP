@@ -1,0 +1,11 @@
+name: Mobile app base workflow
+
+on:
+  push:
+    branches:
+      - 'main'
+  workflow_dispatch:
+
+jobs:
+  build_android:
+      uses: ./.github/workflows/ci-build-android.yml
