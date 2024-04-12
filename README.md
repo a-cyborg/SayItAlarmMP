@@ -1,5 +1,4 @@
-# Title
-Short Title
+# SayIt Alarm
 
 [![Latest release](https://raw.githubusercontent.com/bitPogo/repo/main/docs/src/assets/badge-release-latest.svg)](https://github.com/bitPogo/repo/releases)
 [![License](https://raw.githubusercontent.com/bitPogo/repo/main/docs/src/assets/badge-license.svg)](https://github.com/bitPogo/repo/blob/main/LICENSE)
@@ -19,24 +18,12 @@ Short Title
 * Android 5.0 (API 21) to Android 13 (API 33)
 * [Java 17](https://adoptopenjdk.net/?variant=openjdk17&jvmVariant=hotspot)
 
-## Changelog
-
-See [changelog](https://github.com/bitPogo/repo/blob/main/CHANGELOG.md).
-
 ## Versioning
 
 This project uses [Semantic Versioning](http://semver.org/) as a guideline for our versioning.
 
 ## Contributing
 
-You want to help or share a proposal? You have a specific problem? Read the following:
-
-* [Code of Conduct](https://github.com/bitPogo/repo/blob/main/CODE_OF_CONDUCT.md) for details on our code of conduct.
-* [Contribution Guide](https://github.com/bitPogo/repo/blob/main/CONTRIBUTING.md) for details about how to report bugs and propose features.
-
-## Releasing
-
-Please take a look [here](https://github.com/bitPogo/repo/tree/main/docs/src/development/releasing.md).
-
 ## Copyright and License
-
+Apache License
+Version 2.0
