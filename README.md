@@ -22,8 +22,6 @@
 
 This project uses [Semantic Versioning](http://semver.org/) as a guideline for our versioning.
 
-## Contributing
-
 ## Copyright and License
 
 Apache License Version 2.0
