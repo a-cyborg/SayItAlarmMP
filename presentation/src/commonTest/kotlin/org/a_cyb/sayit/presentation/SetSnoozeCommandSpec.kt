@@ -6,10 +6,10 @@
 
 package org.a_cyb.sayit.presentation
 
+import kotlin.test.Test
 import org.a_cyb.sayit.entity.Snooze
 import tech.antibytes.util.test.fulfils
 import tech.antibytes.util.test.mustBe
-import kotlin.test.Test
 
 class SetSnoozeCommandSpec {
     @Test
