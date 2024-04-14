@@ -40,6 +40,7 @@ dependencies {
     implementation(antibytesCatalog.gradle.antibytes.publishing)
     implementation(antibytesCatalog.gradle.antibytes.publishingConfiguration)
     implementation(antibytesCatalog.gradle.antibytes.quality)
+    implementation(antibytesCatalog.gradle.agp)
 }
 
 gradlePlugin {
