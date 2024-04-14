@@ -4,8 +4,6 @@
  * Use of this source code is governed by Apache v2.0
  */
 
-import org.gradle.kotlin.dsl.antibytesCatalog
-
 /*
  * Copyright (c) 2023 Matthias Geisler (bitPogo) / All rights reserved.
  *
@@ -40,11 +38,7 @@ repositories {
 dependencies {
     api(antibytesCatalog.gradle.antibytes.dependencyHelper)
     implementation(antibytesCatalog.gradle.antibytes.publishing)
-    implementation(antibytesCatalog.gradle.antibytes.versioning)
-    implementation(antibytesCatalog.gradle.antibytes.publishingConfiguration)
     implementation(antibytesCatalog.gradle.antibytes.quality)
-    implementation(antibytesCatalog.gradle.agp)
-    api(antibytesCatalog.gradle.antibytes.runtimeConfig)
 }
 
 gradlePlugin {
