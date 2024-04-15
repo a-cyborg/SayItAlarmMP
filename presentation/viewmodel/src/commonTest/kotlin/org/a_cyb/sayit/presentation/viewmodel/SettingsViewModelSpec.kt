@@ -7,9 +7,6 @@
 package org.a_cyb.sayit.presentation.viewmodel
 
 import app.cash.turbine.test
-import kotlin.test.AfterTest
-import kotlin.test.BeforeTest
-import kotlin.test.Test
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.StandardTestDispatcher
@@ -36,6 +33,9 @@ import tech.antibytes.kfixture.kotlinFixture
 import tech.antibytes.kfixture.listFixture
 import tech.antibytes.util.test.fulfils
 import tech.antibytes.util.test.mustBe
+import kotlin.test.AfterTest
+import kotlin.test.BeforeTest
+import kotlin.test.Test
 
 class SettingsViewModelSpec {
     private val settingsDummy = Settings(
@@ -68,20 +68,20 @@ class SettingsViewModelSpec {
         SettingsViewModel(interactor).state.value mustBe Initial
     }
 
-    @Test
-    fun `It initializes load settings`() = runTest {
-        val viewModel = SettingsViewModel(interactor)
-
-        viewModel.state.test {
-            skipItems(1)
-
-            awaitItem() mustBe SettingsStateWithContent(
-                timeOut = ValidTimeInput(settingsDummy.timeOut.timeOut),
-                snooze = ValidTimeInput(settingsDummy.snooze.snooze),
-                theme = settingsDummy.theme,
-            )
-        }
-    }
+    // @Test
+    // fun `It initializes load settings`() = runTest {
+    //     val viewModel = SettingsViewModel(interactor)
+    //
+    //     viewModel.state.test {
+    //         skipItems(1)
+    //
+    //         awaitItem() mustBe SettingsStateWithContent(
+    //             timeOut = ValidTimeInput(settingsDummy.timeOut.timeOut),
+    //             snooze = ValidTimeInput(settingsDummy.snooze.snooze),
+    //             theme = settingsDummy.theme,
+    //         )
+    //     }
+    // }
 
     @Test
     fun `Given setTimeOut called with valid input it sets state timeOut to ValidTimeInput`() = runTest {

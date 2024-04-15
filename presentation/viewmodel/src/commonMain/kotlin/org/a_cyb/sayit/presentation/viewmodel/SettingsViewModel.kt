@@ -38,12 +38,6 @@ internal class SettingsViewModel(
         interactor.settings
             .onEach(::updateState)
             .launchIn(scope)
-
-        initialize()
-    }
-
-    private fun initialize() {
-        interactor.load(scope)
     }
 
     private fun updateState(settingsResult: Result<Settings>) {
