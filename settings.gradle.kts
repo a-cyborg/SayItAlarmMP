@@ -73,7 +73,6 @@ dependencyResolutionManagement {
 }
 
 include(
-    ":kmp-lib",
     ":android",
     ":entity",
     ":presentation",
