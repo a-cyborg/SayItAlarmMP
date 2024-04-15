@@ -28,13 +28,5 @@ jobs:
       - name: Validate gradle wrapper
         uses: gradle/wrapper-validation-action@v2
 
-      - name: Caching gradle
-        uses: actions/cache@v4
-        with:
-          path: |
-            ~/.gradle/caches
-            ~/.gradle/wrapper
-          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
-
-      - name: Build android
-        run: ./gradlew build
+      - name: Test android
+        run: ./gradlew testDebugUnitTest testReleaseUnitTest
