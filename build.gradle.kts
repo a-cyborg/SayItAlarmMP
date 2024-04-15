@@ -7,6 +7,7 @@
 import tech.antibytes.gradle.dependency.helper.addCustomRepositories
 import tech.antibytes.gradle.dependency.helper.ensureKotlinVersion
 import tech.antibytes.gradle.project.config.quality.SonarConfiguration
+import tech.antibytes.gradle.project.config.quality.StableApi
 import tech.antibytes.gradle.project.config.repositories.Repositories.projectRepositories
 import tech.antibytes.gradle.quality.api.CodeAnalysisConfiguration
 
@@ -20,6 +21,7 @@ plugins {
 
 antibytesQuality {
     codeAnalysis.set(CodeAnalysisConfiguration(project = project))
+    stableApi.set(StableApi.api)
     qualityGate.set(SonarConfiguration(project).configuration)
 }
 

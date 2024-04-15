@@ -6,8 +6,4 @@
 
 package tech.antibytes.gradle.project.config.quality
 
-val excludes = setOf<String>(
-    "playground",
-    "integration-kmp",
-    "docs",
-)
+val excludes = setOf<String>()
