@@ -28,5 +28,14 @@ jobs:
       - name: Validate gradle wrapper
         uses: gradle/wrapper-validation-action@v2
 
+      - name: Restore build cache
+        uses: actions/cache/restore@v4
+        with:
+          path: '**/.gradle/build-cache/**'
+          key: ${{ runner.os }}-build-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ github.sha }}
+            ${{ runner.os }}-build-
+
       - name: Test android
         run: ./gradlew testDebugUnitTest testReleaseUnitTest
