@@ -59,4 +59,11 @@ class TextSpec : RoborazziTest() {
             TextHeadlineStandardSmall(text = "HeadlineStandard")
         }
     }
+
+    @Test
+    fun `It renders TextHeadlineStandardDebugTest`() {
+        subjectUnderTest.setContent {
+            TextHeadlineStandardSmall(text = "HeadlineStandard")
+        }
+    }
 }
