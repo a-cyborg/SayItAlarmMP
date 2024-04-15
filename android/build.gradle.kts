@@ -1,6 +1,8 @@
 /*
- * Copyright (c) 2024 Matthias Geisler (bitPogo) / All rights reserved.
+ * Copyright (c) 2024 Matthias Geisler (bitPogo)
+ * Copyright (c) 2024 Mima Kang
  *
+ * All rights reserved.
  * Use of this source code is governed by Apache v2.0
  */
 
@@ -137,4 +139,14 @@ dependencies {
 
 tasks.withType<Test> {
     useJUnitPlatform()
+}
+
+afterEvaluate {
+    tasks.named("generateDebugLintReportModel") {
+        mustRunAfter("kspDebugUnitTestKotlin")
+    }
+
+    tasks.named("lintAnalyzeDebug") {
+        mustRunAfter("kspDebugUnitTestKotlin")
+    }
 }
