@@ -152,7 +152,7 @@ afterEvaluate {
 
     tasks.getByName("testReleaseUnitTest") {
         tasks
-            .filter { it.name.contains("roborazzi", ignoreCase = true) }
+            .filter { it.name.matches(Regex("(?i).*roborazzi*")) }
             .forEach { _ -> enabled = false }
 
         // val roborazziTests = tasks.filter { it.name.contains("roborazzi", ignoreCase = true) }
