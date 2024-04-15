@@ -4,12 +4,12 @@
  * Use of this source code is governed by Apache v2.0
  */
 
+import tech.antibytes.gradle.configuration.apple.ensureAppleDeviceCompatibility
 import tech.antibytes.gradle.configuration.sourcesets.iosx
 
 plugins {
     alias(antibytesCatalog.plugins.gradle.antibytes.kmpConfiguration)
     alias(antibytesCatalog.plugins.gradle.antibytes.androidLibraryConfiguration)
-    alias(antibytesCatalog.plugins.gradle.antibytes.coverage)
 }
 
 val projectPackage = "org.acyb.sayit.entity"
@@ -20,7 +20,9 @@ android {
 
 kotlin {
     androidTarget()
+
     iosx()
+    ensureAppleDeviceCompatibility()
 
     sourceSets {
         val commonMain by getting

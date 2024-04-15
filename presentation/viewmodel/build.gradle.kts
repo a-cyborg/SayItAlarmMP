@@ -6,13 +6,14 @@
  */
 
 
-import tech.antibytes.gradle.configuration.apple.ensureAppleDeviceCompatibility
 import org.gradle.api.tasks.testing.logging.TestLogEvent.FAILED
+import tech.antibytes.gradle.configuration.apple.ensureAppleDeviceCompatibility
 import tech.antibytes.gradle.configuration.sourcesets.iosx
 
 plugins {
     alias(antibytesCatalog.plugins.gradle.antibytes.kmpConfiguration)
     alias(antibytesCatalog.plugins.gradle.antibytes.androidLibraryConfiguration)
+    alias(antibytesCatalog.plugins.gradle.antibytes.coverage)
 
     alias(antibytesCatalog.plugins.kmock)
 }
