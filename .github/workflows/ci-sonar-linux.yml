@@ -36,6 +36,7 @@ jobs:
         uses:  actions/cache/restore@v4
         with:
           path: ${{ inputs.build-cache-dir }}
+          key: ${{ runner.os }}-build-${{ github.sha }}
           restore-keys: |
             ${{ runner.os }}-build-${{ github.sha }}
             ${{ runner.os }}-build-
