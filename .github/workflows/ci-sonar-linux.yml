@@ -35,7 +35,7 @@ jobs:
       - name: Restore build cache
         uses:  actions/cache/restore@v4
         with:
-          path: ${{ inputs.build-cache-dir }}
+          path: '**/.gradle/build-cache/**'
           key: ${{ runner.os }}-build-${{ github.sha }}
           restore-keys: |
             ${{ runner.os }}-build-${{ github.sha }}
