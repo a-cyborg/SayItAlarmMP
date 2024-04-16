@@ -24,6 +24,8 @@ antibytesQuality {
 }
 
 allprojects {
+    group = "com.sonarqube"
+
     repositories {
         mavenCentral()
         google()
@@ -40,6 +42,30 @@ allprojects {
 tasks.named<Wrapper>("wrapper") {
     gradleVersion = antibytesCatalog.versions.gradle.gradle.get()
     distributionType = Wrapper.DistributionType.ALL
+}
+
+subprojects {
+    apply(plugin = "org.sonarqube")
+
+    tasks.withType<Test> {
+        useJUnitPlatform()
+    }
+
+    sonar {
+        properties {
+            property("sonar.sources", "src/main/kotlin")
+            property("sonar.tests", "src/commonTest/kotlin")
+            property("sonar.coverage.jacoco.xmlReportPaths", "/reports/jacoco/**/*.xml")
+        }
+    }
+}
+
+project(":android") {
+    sonar {
+        properties {
+            property("sonar.tests", "src/test/kotlin")
+        }
+    }
 }
 
 sonar {
