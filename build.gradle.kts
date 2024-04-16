@@ -15,14 +15,14 @@ plugins {
     id("tech.antibytes.gradle.setup")
 
     alias(antibytesCatalog.plugins.gradle.antibytes.dependencyHelper)
-    // alias(antibytesCatalog.plugins.gradle.antibytes.publishing)
+    alias(antibytesCatalog.plugins.gradle.antibytes.publishing)
     alias(antibytesCatalog.plugins.gradle.antibytes.quality)
 }
 
 antibytesQuality {
     codeAnalysis.set(CodeAnalysisConfiguration(project = project))
-    stableApi.set(StableApi.api)
     qualityGate.set(SonarConfiguration(project).configuration)
+    stableApi.set(StableApi.api)
 }
 
 allprojects {
