@@ -47,10 +47,6 @@ tasks.named<Wrapper>("wrapper") {
 subprojects {
     apply(plugin = "org.sonarqube")
 
-    tasks.withType<Test> {
-        useJUnitPlatform()
-    }
-
     sonar {
         properties {
             property("sonar.sources", "src/commonMain/kotlin")
