@@ -68,6 +68,13 @@ project(":android") {
     }
 }
 
+
+project(":entity") {
+    sonar {
+        isSkipProject = true
+    }
+}
+
 sonar {
     properties {
         property("sonar.projectKey", "a-cyborg_SayItAlarmMP")
