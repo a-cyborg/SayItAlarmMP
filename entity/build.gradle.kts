@@ -10,7 +10,7 @@ import tech.antibytes.gradle.configuration.sourcesets.iosx
 plugins {
     alias(antibytesCatalog.plugins.gradle.antibytes.kmpConfiguration)
     alias(antibytesCatalog.plugins.gradle.antibytes.androidLibraryConfiguration)
-    alias(antibytesCatalog.plugins.gradle.antibytes.publishing)
+    alias(antibytesCatalog.plugins.gradle.antibytes.coverage)
 }
 
 val projectPackage = "org.acyb.sayit.entity"
