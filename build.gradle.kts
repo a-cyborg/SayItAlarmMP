@@ -53,7 +53,7 @@ subprojects {
 
     sonar {
         properties {
-            property("sonar.sources", "src/main/kotlin")
+            property("sonar.sources", "src/commonMain/kotlin")
             property("sonar.tests", "src/commonTest/kotlin")
             property("sonar.coverage.jacoco.xmlReportPaths", "/reports/jacoco/**/*.xml")
         }
@@ -63,6 +63,7 @@ subprojects {
 project(":android") {
     sonar {
         properties {
+            property("sonar.sources", "src/main/kotlin")
             property("sonar.tests", "src/test/kotlin")
         }
     }
@@ -72,6 +73,14 @@ project(":android") {
 project(":entity") {
     sonar {
         isSkipProject = true
+    }
+}
+
+project(":presentation:viewmodel") {
+    sonar {
+        properties {
+            property("sonar.sources", listOf("src/commonMain/kotlin", "src/androidMain/kotlin"))
+        }
     }
 }
 
