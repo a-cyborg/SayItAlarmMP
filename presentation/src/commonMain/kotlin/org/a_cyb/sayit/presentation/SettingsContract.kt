@@ -18,9 +18,14 @@ interface SettingsContract {
         val state: StateFlow<SettingsState>
     }
 
+    enum class SettingsError {
+        INITIAL_SETTINGS_UNRESOLVED,
+        UNABLE_RESOLVE_SETTINGS_STATE_WITH_CONTENT,
+    }
+
     interface SettingsState
     data object Initial : SettingsState
-    data class Error(val message: String) : SettingsState
+    data class Error(val detail: String) : SettingsState
 
     interface TimeInput {
         val input: Int

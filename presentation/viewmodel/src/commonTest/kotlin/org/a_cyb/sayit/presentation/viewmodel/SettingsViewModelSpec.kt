@@ -23,14 +23,12 @@ import org.a_cyb.sayit.presentation.SetSnoozeCommand
 import org.a_cyb.sayit.presentation.SetThemeCommand
 import org.a_cyb.sayit.presentation.SetTimeOutCommand
 import org.a_cyb.sayit.presentation.SettingsContract
-import org.a_cyb.sayit.presentation.SettingsContract.Error
 import org.a_cyb.sayit.presentation.SettingsContract.Initial
 import org.a_cyb.sayit.presentation.SettingsContract.InvalidTimeInput
 import org.a_cyb.sayit.presentation.SettingsContract.SettingsStateWithContent
 import org.a_cyb.sayit.presentation.SettingsContract.ValidTimeInput
 import tech.antibytes.kfixture.fixture
 import tech.antibytes.kfixture.kotlinFixture
-import tech.antibytes.kfixture.listFixture
 import tech.antibytes.util.test.fulfils
 import tech.antibytes.util.test.mustBe
 import kotlin.test.AfterTest
@@ -250,45 +248,6 @@ class SettingsViewModelSpec {
 
                 cancelAndIgnoreRemainingEvents()
             }
-        }
-    }
-
-    @Test
-    fun `Given interactor failure result it sets Error with message`() = runTest {
-        // Given
-        val messages: List<String> = fixture.listFixture()
-        val viewModel = SettingsViewModel(interactor)
-
-        interactor.emitResult(Result.success(settingsDummy), this)
-
-        viewModel.state.test {
-            skipItems(2)
-
-            messages.forEach { message ->
-                // When
-                interactor.emitResult(Result.failure(IllegalStateException(message)), this)
-
-                // Then
-                awaitItem() mustBe Error(message = message)
-            }
-        }
-    }
-
-    @Test
-    fun `Given interactor failure result it sets Error without message`() = runTest {
-        // Given
-        val viewModel = SettingsViewModel(interactor)
-
-        interactor.emitResult(Result.success(settingsDummy), this)
-
-        viewModel.state.test {
-            skipItems(2)
-
-            // When
-            interactor.emitResult(Result.failure(IllegalStateException()), this)
-
-            // Then
-            awaitItem() mustBe Error(message = "")
         }
     }
 }

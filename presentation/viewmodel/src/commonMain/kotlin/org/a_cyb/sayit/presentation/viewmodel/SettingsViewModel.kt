@@ -21,6 +21,9 @@ import org.a_cyb.sayit.presentation.SettingsContract
 import org.a_cyb.sayit.presentation.SettingsContract.Error
 import org.a_cyb.sayit.presentation.SettingsContract.Initial
 import org.a_cyb.sayit.presentation.SettingsContract.InvalidTimeInput
+import org.a_cyb.sayit.presentation.SettingsContract.SettingsError
+import org.a_cyb.sayit.presentation.SettingsContract.SettingsError.INITIAL_SETTINGS_UNRESOLVED
+import org.a_cyb.sayit.presentation.SettingsContract.SettingsError.UNABLE_RESOLVE_SETTINGS_STATE_WITH_CONTENT
 import org.a_cyb.sayit.presentation.SettingsContract.SettingsState
 import org.a_cyb.sayit.presentation.SettingsContract.SettingsStateWithContent
 import org.a_cyb.sayit.presentation.SettingsContract.TimeInput
@@ -41,18 +44,10 @@ internal class SettingsViewModel(
     }
 
     private fun updateState(settingsResult: Result<Settings>) {
-        _state.update { settingsResult.toState() }
+        settingsResult
+            .onSuccess { settings -> _state.update { settings.toStateWithContent() } }
+            .onFailure { throwable -> _state.update { throwable.toErrorState(INITIAL_SETTINGS_UNRESOLVED) } }
     }
-
-    private fun Result<Settings>.toState(): SettingsState =
-        if (isFailure) {
-            exceptionOrNull().toError()
-        } else {
-            getOrThrow().toStateWithContent()
-        }
-
-    private fun Throwable?.toError(): SettingsState =
-        Error(message = this?.message ?: "")
 
     private fun Settings.toStateWithContent(): SettingsStateWithContent =
         SettingsStateWithContent(
@@ -75,39 +70,36 @@ internal class SettingsViewModel(
             ValidTimeInput(snooze)
         }
 
-    private fun resolveSettingsStateWithContent(): SettingsStateWithContent =
-        if (state.value !is SettingsStateWithContent) {
-            throw IllegalStateException("Unable to resolve the settings state with content.")
-        } else {
-            state.value as SettingsStateWithContent
-        }
+    private fun Throwable.toErrorState(settingsError: SettingsError): SettingsState =
+        Error(detail = "$settingsError message=$message, cause=$cause")
 
     override fun setTimeOut(timeOut: TimeOut) {
-        _state.update {
-            resolveSettingsStateWithContent()
-                .copy(timeOut = timeOut.toValidatedTimeInput())
-        }
+        updateContentOrError { copy(timeOut = timeOut.toValidatedTimeInput()) }
     }
 
     override fun setSnooze(snooze: Snooze) {
-        _state.update {
-            resolveSettingsStateWithContent()
-                .copy(snooze = snooze.toValidatedTimeInput())
-        }
+        updateContentOrError { copy(snooze = snooze.toValidatedTimeInput()) }
     }
 
     override fun setTheme(theme: Theme) {
+        updateContentOrError { copy(theme = theme) }
+    }
+
+    private fun updateContentOrError(updateAction: SettingsStateWithContent.() -> SettingsStateWithContent) {
         _state.update {
-            resolveSettingsStateWithContent()
-                .copy(theme = theme)
+            (state.value as? SettingsStateWithContent)
+                ?.updateAction()
+                ?: IllegalStateException().toErrorState(UNABLE_RESOLVE_SETTINGS_STATE_WITH_CONTENT)
         }
     }
 
     override fun save() {
-        interactor.save(
-            settings = resolveSettingsStateWithContent().toSettings(),
-            scope = scope,
-        )
+        if (state.value is SettingsStateWithContent) {
+            interactor.save(
+                settings = (state.value as SettingsStateWithContent).toSettings(),
+                scope = scope,
+            )
+        }
     }
 
     private fun SettingsStateWithContent.toSettings() =
