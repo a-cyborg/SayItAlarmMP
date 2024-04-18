@@ -6,7 +6,6 @@ name: Run sonar cloud
 on:
   workflow_call:
 
-
 jobs:
   coverage:
     runs-on: ubuntu-latest

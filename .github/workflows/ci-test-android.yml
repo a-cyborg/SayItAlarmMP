@@ -37,5 +37,11 @@ jobs:
             ${{ runner.os }}-build-${{ github.sha }}
             ${{ runner.os }}-build-
 
+      - name: Cleanup
+        run: ./gradlew clean
+
       - name: Test android
         run: ./gradlew testDebugUnitTest testReleaseUnitTest --stacktrace
+
+      - name: Coverage android
+        run: ./gradlew --stacktrace androidCoverageVerification

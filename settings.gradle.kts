@@ -85,4 +85,4 @@ buildCache {
     fullCache(rootDir)
 }
 
-rootProject.name = "SayItKMP"
+rootProject.name = "SayIt"

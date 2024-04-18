@@ -4,86 +4,49 @@
  * Use of this source code is governed by Apache v2.0
  */
 
+import tech.antibytes.gradle.dependency.helper.GradleCompositeBuilds
 import tech.antibytes.gradle.dependency.helper.addCustomRepositories
 import tech.antibytes.gradle.dependency.helper.ensureKotlinVersion
+import tech.antibytes.gradle.project.config.quality.Linter
+import tech.antibytes.gradle.project.config.quality.SonarConfiguration
+import tech.antibytes.gradle.project.config.quality.StableApi
 import tech.antibytes.gradle.project.config.repositories.Repositories.projectRepositories
 import tech.antibytes.gradle.quality.api.CodeAnalysisConfiguration
 
 plugins {
     id("tech.antibytes.gradle.setup")
-    id("org.sonarqube") version "4.4.1.3373"
 
     alias(antibytesCatalog.plugins.gradle.antibytes.dependencyHelper)
     alias(antibytesCatalog.plugins.gradle.antibytes.quality)
 }
 
 antibytesQuality {
+    linter.set(Linter.spotless)
     codeAnalysis.set(CodeAnalysisConfiguration(project = project))
-    // qualityGate.set(SonarConfiguration(project).configuration)
-    // stableApi.set(StableApi.api)
+    stableApi.set(StableApi.api)
+    qualityGate.set(SonarConfiguration(project).configuration)
 }
 
 allprojects {
-    group = "com.sonarqube"
+    // group = "com.sonarqube"
 
     repositories {
         mavenCentral()
         google()
         jcenter()
-        maven {
-            url = uri("https://oss.sonatype.org/content/repositories/snapshots")
-        }
+        // maven {
+        //     url = uri("https://oss.sonatype.org/content/repositories/snapshots")
+        // }
         addCustomRepositories(projectRepositories)
     }
 
     ensureKotlinVersion()
 }
 
+GradleCompositeBuilds.configure(project)
+evaluationDependsOnChildren()
+
 tasks.named<Wrapper>("wrapper") {
     gradleVersion = antibytesCatalog.versions.gradle.gradle.get()
     distributionType = Wrapper.DistributionType.ALL
-}
-
-subprojects {
-    apply(plugin = "org.sonarqube")
-
-    sonar {
-        properties {
-            property("sonar.sources", "src/commonMain/kotlin")
-            property("sonar.tests", "src/commonTest/kotlin")
-            property("sonar.coverage.jacoco.xmlReportPaths", "/reports/jacoco/**/*.xml")
-        }
-    }
-}
-
-project(":android") {
-    sonar {
-        properties {
-            property("sonar.sources", "src/main/kotlin")
-            property("sonar.tests", "src/test/kotlin")
-        }
-    }
-}
-
-
-project(":entity") {
-    sonar {
-        isSkipProject = true
-    }
-}
-
-project(":presentation:viewmodel") {
-    sonar {
-        properties {
-            property("sonar.sources", listOf("src/commonMain/kotlin", "src/androidMain/kotlin"))
-        }
-    }
-}
-
-sonar {
-    properties {
-        property("sonar.projectKey", "a-cyborg_SayItAlarmMP")
-        property("sonar.organization", "a-cyborg")
-        property("sonar.host.url", "https://sonarcloud.io")
-    }
 }

@@ -14,6 +14,6 @@ class SonarConfiguration(project: Project) {
         project = project,
         projectKey = "a-cyborg_SayItAlarmMP",
         organization = "a-cyborg",
-        exclude = excludes
+        exclude = excludes,
     )
 }

@@ -69,14 +69,6 @@ android {
     testOptions {
         unitTests {
             isIncludeAndroidResources = true
-            all {
-                // -Pscreenshot to filter screenshot tests
-                /*it.useJUnit {
-                    if (project.hasProperty("screenshot")) {
-                        includeCategories("io.github.takahirom.roborazzi.testing.category.ScreenshotTests")
-                    }
-                }*/
-            }
         }
     }
 }
