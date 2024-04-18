@@ -4,7 +4,6 @@
  * Use of this source code is governed by Apache v2.0
  */
 
-import tech.antibytes.gradle.dependency.helper.GradleCompositeBuilds
 import tech.antibytes.gradle.dependency.helper.addCustomRepositories
 import tech.antibytes.gradle.dependency.helper.ensureKotlinVersion
 import tech.antibytes.gradle.project.config.quality.Linter
@@ -22,28 +21,23 @@ plugins {
 antibytesQuality {
     linter.set(Linter.spotless)
     codeAnalysis.set(CodeAnalysisConfiguration(project = project))
-    // stableApi.set(StableApi.api)
     qualityGate.set(SonarConfiguration(project).configuration)
 }
 
 allprojects {
-    // group = "com.sonarqube"
-
     repositories {
         mavenCentral()
         google()
         jcenter()
-        // maven {
-        //     url = uri("https://oss.sonatype.org/content/repositories/snapshots")
-        // }
+
         addCustomRepositories(projectRepositories)
     }
 
     ensureKotlinVersion()
 }
 
-GradleCompositeBuilds.configure(project)
-evaluationDependsOnChildren()
+// GradleCompositeBuilds.configure(project)
+// evaluationDependsOnChildren()
 
 tasks.named<Wrapper>("wrapper") {
     gradleVersion = antibytesCatalog.versions.gradle.gradle.get()
