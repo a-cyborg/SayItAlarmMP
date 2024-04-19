@@ -28,6 +28,7 @@ object Linter {
                 "ktlint_standard_value-argument-comment" to "disabled",
                 "ktlint_standard_multiline-expression-wrapping" to "disabled",
                 "ktlint_standard_function-naming" to "disabled",
+                "ktlint_standard_package-name" to "disabled",
             ),
         ),
     )

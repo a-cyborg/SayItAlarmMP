@@ -36,9 +36,6 @@ allprojects {
     ensureKotlinVersion()
 }
 
-// GradleCompositeBuilds.configure(project)
-// evaluationDependsOnChildren()
-
 tasks.named<Wrapper>("wrapper") {
     gradleVersion = antibytesCatalog.versions.gradle.gradle.get()
     distributionType = Wrapper.DistributionType.ALL
