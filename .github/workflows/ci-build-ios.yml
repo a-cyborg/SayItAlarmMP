@@ -1,15 +1,12 @@
-name: Test android
+name: Build on macos
 
 on:
   workflow_call:
-    inputs:
-      coverage:
-        type: boolean
-        default: false
 
 jobs:
-  test-android:
-    runs-on: ubuntu-latest
+  build-on-macos:
+    runs-on: macos-latest
+
     steps:
       - name: Check out repo
         uses: actions/checkout@v4
@@ -37,11 +34,5 @@ jobs:
             ${{ runner.os }}-build-${{ github.sha }}
             ${{ runner.os }}-build-
 
-      - name: Cleanup
-        run: ./gradlew clean
-
-      - name: Test android
-        run: ./gradlew testDebugUnitTest testReleaseUnitTest --stacktrace
-
-      - name: Coverage android
-        run: ./gradlew --stacktrace androidCoverage
+      - name: Build
+        run: ./gradlew build -x check --stacktrace

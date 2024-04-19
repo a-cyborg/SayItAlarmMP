@@ -7,8 +7,14 @@ on:
   workflow_dispatch:
 
 jobs:
+  build-android:
+    uses: ./.github/workflows/ci-build-android.yml
+
+  build-ios:
+    uses: ./.github/workflows/ci-build-ios.yml
+
   test_android:
       uses: ./.github/workflows/ci-test-android.yml
 
-  coverage:
-    uses: ./.github/workflows/ci-sonar-linux.yml
+#  coverage:
+#    uses: ./.github/workflows/ci-sonar-linux.yml
