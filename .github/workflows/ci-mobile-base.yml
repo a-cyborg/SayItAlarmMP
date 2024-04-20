@@ -14,9 +14,11 @@ jobs:
     uses: ./.github/workflows/ci-build-on-macos.yml
 
   test_android:
-      uses: ./.github/workflows/ci-test-android.yml
-      with:
-        coverage: true
+    needs: build-on-linux
+    uses: ./.github/workflows/ci-test-android.yml
+    with:
+      coverage: true
 
-#  coverage:
-#    uses: ./.github/workflows/ci-sonar-linux.yml
+  coding-convention:
+    needs: build-on-linux
+    uses: ./.github/workflows/ci-coding-convention.yml

@@ -1,0 +1,51 @@
+name: Check coding convention
+
+on:
+  workflow_call:
+
+jobs:
+  conding-convention:
+    runs-on: ubuntu-latest
+
+    name: Coding Convention
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Cache Gradle
+        uses: gradle/actions/setup-gradle@v3
+        with:
+          cache-read-only: false
+
+      - name: Validate Gradle Wrapper
+        uses: gradle/wrapper-validation-action@v2
+
+      - name: Cache BuildCache
+        uses: actions/cache@v4
+        with:
+          path: '**/.gradle/build-cache/**'
+          key: ${{ runner.os }}-build-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ github.sha }}
+            ${{ runner.os }}-build-
+
+      - name: Spotless Check
+        run: ./gradlew spotlessCheck
+
+      - name: Static Analysis
+        run: ./gradlew detekt
+
+      - name: Cache Reports
+        if: inputs.cache-reports == true
+        uses: actions/cache/save@v4
+        with:
+          path: |
+            **/reports/detekt/**/*.xml
+            **/test-results/**/*
+          key: reports-convention-${{ github.sha }}
