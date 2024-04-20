@@ -4,6 +4,7 @@ on:
   workflow_call:
     inputs:
       coverage:
+        required: false
         type: boolean
         default: false
       api-level:
@@ -13,7 +14,7 @@ on:
       arch:
         required: false
         type: string
-        default: "['x86_64']"
+        default: "['x86']"
 
 jobs:
   test-android:
@@ -25,9 +26,7 @@ jobs:
         arch: ${{ fromJson(inputs.arch) }}
 
     steps:
-      - run: echo "🍑 Runs android test on a ${{ runner.os }}"
-
-      - name: Check out repo
+      - name: Checkout repo
         uses: actions/checkout@v4
 
       - name: Setup Java
@@ -36,15 +35,15 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
-      - name: Gradle cache
+      - name: Cache Gradle
         uses: gradle/actions/setup-gradle@v3
         with:
           cache-read-only: false
 
-      - name: Validate gradle wrapper
+      - name: Validate Gradle Wrapper
         uses: gradle/wrapper-validation-action@v2
 
-      - name: Konan cache
+      - name: Cache Konan
         uses: actions/cache@v4
         with:
           path: ~/.konan
@@ -53,8 +52,8 @@ jobs:
             ${{ runner.os }}-konan-${{ github.sha }}
             ${{ runner.os }}-konan-
 
-      - name: Build cache
-        uses: actions/cache/restore@v4
+      - name: Cache BuildCache
+        uses: actions/cache@v4
         with:
           path: '**/.gradle/build-cache/**'
           key: ${{ runner.os }}-build-${{ github.sha }}
@@ -67,7 +66,8 @@ jobs:
           echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
           sudo udevadm control --reload-rules
           sudo udevadm trigger --name-match=kvm
-      - name: AVD cache
+
+      - name: Cache AVD
         uses: actions/cache@v4
         id: avd-cache
         with:
@@ -76,16 +76,7 @@ jobs:
             ~/.android/adb*
           key: avd-${{ matrix.api-level }}
 
-      - name: AVD cache
-        uses: actions/cache@v4
-        id: avd-cache
-        with:
-          path: |
-            ~/.android/avd/*
-            ~/.android/adb*
-          key: avd-${{ matrix.api-level }}
-
-      - name: create AVD and generate snapshot for caching
+      - name: Create AVD And Generate Snapshot For Caching
         if: steps.avd-cache.outputs.cache-hit != 'true'
         uses: reactivecircus/android-emulator-runner@v2
         with:
@@ -95,7 +86,7 @@ jobs:
           disable-animations: false
           script: echo "Generated AVD snapshot for caching."
 
-      - name: Run instrumented tests
+      - name: Run Instrumented Tests
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: ${{ matrix.api-level }}
@@ -105,17 +96,11 @@ jobs:
           disable-animations: true
           script: ./gradlew :android:connectedCheck
 
-#      - name: Run acceptance test
-#        run: |
-#          curl -Ls "https://get.maestro.mobile.dev" | bash
-#          maestro test ./acceptance-test/main-flow.yml
-          
-      - name: Coverage android
-        if: always()
+      - name: Coverage Android
+        if: inputs.coverage == ture
         run: ./gradlew --stacktrace androidCoverage
 
-      - name: Cache reports
-        if: inputs.coverage == true
+      - name: Cache Reports
         uses: actions/cache/save@v4
         with:
           path: |
@@ -123,6 +108,11 @@ jobs:
             **/reports/jacoco/**/*.xml
             **/test-results/**/*
           key: reports-android-${{ github.sha }}
+
+      #      - name: Run acceptance test
+      #        run: |
+      #          curl -Ls "https://get.maestro.mobile.dev" | bash
+      #          maestro test ./acceptance-test/main-flow.yml
 
       - name: Cleanup
         run: ./gradlew clean

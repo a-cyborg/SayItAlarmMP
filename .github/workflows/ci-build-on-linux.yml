@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Check out repo
+      - name: Checkout Repo
         uses: actions/checkout@v4
 
       - name: Setup Java
@@ -20,16 +20,25 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
-      - name: Setup Gradle
+      - name: Cache Gradle
         uses: gradle/actions/setup-gradle@v3
         with:
           cache-read-only: false
 
-      - name: Validate gradle wrapper
+      - name: Validate Gradle Wrapper
         uses: gradle/wrapper-validation-action@v2
 
-      - name: Restore build cache
-        uses: actions/cache/restore@v4
+      - name: Cache konan
+        uses: actions/cache@v4
+        with:
+          path: ~/.konan
+          key: ${{ runner.os }}-konan-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-konan-${{ github.sha }}
+            ${{ runner.os }}-konan-
+
+      - name: Cache BuildCache
+        uses: actions/cache@v4
         with:
           path: '**/.gradle/build-cache/**'
           key: ${{ runner.os }}-build-${{ github.sha }}
