@@ -97,7 +97,7 @@ jobs:
           script: ./gradlew :android:connectedCheck
 
       - name: Coverage Android
-        if: inputs.coverage == ture
+        if: inputs.coverage == true
         run: ./gradlew --stacktrace androidCoverage
 
       - name: Cache Reports
