@@ -23,7 +23,6 @@ jobs:
       matrix:
         api-level: ${{ fromJson(inputs.api-level) }}
         arch: ${{ fromJson(inputs.arch) }}
-        device: ${{ fromJson(inputs.device) }}
 
     steps:
       - run: echo "🍑 Runs android test on a ${{ runner.os }}"
@@ -97,7 +96,13 @@ jobs:
           disable-animations: true
           script: ./gradlew :android:connectedCheck
 
+#      - name: Run acceptance test
+#        run: |
+#          curl -Ls "https://get.maestro.mobile.dev" | bash
+#          maestro test ./acceptance-test/main-flow.yml
+          
       - name: Coverage android
+        if: always()
         run: ./gradlew --stacktrace androidCoverage
 
       - name: Cache reports
