@@ -1,0 +1,63 @@
+name: Code coverage
+
+on:
+  workflow_call:
+
+jobs:
+  coverage:
+    runs-on: ubuntu-latest
+
+    name: Code coverage
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Cache Gradle
+        uses: gradle/actions/setup-gradle@v3
+        with:
+          cache-read-only: false
+
+      - name: Validate Gradle Wrapper
+        uses: gradle/wrapper-validation-action@v2
+
+      - name: Restore BuildCache
+        uses: actions/cache/restore@v4
+        with:
+          path: ${{ inputs.build-cache-dir }}
+          key: ${{ runner.os }}-build-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ github.sha }}
+            ${{ runner.os }}-build-
+
+      - name: Restore Reports
+        uses: actions/cache/restore@v4
+        with:
+          path: |
+            **/reports/detekt/**/*.xml
+            **/reports/jacoco/**/*.xml
+            **/test-results/**/*
+          key: reports-android-${{ github.sha }}
+
+      - name: Coverage KMP
+        run: ./gradlew --stacktrace multiplatformCoverage
+
+      - name: Sonarcloud
+        env:
+          GITHUB_TOKEN: ${{ secrets.github-token }}
+          SONAR_TOKEN: ${{ secrets.sonar-token }}
+        run: ./gradlew --stacktrace sonarqube --info
+
+      - name: Save Cache Reports
+        uses: actions/cache/save@v4
+        with:
+          path: |
+            **/reports/detekt/**/*.xml
+            **/reports/jacoco/**/*.xml
+            **/test-results/**/*
+          key: reports-coverage-${{ github.sha }}

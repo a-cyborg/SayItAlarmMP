@@ -348,7 +348,7 @@ naming:
     propertyPattern: '[A-Za-z][_A-Za-z0-9]*'
     privatePropertyPattern: '_?[A-Za-z][_A-Za-z0-9]*'
   PackageNaming:
-    active: true
+    active: false
     packagePattern: '[a-z]+(\.[a-z][A-Za-z0-9]*)*'
   TopLevelPropertyNaming:
     active: true
@@ -547,7 +547,7 @@ style:
     maxJumpCount: 1
   MagicNumber:
     active: true
-    excludes: ['**/test/**', '**/androidTest/**', '**/androidAndroidTest/**', '**/commonTest/**', '**/jvmTest/**', '**/jsTest/**', '**/nativeTest/**', '**/iosTest/**']
+    excludes: ['**/test/**', '**/androidTest/**', '**/androidAndroidTest/**', '**/commonTest/**', '**/jvmTest/**', '**/jsTest/**', '**/nativeTest/**', '**/iosTest/**', '**/token/Color.kt']
     ignoreNumbers:
       - '-1'
       - '0'

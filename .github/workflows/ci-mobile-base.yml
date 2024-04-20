@@ -13,7 +13,7 @@ jobs:
   build-on-macos:
     uses: ./.github/workflows/ci-build-on-macos.yml
 
-  test_android:
+  test-android:
     needs: build-on-linux
     uses: ./.github/workflows/ci-test-android.yml
     with:
@@ -22,3 +22,7 @@ jobs:
   coding-convention:
     needs: build-on-linux
     uses: ./.github/workflows/ci-coding-convention.yml
+
+  coverage:
+    needs: [ coding-convention, test-android ]
+    uses: ./.github/workflows/ci-coverage.yml

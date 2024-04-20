@@ -42,7 +42,7 @@ jobs:
         run: ./gradlew detekt
 
       - name: Cache Reports
-        if: inputs.cache-reports == true
+        if: always()
         uses: actions/cache/save@v4
         with:
           path: |

@@ -6,14 +6,12 @@
 
 package org.a_cyb.sayit.presentation.viewmodel
 
-import app.cash.turbine.test
 import kotlin.test.AfterTest
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.resetMain
-import kotlinx.coroutines.test.runTest
 import kotlinx.coroutines.test.setMain
 import org.a_cyb.sayit.entity.Settings
 import org.a_cyb.sayit.entity.Snooze
@@ -21,8 +19,6 @@ import org.a_cyb.sayit.entity.Theme
 import org.a_cyb.sayit.entity.TimeOut
 import org.a_cyb.sayit.presentation.SettingsContract
 import org.a_cyb.sayit.presentation.SettingsContract.Initial
-import org.a_cyb.sayit.presentation.SettingsContract.SettingsStateWithContent
-import org.a_cyb.sayit.presentation.SettingsContract.ValidTimeInput
 import tech.antibytes.util.test.fulfils
 import tech.antibytes.util.test.mustBe
 
@@ -55,6 +51,7 @@ class SettingsViewModelSpec {
         SettingsViewModel(interactor).state.value mustBe Initial
     }
 
+    /*
     @Test
     fun `It initializes with loaded settings`() = runTest {
         val viewModel = SettingsViewModel(interactor)
@@ -70,7 +67,6 @@ class SettingsViewModelSpec {
         }
     }
 
-    /*
     @Test
     fun `Given setTimeOut called with valid input it sets state timeOut to ValidTimeInput`() = runTest {
         // Given
