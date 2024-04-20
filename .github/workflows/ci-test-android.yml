@@ -13,11 +13,7 @@ on:
       arch:
         required: false
         type: string
-        default: "['x86_64', 'arm64-v8a']"
-      device:
-        required: false
-        type: string
-        default: "['Nexus 6']"
+        default: "['x86_64']"
 
 jobs:
   test-android:
@@ -41,7 +37,7 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
-      - name: Setup Gradle
+      - name: Gradle cache
         uses: gradle/actions/setup-gradle@v3
         with:
           cache-read-only: false
@@ -49,7 +45,7 @@ jobs:
       - name: Validate gradle wrapper
         uses: gradle/wrapper-validation-action@v2
 
-      - name: Cache konan
+      - name: Konan cache
         uses: actions/cache@v4
         with:
           path: ~/.konan
@@ -58,7 +54,7 @@ jobs:
             ${{ runner.os }}-konan-${{ github.sha }}
             ${{ runner.os }}-konan-
 
-      - name: Restore and cache build cache
+      - name: Build cache
         uses: actions/cache/restore@v4
         with:
           path: '**/.gradle/build-cache/**'
@@ -67,6 +63,11 @@ jobs:
             ${{ runner.os }}-build-${{ github.sha }}
             ${{ runner.os }}-build-
 
+      - name: Enable KVM
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
       - name: AVD cache
         uses: actions/cache@v4
         id: avd-cache
@@ -76,24 +77,31 @@ jobs:
             ~/.android/adb*
           key: avd-${{ matrix.api-level }}
 
-      - name: Cleanup
-        run: ./gradlew clean
+      - name: create AVD and generate snapshot for caching
+        if: steps.avd-cache.outputs.cache-hit != 'true'
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: ${{ matrix.api-level }}
+          force-avd-creation: false
+          emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
+          disable-animations: false
+          script: echo "Generated AVD snapshot for caching."
 
       - name: Run instrumented tests
         uses: reactivecircus/android-emulator-runner@v2
         with:
-          force-avd-creation: false
           api-level: ${{ matrix.api-level }}
           arch: ${{ matrix.arch }}
-          profile: ${{ matrix.device }}
+          force-avd-creation: false
+          emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           disable-animations: true
-          emulator-options: -no-window -gpu swiftshader_indirec -no-snapshot  -noaudio -no-boot-anim -camera-back emulated
           script: ./gradlew :android:connectedCheck
 
       - name: Coverage android
         run: ./gradlew --stacktrace androidCoverage
 
       - name: Cache reports
+        if: inputs.coverage == true
         uses: actions/cache/save@v4
         with:
           path: |
@@ -101,3 +109,6 @@ jobs:
             **/reports/jacoco/**/*.xml
             **/test-results/**/*
           key: reports-android-${{ github.sha }}
+
+      - name: Cleanup
+        run: ./gradlew clean
