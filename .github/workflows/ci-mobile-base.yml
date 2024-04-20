@@ -7,11 +7,11 @@ on:
   workflow_dispatch:
 
 jobs:
-  build-android:
-    uses: ./.github/workflows/ci-build-android.yml
+  build-on-linux:
+    uses: ./.github/workflows/ci-build-on-linux.yml
 
-  build-ios:
-    uses: ./.github/workflows/ci-build-ios.yml
+  build-on-macos:
+    uses: ./.github/workflows/ci-build-on-macos.yml
 
   test_android:
       uses: ./.github/workflows/ci-test-android.yml

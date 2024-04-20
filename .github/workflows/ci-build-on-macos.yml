@@ -1,11 +1,14 @@
-name: Build on linux
+# This CI jobs based on open-source workflows project:
+#  https://github.com/bitPogo/workflows/blob/main/.github/workflows/shared-build-macos.yml
+
+name: Build on macos
 
 on:
   workflow_call:
 
 jobs:
-  build-on-linux:
-    runs-on: ubuntu-latest
+  build-on-macOS:
+    runs-on: macos-latest
 
     steps:
       - name: Check out repo
@@ -24,6 +27,15 @@ jobs:
 
       - name: Validate gradle wrapper
         uses: gradle/wrapper-validation-action@v2
+
+      - name: Cache konan
+        uses: actions/cache@v4
+        with:
+          path: ~/.konan
+          key: ${{ runner.os }}-konan-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-konan-${{ github.sha }}
+            ${{ runner.os }}-konan-
 
       - name: Restore build cache
         uses: actions/cache/restore@v4

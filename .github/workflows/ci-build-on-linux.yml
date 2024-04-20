@@ -1,11 +1,14 @@
-name: Build on macos
+# This CI jobs based on open-source workflows project:
+#  https://github.com/bitPogo/workflows/blob/main/.github/workflows/shared-build-linux.yml
+
+name: Build on linux
 
 on:
   workflow_call:
 
 jobs:
-  build-on-macos:
-    runs-on: macos-latest
+  build-on-linux:
+    runs-on: ubuntu-latest
 
     steps:
       - name: Check out repo

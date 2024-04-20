@@ -6,11 +6,32 @@ on:
       coverage:
         type: boolean
         default: false
+      api-level:
+        required: false
+        type: string
+        default: "['31']"
+      arch:
+        required: false
+        type: string
+        default: "['x86_64', 'arm64-v8']"
+      device:
+        required: false
+        type: string
+        default: "['Nexus 6']"
 
 jobs:
   test-android:
     runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        api-level: ${{ fromJson(inputs.api-level) }}
+        arch: ${{ fromJson(inputs.arch) }}
+        device: ${{ fromJson(inputs.device) }}
+
     steps:
+      - run: echo "🍑 Runs android test on a ${{ runner.os }}"
+
       - name: Check out repo
         uses: actions/checkout@v4
 
@@ -28,7 +49,16 @@ jobs:
       - name: Validate gradle wrapper
         uses: gradle/wrapper-validation-action@v2
 
-      - name: Restore build cache
+      - name: Cache konan
+        uses: actions/cache@v4
+        with:
+          path: ~/.konan
+          key: ${{ runner.os }}-konan-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-konan-${{ github.sha }}
+            ${{ runner.os }}-konan-
+
+      - name: Restore and cache build cache
         uses: actions/cache/restore@v4
         with:
           path: '**/.gradle/build-cache/**'
@@ -37,11 +67,37 @@ jobs:
             ${{ runner.os }}-build-${{ github.sha }}
             ${{ runner.os }}-build-
 
+      - name: AVD cache
+        uses: actions/cache@v4
+        id: avd-cache
+        with:
+          path: |
+            ~/.android/avd/*
+            ~/.android/adb*
+          key: avd-${{ matrix.api-level }}
+
       - name: Cleanup
         run: ./gradlew clean
 
-      - name: Test android
-        run: ./gradlew testDebugUnitTest testReleaseUnitTest --stacktrace
+      - name: Run instrumented tests
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          force-avd-creation: false
+          api-level: ${{ matrix.api-level }}
+          arch: ${{ matrix.arch }}
+          profile: ${{ matrix.device }}
+          disable-animations: true
+          emulator-options: -no-window -gpu swiftshader_indirec -no-snapshot  -noaudio -no-boot-anim -camera-back emulated
+          script: ./gradlew :android:connectedCheck
 
       - name: Coverage android
         run: ./gradlew --stacktrace androidCoverage
+
+      - name: Cache reports
+        uses: actions/cache/save@v4
+        with:
+          path: |
+            **/reports/detekt/**/*.xml
+            **/reports/jacoco/**/*.xml
+            **/test-results/**/*
+          key: reports-android-${{ github.sha }}
