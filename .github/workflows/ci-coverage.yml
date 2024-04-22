@@ -53,7 +53,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.github-token }}
           SONAR_TOKEN: ${{ secrets.sonar-token }}
-        run: ./gradlew --stacktrace sonarqube --info
+        run: ./gradlew --stacktrace sonar --info
 
       - name: Save Cache Reports
         uses: actions/cache/save@v4

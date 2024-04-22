@@ -24,6 +24,5 @@ jobs:
     uses: ./.github/workflows/ci-coding-convention.yml
 
   coverage:
-    if: always()
     needs: [ build-on-macos, coding-convention, test-android ]
     uses: ./.github/workflows/ci-coverage.yml

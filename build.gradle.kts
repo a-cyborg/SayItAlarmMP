@@ -26,7 +26,7 @@ antibytesQuality {
             configurationFiles = project.files("${project.projectDir}/detekt/config.yml"),
             baselineFile = project.file("${project.projectDir}/detekt/baseline.xml"),
             sourceFiles = project.files(project.projectDir),
-        )
+        ),
     )
     qualityGate.set(SonarConfiguration(project).configuration)
 }
