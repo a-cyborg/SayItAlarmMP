@@ -56,6 +56,7 @@ internal class SettingsViewModel(
             theme = theme,
         )
 
+    @Suppress("MagicNumber")
     private fun TimeOut.toValidatedTimeInput(): TimeInput =
         if (timeOut !in (30..300)) {
             InvalidTimeInput(timeOut)
@@ -63,6 +64,7 @@ internal class SettingsViewModel(
             ValidTimeInput(timeOut)
         }
 
+    @Suppress("MagicNumber")
     private fun Snooze.toValidatedTimeInput(): TimeInput =
         if (snooze !in (5..60)) {
             InvalidTimeInput(snooze)
