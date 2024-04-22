@@ -51,9 +51,9 @@ jobs:
 
       - name: Sonarcloud
         env:
-          GITHUB_TOKEN: ${{ secrets.github-token }}
-          SONAR_TOKEN: ${{ secrets.sonar_token }}
-        run: ./gradlew --stacktrace sonar --info
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: ./gradlew sonar --info --stacktrace
 
       - name: Save Cache Reports
         uses: actions/cache/save@v4
