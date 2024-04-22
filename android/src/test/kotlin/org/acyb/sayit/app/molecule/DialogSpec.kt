@@ -28,9 +28,6 @@ import tech.antibytes.util.test.mustBe
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
 @Config(sdk = [33])
 class DialogSpec {
-    // TODO: composeTestRule.onRoot() will cause an error as it will find 2 roots (dialog).
-    //  Find a clean solution for testing multiple root components in RoborazziTest.
-
     @get:Rule
     val composeTestRule = createAndroidComposeRule<ComponentActivity>()
 
