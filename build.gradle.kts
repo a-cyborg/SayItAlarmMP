@@ -4,6 +4,7 @@
  * Use of this source code is governed by Apache v2.0
  */
 
+import org.sonarqube.gradle.SonarExtension
 import tech.antibytes.gradle.dependency.helper.addCustomRepositories
 import tech.antibytes.gradle.dependency.helper.ensureKotlinVersion
 import tech.antibytes.gradle.project.config.quality.Linter
@@ -34,6 +35,16 @@ allprojects {
     }
 
     ensureKotlinVersion()
+}
+
+allprojects {
+    afterEvaluate {
+        extensions.configure(SonarExtension::class.java) {
+            properties {
+                property("sonar.organization", "a-cyborg")
+            }
+        }
+    }
 }
 
 tasks.named<Wrapper>("wrapper") {
