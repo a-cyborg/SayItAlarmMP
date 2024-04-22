@@ -10,20 +10,15 @@ on:
       api-level:
         required: false
         type: string
-        default: "['33']"
+        default: "33"
       arch:
         required: false
         type: string
-        default: "['x86_64']"
+        default: "x86_64"
 
 jobs:
   test-android:
     runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        api-level: ${{ fromJson(inputs.api-level) }}
-        arch: ${{ fromJson(inputs.arch) }}
 
     steps:
       - name: Checkout repo
@@ -34,6 +29,9 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '17'
+
+#      - name: Setup Maestro
+#        run: curl -Ls "https://get.maestro.mobile.dev" | bash
 
       - name: Cache Gradle
         uses: gradle/actions/setup-gradle@v3
@@ -74,24 +72,34 @@ jobs:
           path: |
             ~/.android/avd/*
             ~/.android/adb*
-          key: avd-${{ matrix.api-level }}
+          key: avd-${{ inputs.api-level }}
 
       - name: Create AVD And Generate Snapshot For Caching
         if: steps.avd-cache.outputs.cache-hit != 'true'
         uses: reactivecircus/android-emulator-runner@v2
         with:
-          api-level: ${{ matrix.api-level }}
-          arch: ${{ matrix.arch }}
+          api-level: ${{ inputs.api-level }}
+          arch: ${{ inputs.arch }}
           force-avd-creation: false
           emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           disable-animations: false
           script: echo "Generated AVD snapshot for caching."
 
+#      - name: Run Acceptance Test
+#        uses: reactivecircus/android-emulator-runner@v2
+#        with:
+#          api-level: ${{ inputs.api-level }}
+#          arch: ${{ inputs.arch }}
+#          force-avd-creation: false
+#          emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
+#          disable-animations: true
+#          script: maestro test ./acceptance-test/main-flow.yml
+
       - name: Run Instrumented Tests
         uses: reactivecircus/android-emulator-runner@v2
         with:
-          api-level: ${{ matrix.api-level }}
-          arch: ${{ matrix.arch }}
+          api-level: ${{ inputs.api-level }}
+          arch: ${{ inputs.arch }}
           force-avd-creation: false
           emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           disable-animations: true
@@ -109,8 +117,3 @@ jobs:
             **/reports/jacoco/**/*.xml
             **/test-results/**/*
           key: reports-android-${{ github.sha }}
-
-      #      - name: Run acceptance test
-      #        run: |
-      #          curl -Ls "https://get.maestro.mobile.dev" | bash
-      #          maestro test ./acceptance-test/main-flow.yml
