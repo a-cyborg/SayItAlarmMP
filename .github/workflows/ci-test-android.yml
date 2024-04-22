@@ -114,6 +114,3 @@ jobs:
       #        run: |
       #          curl -Ls "https://get.maestro.mobile.dev" | bash
       #          maestro test ./acceptance-test/main-flow.yml
-
-      - name: Cleanup
-        run: ./gradlew clean
