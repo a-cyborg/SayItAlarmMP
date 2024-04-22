@@ -20,9 +20,9 @@ jobs:
       coverage: true
 
   coding-convention:
-    needs: build-on-linux
+    needs: [ build-on-macos, test-android ]
     uses: ./.github/workflows/ci-coding-convention.yml
 
   coverage:
-    needs: [ build-on-macos, coding-convention, test-android ]
+    needs: [ test-android ]
     uses: ./.github/workflows/ci-coverage.yml
