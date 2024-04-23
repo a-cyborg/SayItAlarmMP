@@ -132,11 +132,3 @@ dependencies {
 tasks.withType<Test> {
     useJUnitPlatform()
 }
-
-afterEvaluate {
-    tasks.getByName("testReleaseUnitTest") {
-        tasks
-            .filter { it.name.matches(Regex("(?i).*roborazzi*")) }
-            .forEach { _ -> enabled = false }
-    }
-}
