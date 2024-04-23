@@ -134,23 +134,9 @@ tasks.withType<Test> {
 }
 
 afterEvaluate {
-    tasks.named("generateDebugLintReportModel") {
-        mustRunAfter("kspDebugUnitTestKotlin")
-    }
-
-    tasks.named("lintAnalyzeDebug") {
-        mustRunAfter("kspDebugUnitTestKotlin")
-    }
-
     tasks.getByName("testReleaseUnitTest") {
         tasks
             .filter { it.name.matches(Regex("(?i).*roborazzi*")) }
             .forEach { _ -> enabled = false }
-
-        // val roborazziTests = tasks.filter { it.name.contains("roborazzi", ignoreCase = true) }
-        //     .map { it.name }
-        //     .toSet()
-        //
-        // gradle.startParameter.excludedTaskNames.addAll(roborazziTests)
     }
 }
