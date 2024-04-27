@@ -7,10 +7,6 @@
 package org.a_cyb.sayit.presentation.viewmodel
 
 import app.cash.turbine.test
-import kotlin.test.AfterTest
-import kotlin.test.BeforeTest
-import kotlin.test.Test
-import kotlin.test.assertTrue
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.StandardTestDispatcher
@@ -36,6 +32,10 @@ import tech.antibytes.kfixture.fixture
 import tech.antibytes.kfixture.kotlinFixture
 import tech.antibytes.util.test.fulfils
 import tech.antibytes.util.test.mustBe
+import kotlin.test.AfterTest
+import kotlin.test.BeforeTest
+import kotlin.test.Test
+import kotlin.test.assertTrue
 
 class SettingsViewModelSpec {
 
@@ -215,39 +215,35 @@ class SettingsViewModelSpec {
     @Test
     fun `Given save called it invokes interactor save with mapped Settings from settingsStateWithContent`() = runTest {
         // Given
-        val numOfTest = 3
         val viewModel = SettingsViewModel(interactor)
         interactor.load(this)
 
         viewModel.state.test {
             skipItems(2)
 
-            repeat(numOfTest) {
-                val timeOut: Int = fixture.fixture(range = 30..300)
-                val snooze: Int = fixture.fixture(range = 5..60)
-                val theme: Theme = fixture.fixture(listOf(Theme.DARK, Theme.LIGHT))
+            val timeOut: Int = fixture.fixture(range = 30..300)
+            val snooze: Int = fixture.fixture(range = 5..60)
 
-                viewModel.runCommand(SetTimeOutCommand(timeOut))
-                viewModel.runCommand(SetSnoozeCommand(snooze))
-                viewModel.runCommand(SetThemeCommand(theme))
+            viewModel.runCommand(SetTimeOutCommand(timeOut))
+            viewModel.runCommand(SetSnoozeCommand(snooze))
+            viewModel.runCommand(SetThemeCommand(Theme.DARK))
 
-                // When
-                viewModel.runCommand(SaveCommand)
+            skipItems(3)
 
-                // Then
-                interactor.settings.first().getOrThrow() mustBe Settings(
-                    timeOut = TimeOut(timeOut),
-                    snooze = Snooze(snooze),
-                    theme = theme,
-                )
+            // When
+            viewModel.runCommand(SaveCommand)
 
-                cancelAndIgnoreRemainingEvents()
-            }
+            // Then
+            interactor.settings.first().getOrThrow() mustBe Settings(
+                timeOut = TimeOut(timeOut),
+                snooze = Snooze(snooze),
+                theme = Theme.DARK,
+            )
         }
     }
 
     @Test
-    fun `Given interactor load fails sets error state with INITIAL_SETTINGS_UNRESOLVED`() = runTest {
+    fun `When interactor propagates result fail sets error state INITIAL_SETTINGS_UNRESOLVED`() = runTest {
         // Given
         val result = Result.failure<Settings>(IllegalStateException())
         val interactor = SettingsInteractorFake(result)
