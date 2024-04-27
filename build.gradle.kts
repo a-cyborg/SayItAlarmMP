@@ -17,6 +17,7 @@ plugins {
 
     alias(antibytesCatalog.plugins.gradle.antibytes.dependencyHelper)
     alias(antibytesCatalog.plugins.gradle.antibytes.quality)
+    alias(antibytesCatalog.plugins.gradle.owasp)
 }
 
 antibytesQuality {
