@@ -59,6 +59,7 @@ kotlin {
                 implementation(antibytesCatalog.kmock)
                 implementation(antibytesCatalog.kfixture)
                 implementation(antibytesCatalog.testUtils.core)
+                implementation(antibytesCatalog.testUtils.coroutine)
                 implementation(antibytesCatalog.testUtils.annotations)
                 implementation(antibytesCatalog.common.test.turbine)
             }
