@@ -7,5 +7,5 @@
 package tech.antibytes.gradle.project.config.quality
 
 val excludes = setOf<String>(
-    "**/*Contract.kt"
+    "**/*Contract.kt",
 )
