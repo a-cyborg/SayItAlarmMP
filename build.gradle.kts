@@ -57,14 +57,14 @@ allprojects {
 subprojects {
     apply(plugin = "info.solidsoft.pitest")
 
-    pitest {
-        threads.set(4)
-        outputFormats.set(setOf("XML", "HTML"))
-
-        if (project.name == "entity") {
-            failWhenNoMutations.set(false)
-        }
-    }
+    // pitest {
+    //     threads.set(4)
+    //     outputFormats.set(setOf("XML", "HTML"))
+    //
+    //     if (project.name == "entity") {
+    //         failWhenNoMutations.set(false)
+    //     }
+    // }
 }
 
 tasks.named<Wrapper>("wrapper") {
