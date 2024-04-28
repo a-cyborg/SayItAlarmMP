@@ -14,10 +14,10 @@ import tech.antibytes.gradle.quality.api.CodeAnalysisConfiguration
 
 plugins {
     id("tech.antibytes.gradle.setup")
+    id("info.solidsoft.pitest") version "1.15.0"
 
     alias(antibytesCatalog.plugins.gradle.antibytes.dependencyHelper)
     alias(antibytesCatalog.plugins.gradle.antibytes.quality)
-    alias(antibytesCatalog.plugins.gradle.owasp)
 }
 
 antibytesQuality {
@@ -50,6 +50,19 @@ allprojects {
             properties {
                 property("sonar.organization", "a-cyborg")
             }
+        }
+    }
+}
+
+subprojects {
+    apply(plugin = "info.solidsoft.pitest")
+
+    pitest {
+        threads.set(4)
+        outputFormats.set(setOf("XML", "HTML"))
+
+        if (project.name == "entity") {
+            failWhenNoMutations.set(false)
         }
     }
 }
