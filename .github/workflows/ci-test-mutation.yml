@@ -1,7 +1,7 @@
 name: Mutation Test
 
 on:
-  workflow_call:
+  workflow_dispatch:
 
 jobs:
   test-mutation:
