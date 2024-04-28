@@ -56,11 +56,10 @@ kotlin {
         val commonTest by getting {
             dependencies {
                 implementation(antibytesCatalog.common.test.kotlin.core)
-                implementation(antibytesCatalog.testUtils.core)
-                implementation(antibytesCatalog.testUtils.coroutine)
-                implementation(antibytesCatalog.testUtils.annotations)
-                implementation(antibytesCatalog.kfixture)
                 implementation(antibytesCatalog.kmock)
+                implementation(antibytesCatalog.kfixture)
+                implementation(antibytesCatalog.testUtils.core)
+                implementation(antibytesCatalog.testUtils.annotations)
                 implementation(antibytesCatalog.common.test.turbine)
             }
         }
