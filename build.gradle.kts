@@ -14,7 +14,7 @@ import tech.antibytes.gradle.quality.api.CodeAnalysisConfiguration
 
 plugins {
     id("tech.antibytes.gradle.setup")
-    id("info.solidsoft.pitest") version "1.15.0"
+    id("pl.droidsonroids.pitest") version "0.2.18" apply false
 
     alias(antibytesCatalog.plugins.gradle.antibytes.dependencyHelper)
     alias(antibytesCatalog.plugins.gradle.antibytes.quality)
@@ -54,20 +54,11 @@ allprojects {
     }
 }
 
-subprojects {
-    apply(plugin = "info.solidsoft.pitest")
-
-    // pitest {
-    //     threads.set(4)
-    //     outputFormats.set(setOf("XML", "HTML"))
-    //
-    //     if (project.name == "entity") {
-    //         failWhenNoMutations.set(false)
-    //     }
-    // }
-}
-
 tasks.named<Wrapper>("wrapper") {
     gradleVersion = antibytesCatalog.versions.gradle.gradle.get()
     distributionType = Wrapper.DistributionType.ALL
+}
+
+subprojects {
+    apply(plugin = "pl.droidsonroids.pitest")
 }
