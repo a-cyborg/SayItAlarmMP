@@ -26,29 +26,27 @@ class WheelPickerSpec : RoborazziTest() {
     private val colors: List<String> = listOf(
         "Red", "Blue", "Green", "Yellow", "Purple",
         "Orange", "Pink", "Brown", "Black", "White",
-        "Gray", "Turquoise", "Maroon"
+        "Gray", "Turquoise", "Maroon",
     )
 
     @Test
     fun `It renders a WheelPicker`() {
-
         subjectUnderTest.setContent {
             WheelPicker(
                 values = colors,
                 itemRow = { TextHeadlineStandardLarge(text = it) },
-                onConfirm = { _ -> }
+                onConfirm = { _ -> },
             )
         }
     }
 
     @Test
     fun `When initIdx is not provided it displays a first value in the center`() {
-
         subjectUnderTest.setContent {
             WheelPicker(
                 values = colors,
                 itemRow = { TextHeadlineStandardLarge(text = it) },
-                onConfirm = { _ -> }
+                onConfirm = { _ -> },
             )
         }
 
@@ -68,7 +66,7 @@ class WheelPickerSpec : RoborazziTest() {
                 values = colors,
                 initIdx = initIdx,
                 itemRow = { TextHeadlineStandardLarge(text = it) },
-                onConfirm = { _ -> }
+                onConfirm = { _ -> },
             )
         }
 

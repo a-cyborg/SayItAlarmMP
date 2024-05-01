@@ -16,12 +16,12 @@ fun WheelPickerPreview() {
     val colors: List<String> = listOf(
         "Red", "Blue", "Green", "Yellow", "Purple",
         "Orange", "Pink", "Brown", "Black", "White",
-        "Gray", "Turquoise", "Maroon"
+        "Gray", "Turquoise", "Maroon",
     )
 
     WheelPicker(
         values = colors,
         itemRow = { TextHeadlineStandardLarge(text = it) },
-        onConfirm = { _ -> }
+        onConfirm = { _ -> },
     )
 }

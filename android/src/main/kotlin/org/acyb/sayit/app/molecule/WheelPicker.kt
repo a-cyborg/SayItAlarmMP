@@ -20,6 +20,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -71,20 +72,17 @@ fun <T> WheelPicker(
                 flingBehavior = rememberSnapFlingBehavior(lazyListState = lazyListState),
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally,
-                contentPadding = PaddingValues(all = 0.dp)
+                contentPadding = PaddingValues(all = 0.dp),
             ) {
                 // This item serves as a placeholder for the first item to be vertically centered.
                 item { Spacer(modifier = Modifier.height(placeholderHeight)) }
 
-                items(
-                    count = values.size,
-                    key = { it }
-                ) {
+                items(values) {
                     Row(
                         modifier = Modifier.height(itemRowHeight),
                         verticalAlignment = Alignment.CenterVertically,
                     ) {
-                        itemRow(values[it])
+                        itemRow(it)
                     }
                 }
 
@@ -95,7 +93,7 @@ fun <T> WheelPicker(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(itemRowHeight)
-                    .background(Color.surface.accent.copy(alpha = 0.3f))
+                    .background(Color.surface.accent.copy(alpha = 0.3f)),
             )
         }
 
