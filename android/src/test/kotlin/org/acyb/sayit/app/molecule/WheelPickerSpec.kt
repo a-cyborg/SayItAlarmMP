@@ -58,7 +58,7 @@ class WheelPickerSpec : RoborazziTest() {
     }
 
     @Test
-    fun `When initIdx is provided it displays a value at initValueIndex in the center`() {
+    fun `When initIdx is provided it displays a value at initIdx in the center`() {
         val initIdx = 6
 
         subjectUnderTest.setContent {
@@ -76,6 +76,47 @@ class WheelPickerSpec : RoborazziTest() {
             onNodeWithText(colors[initIdx]).assertExists()
             onNodeWithText(colors[initIdx + 1]).assertExists()
             onNodeWithText(colors[initIdx + 2]).assertExists()
+        }
+    }
+
+    @Test
+    fun `When initIdx 1 is provided it displays a second value in the center`() {
+        val initIdx = 1
+
+        subjectUnderTest.setContent {
+            WheelPicker(
+                values = colors,
+                initIdx = initIdx,
+                itemRow = { TextHeadlineStandardLarge(text = it) },
+                onConfirm = { _ -> },
+            )
+        }
+
+        with(subjectUnderTest) {
+            onNodeWithText(colors[initIdx - 1]).assertExists()
+            onNodeWithText(colors[initIdx]).assertExists()
+            onNodeWithText(colors[initIdx + 1]).assertExists()
+            onNodeWithText(colors[initIdx + 2]).assertExists()
+        }
+    }
+
+    @Test
+    fun `When last value is centered it displays only value before`() {
+        val initIdx = colors.lastIndex
+
+        subjectUnderTest.setContent {
+            WheelPicker(
+                values = colors,
+                initIdx = initIdx,
+                itemRow = { TextHeadlineStandardLarge(text = it) },
+                onConfirm = { _ -> },
+            )
+        }
+
+        with(subjectUnderTest) {
+            onNodeWithText(colors[initIdx - 2]).assertExists()
+            onNodeWithText(colors[initIdx - 1]).assertExists()
+            onNodeWithText(colors[initIdx]).assertExists()
         }
     }
 
