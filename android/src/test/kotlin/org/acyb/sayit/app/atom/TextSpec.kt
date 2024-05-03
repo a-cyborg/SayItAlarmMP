@@ -19,30 +19,58 @@ import org.robolectric.annotation.GraphicsMode
 class TextSpec : RoborazziTest() {
 
     @Test
-    fun `It renders TextDisplayStandard`() {
+    fun `It renders TextDisplayStandardLarge`() {
         subjectUnderTest.setContent {
-            TextDisplayStandardLarge(text = "DisplayStandard")
+            TextDisplayStandardLarge(text = "DisplayStandardLarge")
         }
     }
 
     @Test
-    fun `It renders TextTitleStandard`() {
+    fun `It renders TextHeadlineStandardLarge`() {
         subjectUnderTest.setContent {
-            TextTitleStandardLarge(text = "TitleStandard")
+            TextHeadlineStandardLarge(text = "HeadlineStandardLarge")
+        }
+    }
+
+    @Test
+    fun `It renders TextHeadlineStandardSmall`() {
+        subjectUnderTest.setContent {
+            TextHeadlineStandardSmall(text = "HeadlineStandardSmall")
+        }
+    }
+
+    @Test
+    fun `It renders TextTitleStandardLarge`() {
+        subjectUnderTest.setContent {
+            TextTitleStandardLarge(text = "TitleStandardLarge")
+        }
+    }
+
+    @Test
+    fun `It renders TextTitleAttentionMedium`() {
+        subjectUnderTest.setContent {
+            TextTitleAttentionMedium(text = "TitleAttentionMedium")
+        }
+    }
+
+    @Test
+    fun `It renders TextTitleWarningMedium`() {
+        subjectUnderTest.setContent {
+            TextTitleWarningMedium(text = "TitleWarningMedium")
         }
     }
 
     @Test
     fun `It renders TextLabelAttentionLarge`() {
         subjectUnderTest.setContent {
-            TextLabelAttentionLarge(text = "Label")
+            TextLabelAttentionLarge(text = "LabelAttentionLarge")
         }
     }
 
     @Test
     fun `It renders TextBodyStandardLarge`() {
         subjectUnderTest.setContent {
-            TextBodyStandardLarge(text = "BodyStandard")
+            TextBodyStandardLarge(text = "BodyStandardLarge")
         }
     }
 
@@ -54,9 +82,9 @@ class TextSpec : RoborazziTest() {
     }
 
     @Test
-    fun `It renders TextHeadlineStandard`() {
+    fun `It renders TextBodySubtleLarge`() {
         subjectUnderTest.setContent {
-            TextHeadlineStandardSmall(text = "HeadlineStandard")
+            TextBodySubtleLarge(text = "BodySubtleLarge")
         }
     }
 }
