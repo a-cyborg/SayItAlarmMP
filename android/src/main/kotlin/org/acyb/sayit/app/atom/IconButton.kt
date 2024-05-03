@@ -6,10 +6,13 @@
 
 package org.acyb.sayit.app.atom
 
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import org.acyb.sayit.R
 import org.acyb.sayit.app.token.Color
 import org.acyb.sayit.app.token.Icon
@@ -51,7 +54,28 @@ fun IconButtonDelete(onClick: () -> Unit) {
 fun IconButtonEdit(onClick: () -> Unit) {
     IconButton(onClick = onClick) {
         Icon(
-            imageVector = Icon.editArrowRight,
+            imageVector = Icon.arrowRight,
+            tint = Color.text.attention,
+            contentDescription = stringResource(id = R.string.action_edit_alarm),
+        )
+    }
+}
+
+@Composable
+fun IconButtonEditText(onClick: () -> Unit) {
+    IconButton(onClick = onClick) {
+        TextLabelAttentionLarge(text = stringResource(id = R.string.edit))
+    }
+}
+
+@Composable
+fun IconButtonEditNoPadding(onClick: () -> Unit) {
+    IconButton(
+        onClick = onClick,
+        modifier = Modifier.then(Modifier.size(24.dp)),
+    ) {
+        Icon(
+            imageVector = Icon.arrowRight,
             tint = Color.text.attention,
             contentDescription = stringResource(id = R.string.action_edit_alarm),
         )
@@ -70,9 +94,13 @@ fun IconButtonSettings(onClick: () -> Unit) {
 }
 
 @Composable
-fun IconButtonEditText(onClick: () -> Unit) {
+fun IconButtonNavigateBack(onClick: () -> Unit) {
     IconButton(onClick = onClick) {
-        TextLabelAttentionLarge(text = stringResource(id = R.string.edit))
+        Icon(
+            imageVector = Icon.arrowLeft,
+            tint = Color.text.attention,
+            contentDescription = stringResource(id = R.string.action_navigate_back),
+        )
     }
 }
 
@@ -80,5 +108,19 @@ fun IconButtonEditText(onClick: () -> Unit) {
 fun IconButtonSaveText(onClick: () -> Unit) {
     IconButton(onClick = onClick) {
         TextLabelAttentionLarge(text = stringResource(id = R.string.save))
+    }
+}
+
+@Composable
+fun IconButtonCancelText(onClick: () -> Unit) {
+    IconButton(onClick = onClick) {
+        TextTitleWarningMedium(text = stringResource(id = R.string.cancel))
+    }
+}
+
+@Composable
+fun IconButtonConfirmText(onClick: () -> Unit) {
+    IconButton(onClick = onClick) {
+        TextTitleAttentionMedium(text = stringResource(id = R.string.confirm))
     }
 }

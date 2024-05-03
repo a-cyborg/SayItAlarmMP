@@ -141,6 +141,30 @@ class IconButtonSpec : RoborazziTest() {
     }
 
     @Test
+    fun `It renders a IconButtonEditNoPadding`() {
+        subjectUnderTest.setContent {
+            IconButtonEditNoPadding {}
+        }
+    }
+
+    @Test
+    fun `Given IconButtonEditNoPadding click is called it propagates the given action`() {
+        var hasBeenCalled = false
+
+        subjectUnderTest.setContent {
+            IconButtonEditNoPadding {
+                hasBeenCalled = true
+            }
+        }
+
+        subjectUnderTest
+            .onNodeWithContentDescription(getString(R.string.action_edit_alarm))
+            .performClick()
+
+        hasBeenCalled mustBe true
+    }
+
+    @Test
     fun `It renders a IconButtonSettings`() {
         subjectUnderTest.setContent {
             IconButtonSettings {}
@@ -165,6 +189,30 @@ class IconButtonSpec : RoborazziTest() {
     }
 
     @Test
+    fun `It renders IconButtonNavigateBack`() {
+        subjectUnderTest.setContent {
+            IconButtonNavigateBack {}
+        }
+    }
+
+    @Test
+    fun `Given IconButtonNavigateBack click is called it propagates the given action`() {
+        var hasBeenCalled = false
+
+        subjectUnderTest.setContent {
+            IconButtonNavigateBack {
+                hasBeenCalled = true
+            }
+        }
+
+        subjectUnderTest
+            .onNodeWithContentDescription(getString(R.string.action_navigate_back))
+            .performClick()
+
+        hasBeenCalled mustBe true
+    }
+
+    @Test
     fun `It renders a IconButtonSaveText`() {
         subjectUnderTest.setContent {
             IconButtonSaveText {}
@@ -183,6 +231,54 @@ class IconButtonSpec : RoborazziTest() {
 
         subjectUnderTest
             .onNodeWithText(getString(R.string.save))
+            .performClick()
+
+        hasBeenCalled mustBe true
+    }
+
+    @Test
+    fun `It renders a IconButtonCancelText`() {
+        subjectUnderTest.setContent {
+            IconButtonCancelText {}
+        }
+    }
+
+    @Test
+    fun `Given IconButtonCancelText click is called it propagates the given action`() {
+        var hasBeenCalled = false
+
+        subjectUnderTest.setContent {
+            IconButtonCancelText {
+                hasBeenCalled = true
+            }
+        }
+
+        subjectUnderTest
+            .onNodeWithText(getString(R.string.cancel))
+            .performClick()
+
+        hasBeenCalled mustBe true
+    }
+
+    @Test
+    fun `It renders a IconButtonConfirmText`() {
+        subjectUnderTest.setContent {
+            IconButtonConfirmText {}
+        }
+    }
+
+    @Test
+    fun `Given IconButtonConfirmText click is called it propagates the given action`() {
+        var hasBeenCalled = false
+
+        subjectUnderTest.setContent {
+            IconButtonConfirmText {
+                hasBeenCalled = true
+            }
+        }
+
+        subjectUnderTest
+            .onNodeWithText(getString(R.string.confirm))
             .performClick()
 
         hasBeenCalled mustBe true
