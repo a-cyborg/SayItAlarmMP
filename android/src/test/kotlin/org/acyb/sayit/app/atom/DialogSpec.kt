@@ -7,9 +7,8 @@
 package org.acyb.sayit.app.atom
 
 import androidx.activity.ComponentActivity
+import androidx.compose.ui.test.isDialog
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
-import androidx.compose.ui.test.onNodeWithText
-import androidx.compose.ui.test.onParent
 import androidx.test.espresso.Espresso
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.github.takahirom.roborazzi.RoborazziRule
@@ -48,9 +47,8 @@ class DialogSpec {
             ) {}
         }
 
-        composeTestRule.onNodeWithText("Dialog")
-            .onParent()
-            .onParent()
+        composeTestRule
+            .onNode(isDialog())
             .captureRoboImage()
     }
 
@@ -88,12 +86,9 @@ class DialogSpec {
             }
         }
 
-        composeTestRule.onNodeWithText("Dialog")
-            .onParent()
+        composeTestRule
+            .onNode(isDialog())
             .captureRoboImage()
-        // composeTestRule
-        //     .onNode(isDialog())
-        //     .captureRoboImage()
     }
 
     @Test

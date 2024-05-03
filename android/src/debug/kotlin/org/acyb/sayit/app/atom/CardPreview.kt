@@ -13,7 +13,15 @@ import androidx.compose.ui.tooling.preview.Preview
 @Composable
 fun CardStandardPreview() {
     CardStandard {
-        TextDisplayStandardLarge(text = "Card")
+        TextDisplayStandardLarge(text = "CardStandard")
+    }
+}
+
+@Preview
+@Composable
+fun CardStandardCenteredPreview() {
+    CardStandardCentered {
+        TextDisplayStandardLarge(text = "CardStandardCentered")
     }
 }
 
@@ -21,6 +29,6 @@ fun CardStandardPreview() {
 @Composable
 fun CardSubtlePreview() {
     CardSubtle {
-        TextDisplayStandardLarge(text = "Card")
+        TextDisplayStandardLarge(text = "CardSubtle")
     }
 }

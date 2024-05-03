@@ -42,7 +42,7 @@ fun DialogStandardFitContent(
         onDismissRequest = onDismiss,
         properties = DialogProperties(usePlatformDefaultWidth = false),
     ) {
-        CardStandard {
+        CardStandardCentered {
             content()
         }
     }

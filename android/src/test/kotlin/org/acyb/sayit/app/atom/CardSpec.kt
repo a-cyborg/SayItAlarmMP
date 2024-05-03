@@ -6,6 +6,7 @@
 
 package org.acyb.sayit.app.atom
 
+import androidx.compose.ui.test.onNodeWithText
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import org.acyb.sayit.app.RoborazziTest
 import org.junit.Test
@@ -25,6 +26,21 @@ class CardSpec : RoborazziTest() {
                 TextDisplayStandardLarge(text = "CardStandard")
             }
         }
+
+        subjectUnderTest.onNodeWithText("CardStandard")
+            .assertExists()
+    }
+
+    @Test
+    fun `It renders CardStandardCentered with given content`() {
+        subjectUnderTest.setContent {
+            CardStandardCentered {
+                TextDisplayStandardLarge(text = "CardStandardCentered")
+            }
+        }
+
+        subjectUnderTest.onNodeWithText("CardStandardCentered")
+            .assertExists()
     }
 
     @Test
@@ -34,5 +50,8 @@ class CardSpec : RoborazziTest() {
                 TextDisplayStandardLarge(text = "CardSubtle")
             }
         }
+
+        subjectUnderTest.onNodeWithText("CardSubtle")
+            .assertExists()
     }
 }
