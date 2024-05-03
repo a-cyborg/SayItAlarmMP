@@ -4,7 +4,7 @@
  * Use of this source code is governed by Apache v2.0
  */
 
-package org.acyb.sayit.app.molecule
+package org.acyb.sayit.app.atom
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -12,10 +12,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
-import org.acyb.sayit.app.atom.CardSubtle
 
 @Composable
-fun DialogStandard(
+fun DialogStandardFillMax(
     onDismiss: () -> Unit,
     topAppBar: @Composable () -> Unit,
     content: @Composable () -> Unit,
@@ -24,12 +23,27 @@ fun DialogStandard(
         onDismissRequest = onDismiss,
         properties = DialogProperties(usePlatformDefaultWidth = false),
     ) {
-        CardSubtle {
+        CardStandard {
             topAppBar()
 
             Box(modifier = Modifier.fillMaxSize()) {
                 content()
             }
+        }
+    }
+}
+
+@Composable
+fun DialogStandardFitContent(
+    onDismiss: () -> Unit,
+    content: @Composable () -> Unit,
+) {
+    Dialog(
+        onDismissRequest = onDismiss,
+        properties = DialogProperties(usePlatformDefaultWidth = false),
+    ) {
+        CardStandard {
+            content()
         }
     }
 }

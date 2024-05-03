@@ -4,18 +4,16 @@
  * Use of this source code is governed by Apache v2.0
  */
 
-package org.acyb.sayit.app.molecule
+package org.acyb.sayit.app.atom
 
 import androidx.activity.ComponentActivity
+import androidx.compose.ui.test.isDialog
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
-import androidx.compose.ui.test.onNodeWithText
-import androidx.compose.ui.test.onParent
 import androidx.test.espresso.Espresso
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.github.takahirom.roborazzi.RoborazziRule
 import com.github.takahirom.roborazzi.captureRoboImage
-import org.acyb.sayit.app.atom.IconButtonClose
-import org.acyb.sayit.app.atom.IconButtonSaveText
+import org.acyb.sayit.app.molecule.TopAppBarGlobal
 import org.acyb.sayit.app.roborazziOf
 import org.junit.Rule
 import org.junit.Test
@@ -35,32 +33,31 @@ class DialogSpec {
     val roborazziRule = roborazziOf(composeTestRule, RoborazziRule.CaptureType.None)
 
     @Test
-    fun `It renders a DialogStandard`() {
+    fun `It renders a DialogStandardFillMax`() {
         composeTestRule.setContent {
-            DialogStandard(
+            DialogStandardFillMax(
                 topAppBar = {
                     TopAppBarGlobal(
-                        title = "Add Alarm",
+                        title = "Dialog",
                         firstIcon = { IconButtonClose {} },
-                        secondIcon = { IconButtonSaveText {} },
+                        secondIcon = {},
                     )
                 },
                 onDismiss = { },
             ) {}
         }
 
-        composeTestRule.onNodeWithText("Add Alarm")
-            .onParent()
-            .onParent()
+        composeTestRule
+            .onNode(isDialog())
             .captureRoboImage()
     }
 
     @Test
-    fun `Given DialogSpec onDismiss pressBack click is called it propagates the given action`() {
+    fun `When pressBack is called given dialogStandardFillMax it propagates the given onDismiss action`() {
         var hasBeenCalled = false
 
         composeTestRule.setContent {
-            DialogStandard(
+            DialogStandardFillMax(
                 topAppBar = {
                     TopAppBarGlobal(
                         title = "Add Alarm",
@@ -72,6 +69,40 @@ class DialogSpec {
                     hasBeenCalled = true
                 },
             ) {}
+        }
+
+        Espresso.pressBack()
+
+        hasBeenCalled mustBe true
+    }
+
+    @Test
+    fun `It renders a DialogStandardFitContent`() {
+        composeTestRule.setContent {
+            DialogStandardFitContent(
+                onDismiss = { },
+            ) {
+                TextTitleStandardLarge(text = "Dialog")
+            }
+        }
+
+        composeTestRule
+            .onNode(isDialog())
+            .captureRoboImage()
+    }
+
+    @Test
+    fun `When pressBack is called given dialogStandardFitContent it propagates the given onDismiss action`() {
+        var hasBeenCalled = false
+
+        composeTestRule.setContent {
+            DialogStandardFitContent(
+                onDismiss = {
+                    hasBeenCalled = true
+                },
+            ) {
+                TextTitleStandardLarge(text = "Dialog")
+            }
         }
 
         Espresso.pressBack()
