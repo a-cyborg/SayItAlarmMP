@@ -8,6 +8,7 @@ package org.acyb.sayit.app.token
 
 import androidx.compose.ui.graphics.Brush
 
+@Suppress("MagicNumber")
 object Brush {
     val verticalFadingBrush = Brush.verticalGradient(
         0f to Color.ColorPalette.transparent,

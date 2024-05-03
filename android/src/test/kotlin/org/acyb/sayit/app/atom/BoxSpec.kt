@@ -17,7 +17,7 @@ import org.robolectric.annotation.GraphicsMode
 @RunWith(AndroidJUnit4::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
 @Config(sdk = [33])
-class BoxSpec() : RoborazziTest() {
+class BoxSpec : RoborazziTest() {
     @Test
     fun `It renders BoxVerticalFading with given content`() {
         subjectUnderTest.setContent {

@@ -19,6 +19,7 @@ import org.acyb.sayit.app.atom.TextBodyStandardLarge
 import org.acyb.sayit.app.atom.TextDisplayStandardSmall
 import org.acyb.sayit.app.atom.TextTitleStandardLarge
 
+@Suppress("MagicNumber")
 @Composable
 fun TextRowTimeDuration(minutes: Int) {
     Row(
