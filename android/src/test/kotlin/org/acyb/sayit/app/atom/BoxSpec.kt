@@ -30,4 +30,3 @@ class BoxSpec() : RoborazziTest() {
             .assertExists()
     }
 }
-

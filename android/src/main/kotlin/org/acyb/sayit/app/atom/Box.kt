@@ -26,7 +26,7 @@ fun BoxVerticalFading(content: @Composable () -> Unit) {
                 drawContent()
                 drawRect(
                     brush = Brush.verticalFadingBrush,
-                    blendMode = BlendMode.DstIn
+                    blendMode = BlendMode.DstIn,
                 )
             },
     ) {

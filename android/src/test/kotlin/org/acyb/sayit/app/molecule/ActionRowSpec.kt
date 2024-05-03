@@ -23,7 +23,7 @@ class ActionRowSpec : RoborazziTest() {
         subjectUnderTest.setContent {
             ActionRowCancelAndConfirm(
                 onCancel = {},
-                onConfirm = {}
+                onConfirm = {},
             )
         }
     }

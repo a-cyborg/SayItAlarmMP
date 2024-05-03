@@ -37,7 +37,7 @@ fun TextRowTimeDuration(minutes: Int) {
 
 @Composable
 fun TextRowTitleAndInfo(title: String, info: String) {
-    Column(horizontalAlignment = Alignment.CenterHorizontally,) {
+    Column(horizontalAlignment = Alignment.CenterHorizontally) {
         TextTitleStandardLarge(text = title)
         SpacerLarge()
         TextBodyStandardLarge(text = info)

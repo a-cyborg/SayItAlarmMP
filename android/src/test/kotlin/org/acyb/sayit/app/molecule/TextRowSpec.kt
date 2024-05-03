@@ -46,7 +46,7 @@ class TextRowSpec : RoborazziTest() {
         subjectUnderTest.setContent {
             TextRowTitleAndInfo(
                 title = "Title",
-                info = "Information"
+                info = "Information",
             )
         }
 
