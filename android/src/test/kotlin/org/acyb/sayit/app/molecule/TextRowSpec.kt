@@ -30,7 +30,7 @@ class TextRowSpec : RoborazziTest() {
     }
 
     @Test
-    fun `TextRowTimeDuration formats given minutes to time duration style`() {
+    fun `Given TextRowTimeDuration formats the minutes to time duration style`() {
         subjectUnderTest.setContent {
             TextRowTimeDuration(minutes = 180)
         }
@@ -38,6 +38,17 @@ class TextRowSpec : RoborazziTest() {
         subjectUnderTest.onNodeWithText("3").assertExists()
         subjectUnderTest.onNodeWithText(getString(R.string.hour_abbr)).assertExists()
         subjectUnderTest.onNodeWithText("00").assertExists()
+        subjectUnderTest.onNodeWithText(getString(R.string.minute_abbr)).assertExists()
+    }
+
+    @Test
+    fun `Given TextRowTimeDuration displays the minutes without hour when it is less than a hour`() {
+        subjectUnderTest.setContent {
+            TextRowTimeDuration(minutes = 33)
+        }
+
+        subjectUnderTest.onNodeWithText(getString(R.string.hour_abbr)).assertDoesNotExist()
+        subjectUnderTest.onNodeWithText("33").assertExists()
         subjectUnderTest.onNodeWithText(getString(R.string.minute_abbr)).assertExists()
     }
 
