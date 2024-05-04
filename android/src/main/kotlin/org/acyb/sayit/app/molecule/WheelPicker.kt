@@ -27,13 +27,12 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import org.acyb.sayit.R
 import org.acyb.sayit.app.atom.BoxVerticalFading
 import org.acyb.sayit.app.atom.SpacerMedium
+import org.acyb.sayit.app.token.Sizing
 
-@Suppress("MagicNumber")
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun <T> WheelPicker(
@@ -43,9 +42,9 @@ fun <T> WheelPicker(
     onCancel: () -> Unit,
     onConfirm: (T) -> Unit,
 ) {
-    val pickerHeight: Dp = 280.dp
+    val itemRowHeight = Sizing.WheelPicker.small_row_height
     val visibleItemNum: Int = 5
-    val itemRowHeight = remember { pickerHeight / visibleItemNum }
+    val pickerHeight = remember { itemRowHeight * visibleItemNum }
     val placeholderHeight = remember { itemRowHeight * (visibleItemNum / 2) }
     val pickerContentDescription = stringResource(id = R.string.component_wheel_picker)
 
