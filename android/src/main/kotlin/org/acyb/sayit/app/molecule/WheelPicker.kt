@@ -24,8 +24,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import org.acyb.sayit.R
 import org.acyb.sayit.app.atom.BoxVerticalFading
 import org.acyb.sayit.app.atom.SpacerMedium
 
@@ -43,11 +47,14 @@ fun <T> WheelPicker(
     val visibleItemNum: Int = 5
     val itemRowHeight = remember { pickerHeight / visibleItemNum }
     val placeholderHeight = remember { itemRowHeight * (visibleItemNum / 2) }
+    val pickerContentDescription = stringResource(id = R.string.component_wheel_picker)
 
     val lazyListState = rememberLazyListState()
 
     Column(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier
+            .fillMaxWidth()
+            .semantics { contentDescription = pickerContentDescription },
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
     ) {

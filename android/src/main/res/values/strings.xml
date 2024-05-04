@@ -35,5 +35,5 @@
     <string name="action_set_alarm_time">Set alarm time</string>
     <string name="action_navigate_back">Return to previous screen</string>
     <string name="action_check">Select or confirm this option</string>
-
+    <string name="component_wheel_picker">Select a value using the wheel picker</string>
 </resources>
