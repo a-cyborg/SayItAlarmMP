@@ -26,29 +26,31 @@ class PanelSpec : RoborazziTest() {
     @Test
     fun `It renders PanelStandard`() {
         subjectUnderTest.setContent {
-            PanelStandard(panelItems = listOf(
-                {
-                    PanelRowStandard(
-                        valueLabel = stringResource(id = R.string.timeout),
-                        value = stringResource(id = R.string.minute_short, 180),
-                        afterContent = { IconButtonEditNoPadding {} }
-                    )
-                },
-                {
-                    PanelRowStandard(
-                        valueLabel = stringResource(id = R.string.snooze),
-                        value = stringResource(id = R.string.minute_short, 15),
-                        afterContent = { IconButtonEditNoPadding {} }
-                    )
-                },
-                {
-                    PanelRowStandard(
-                        valueLabel = stringResource(id = R.string.theme),
-                        value = "Light",
-                        afterContent = { IconButtonEditNoPadding {} }
-                    )
-                }
-            ))
+            PanelStandard(
+                panelItems = listOf(
+                    {
+                        PanelRowStandard(
+                            valueLabel = stringResource(id = R.string.timeout),
+                            value = stringResource(id = R.string.minute_short, 180),
+                            afterContent = { IconButtonEditNoPadding {} },
+                        )
+                    },
+                    {
+                        PanelRowStandard(
+                            valueLabel = stringResource(id = R.string.snooze),
+                            value = stringResource(id = R.string.minute_short, 15),
+                            afterContent = { IconButtonEditNoPadding {} },
+                        )
+                    },
+                    {
+                        PanelRowStandard(
+                            valueLabel = stringResource(id = R.string.theme),
+                            value = "Light",
+                            afterContent = { IconButtonEditNoPadding {} },
+                        )
+                    },
+                ),
+            )
         }
     }
 }
