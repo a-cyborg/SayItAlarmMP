@@ -33,6 +33,7 @@ import org.acyb.sayit.app.atom.BoxVerticalFading
 import org.acyb.sayit.app.atom.SpacerMedium
 import org.acyb.sayit.app.token.Sizing
 
+@Suppress("MagicNumber")
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun <T> WheelPicker(
