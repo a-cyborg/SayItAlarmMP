@@ -52,7 +52,7 @@ object Color {
 
     object TextDark : TextColorScheme {
         override val standard = ColorPalette.white
-        override val subtle = ColorPalette.Secondary.Gray.faded
+        override val subtle = ColorPalette.Secondary.Gray.light
         override val inverse = ColorPalette.black
         override val success = ColorPalette.Secondary.Green.dark
         override val info = ColorPalette.Secondary.Blue.dark
@@ -68,6 +68,7 @@ object Color {
     object ColorPalette {
         val white = Color(0xFFFFFFFF)
         val black = Color(0xFF000000)
+        val transparent = Color(0x00000000)
 
         object Primary {
             object Yellow {
@@ -103,9 +104,9 @@ object Color {
             }
 
             object Gray {
-                val faded = Color(0xFFA89984)
-                val light = Color(0xFF928374)
-                val medium = Color(0xFF7C6F64)
+                val faded = Color(0xFFADADAD)
+                val light = Color(0xFF999999)
+                val medium = Color(0xFF7C7C7C)
                 val dark = Color(0xFF282828)
             }
         }

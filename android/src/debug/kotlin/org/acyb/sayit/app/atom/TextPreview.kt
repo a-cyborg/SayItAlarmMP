@@ -29,6 +29,12 @@ fun TextTitleStandardLargePreview() {
 
 @Preview
 @Composable
+fun TextTitleSubtleMediumPreview() {
+    TextTitleSubtleMedium(text = "TitleSubtleMedium")
+}
+
+@Preview
+@Composable
 fun TextLabelAttentionLargePreview() {
     TextLabelAttentionLarge(text = "SayIt")
 }
@@ -42,5 +48,5 @@ fun TextBodyStandardLargePreview() {
 @Preview
 @Composable
 fun TextBodyStandardMediumPreview() {
-    TextBodyStandardMedium(text = "SayIt")
+    TextBodyStandardSmall(text = "SayIt")
 }

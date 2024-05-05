@@ -38,3 +38,27 @@ fun IconButtonEditTextPreview() {
 fun IconButtonSettingsPreview() {
     IconButtonSettings {}
 }
+
+@Preview
+@Composable
+fun IconButtonNavigateBackPreview() {
+    IconButtonNavigateBack {}
+}
+
+@Preview
+@Composable
+fun IconButtonSaveTextPreview() {
+    IconButtonSaveText {}
+}
+
+@Preview
+@Composable
+fun IconButtonCancelTextPreview() {
+    IconButtonCancelText {}
+}
+
+@Preview
+@Composable
+fun IconButtonConfirmTextPreview() {
+    IconButtonConfirmText {}
+}

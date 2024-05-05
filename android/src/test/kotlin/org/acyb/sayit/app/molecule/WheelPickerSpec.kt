@@ -29,12 +29,15 @@ class WheelPickerSpec : RoborazziTest() {
         "Gray", "Turquoise", "Maroon",
     )
 
+    private fun getString(id: Int) = subjectUnderTest.activity.getString(id)
+
     @Test
     fun `It renders a WheelPicker`() {
         subjectUnderTest.setContent {
             WheelPicker(
                 values = colors,
                 itemRow = { TextHeadlineStandardLarge(text = it) },
+                onCancel = {},
                 onConfirm = { _ -> },
             )
         }
@@ -46,6 +49,7 @@ class WheelPickerSpec : RoborazziTest() {
             WheelPicker(
                 values = colors,
                 itemRow = { TextHeadlineStandardLarge(text = it) },
+                onCancel = {},
                 onConfirm = { _ -> },
             )
         }
@@ -54,6 +58,7 @@ class WheelPickerSpec : RoborazziTest() {
             onNodeWithText(colors[0]).assertExists()
             onNodeWithText(colors[1]).assertExists()
             onNodeWithText(colors[2]).assertExists()
+            onNodeWithText(colors[3]).assertDoesNotExist()
         }
     }
 
@@ -66,6 +71,7 @@ class WheelPickerSpec : RoborazziTest() {
                 values = colors,
                 initIdx = initIdx,
                 itemRow = { TextHeadlineStandardLarge(text = it) },
+                onCancel = {},
                 onConfirm = { _ -> },
             )
         }
@@ -80,7 +86,7 @@ class WheelPickerSpec : RoborazziTest() {
     }
 
     @Test
-    fun `When initIdx 1 is provided it displays a second value in the center`() {
+    fun `When 1 is provided for the initIdx it displays a second value in the center`() {
         val initIdx = 1
 
         subjectUnderTest.setContent {
@@ -88,6 +94,7 @@ class WheelPickerSpec : RoborazziTest() {
                 values = colors,
                 initIdx = initIdx,
                 itemRow = { TextHeadlineStandardLarge(text = it) },
+                onCancel = {},
                 onConfirm = { _ -> },
             )
         }
@@ -109,6 +116,7 @@ class WheelPickerSpec : RoborazziTest() {
                 values = colors,
                 initIdx = initIdx,
                 itemRow = { TextHeadlineStandardLarge(text = it) },
+                onCancel = {},
                 onConfirm = { _ -> },
             )
         }
@@ -121,7 +129,7 @@ class WheelPickerSpec : RoborazziTest() {
     }
 
     @Test
-    fun `Given onConfirm called it propagates the given action with selected value`() {
+    fun `When onConfirm called it propagates the given action with selected value`() {
         val selectedItemIdx = 3
 
         var hasBeenCalled = false
@@ -132,6 +140,7 @@ class WheelPickerSpec : RoborazziTest() {
                 values = colors,
                 initIdx = selectedItemIdx,
                 itemRow = { TextHeadlineStandardLarge(text = it) },
+                onCancel = {},
             ) {
                 hasBeenCalled = true
                 selectedItem = it
@@ -139,10 +148,32 @@ class WheelPickerSpec : RoborazziTest() {
         }
 
         subjectUnderTest
-            .onNodeWithText(subjectUnderTest.activity.getString(R.string.save))
+            .onNodeWithText(getString(R.string.confirm))
             .performClick()
 
         hasBeenCalled mustBe true
         selectedItem mustBe colors[selectedItemIdx]
+    }
+
+    @Test
+    fun `When onCancel called it propagates the onCancel action`() {
+        var hasBeenCalled = false
+
+        subjectUnderTest.setContent {
+            WheelPicker(
+                values = colors,
+                itemRow = { TextHeadlineStandardLarge(text = it) },
+                onCancel = {
+                    hasBeenCalled = true
+                },
+                onConfirm = { _ -> },
+            )
+        }
+
+        subjectUnderTest
+            .onNodeWithText(getString(R.string.cancel))
+            .performClick()
+
+        hasBeenCalled mustBe true
     }
 }

@@ -20,7 +20,7 @@ import org.acyb.sayit.app.token.Color
 fun TopAppBarGlobal(
     title: String,
     firstIcon: @Composable () -> Unit,
-    secondIcon: @Composable () -> Unit,
+    secondIcon: @Composable () -> Unit = {},
     thirdIcon: @Composable () -> Unit = {},
 ) {
     CenterAlignedTopAppBar(

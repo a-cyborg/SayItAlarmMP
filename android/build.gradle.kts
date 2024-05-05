@@ -97,6 +97,9 @@ dependencies {
     implementation(antibytesCatalog.android.material.compose.extendedIcons)
     implementation(antibytesCatalog.android.material3.core)
 
+    implementation(projects.entity)
+    implementation(projects.presentation)
+
     testImplementation(antibytesCatalog.testUtils.core)
     testImplementation(antibytesCatalog.testUtils.coroutine)
     testImplementation(antibytesCatalog.kfixture)

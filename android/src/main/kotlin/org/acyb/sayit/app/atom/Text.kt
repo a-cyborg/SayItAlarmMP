@@ -21,6 +21,15 @@ fun TextDisplayStandardLarge(text: String) {
 }
 
 @Composable
+fun TextDisplayStandardSmall(text: String) {
+    Text(
+        text = text,
+        color = Color.text.standard,
+        style = Font.display.s,
+    )
+}
+
+@Composable
 fun TextHeadlineStandardLarge(text: String) {
     Text(
         text = text,
@@ -48,6 +57,33 @@ fun TextTitleStandardLarge(text: String) {
 }
 
 @Composable
+fun TextTitleAttentionMedium(text: String) {
+    Text(
+        text = text,
+        color = Color.text.attention,
+        style = Font.title.m,
+    )
+}
+
+@Composable
+fun TextTitleWarningMedium(text: String) {
+    Text(
+        text = text,
+        color = Color.text.warning,
+        style = Font.title.m,
+    )
+}
+
+@Composable
+fun TextTitleSubtleMedium(text: String) {
+    Text(
+        text = text,
+        color = Color.text.subtle,
+        style = Font.title.m,
+    )
+}
+
+@Composable
 fun TextLabelAttentionLarge(text: String) {
     Text(
         text = text,
@@ -66,10 +102,19 @@ fun TextBodyStandardLarge(text: String) {
 }
 
 @Composable
-fun TextBodyStandardMedium(text: String) {
+fun TextBodySubtleMedium(text: String) {
+    Text(
+        text = text,
+        color = Color.text.subtle,
+        style = Font.body.m,
+    )
+}
+
+@Composable
+fun TextBodyStandardSmall(text: String) {
     Text(
         text = text,
         color = Color.text.standard,
-        style = Font.body.m,
+        style = Font.body.s,
     )
 }

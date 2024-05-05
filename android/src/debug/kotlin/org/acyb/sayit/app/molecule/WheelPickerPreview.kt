@@ -21,7 +21,9 @@ fun WheelPickerPreview() {
 
     WheelPicker(
         values = colors,
+        initIdx = 4,
         itemRow = { TextHeadlineStandardLarge(text = it) },
+        onCancel = {},
         onConfirm = { _ -> },
     )
 }

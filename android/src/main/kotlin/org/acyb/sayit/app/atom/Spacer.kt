@@ -26,3 +26,8 @@ fun SpacerMedium() {
 fun SpacerLarge() {
     Spacer(modifier = Modifier.size(Spacing.l))
 }
+
+@Composable
+fun SpacerXLarge() {
+    Spacer(modifier = Modifier.size(Spacing.xl))
+}

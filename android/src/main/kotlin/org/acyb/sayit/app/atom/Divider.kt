@@ -18,7 +18,7 @@ import org.acyb.sayit.app.token.Spacing
 fun DividerStandard() {
     Divider(
         color = Color.text.subtle.copy(alpha = 0.3f),
-        thickness = 1.dp,
-        modifier = Modifier.padding(horizontal = Spacing.s),
+        thickness = 0.8.dp,
+        modifier = Modifier.padding(horizontal = Spacing.xs),
     )
 }
