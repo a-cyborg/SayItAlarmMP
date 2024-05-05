@@ -17,22 +17,6 @@ import org.a_cyb.sayit.entity.TimeOut
 import org.a_cyb.sayit.presentation.CommandContract
 import org.a_cyb.sayit.presentation.SettingsContract
 
-@Suppress("MatchingDeclarationName", "EmptyFunctionBlock")
-class SettingsViewModelFake(
-    initState: SettingsContract.SettingsState,
-) : SettingsContract.SettingsViewModel, ViewModel() {
-
-    private val _state: MutableStateFlow<SettingsContract.SettingsState> = MutableStateFlow(initState)
-    override val state: StateFlow<SettingsContract.SettingsState> = _state
-
-    override fun setTimeOut(timeOut: TimeOut) {}
-    override fun setSnooze(snooze: Snooze) {}
-    override fun setTheme(theme: Theme) {}
-    override fun save() {}
-
-    override fun <T : CommandContract.CommandReceiver> runCommand(command: CommandContract.Command<T>) {}
-}
-
 @Preview
 @Composable
 fun SettingsDialogPreview() {
@@ -41,6 +25,22 @@ fun SettingsDialogPreview() {
         snooze = SettingsContract.ValidTimeInput(15),
         theme = Theme.LIGHT,
     )
+
+    @Suppress("EmptyFunctionBlock")
+    class SettingsViewModelFake(
+        initState: SettingsContract.SettingsState,
+    ) : SettingsContract.SettingsViewModel, ViewModel() {
+
+        private val _state: MutableStateFlow<SettingsContract.SettingsState> = MutableStateFlow(initState)
+        override val state: StateFlow<SettingsContract.SettingsState> = _state
+
+        override fun setTimeOut(timeOut: TimeOut) {}
+        override fun setSnooze(snooze: Snooze) {}
+        override fun setTheme(theme: Theme) {}
+        override fun save() {}
+
+        override fun <T : CommandContract.CommandReceiver> runCommand(command: CommandContract.Command<T>) {}
+    }
 
     SettingsScreen(
         viewModel = SettingsViewModelFake(settingsStateWithContent),
