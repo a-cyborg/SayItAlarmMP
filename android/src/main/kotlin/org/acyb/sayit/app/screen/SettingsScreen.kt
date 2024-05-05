@@ -156,9 +156,6 @@ fun PanelItemAbout() {
     PanelRowStandard(valueLabel = stringResource(id = R.string.about)) {
         IconButtonEdit { showText = true }
     }
-
-    if (showText) {
-    }
 }
 
 @Composable
