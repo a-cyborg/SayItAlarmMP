@@ -96,9 +96,9 @@ class TextSpec : RoborazziTest() {
     }
 
     @Test
-    fun `It renders TextBodyStandardSmall`() {
+    fun `It renders TextBodySubtleLarge`() {
         subjectUnderTest.setContent {
-            TextBodySubtleMedium(text = "BodyStandardSmall")
+            TextBodySubtleMedium(text = "BodySubtleLarge")
         }
     }
 }

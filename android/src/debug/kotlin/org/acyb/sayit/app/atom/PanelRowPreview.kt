@@ -17,7 +17,7 @@ fun PanelRowStandardPreview() {
     PanelRowStandard(
         valueLabel = stringResource(id = R.string.timeout),
         value = stringResource(id = R.string.minute_short, 180),
-        afterContent = { IconButtonEditNoPadding {} },
+        afterContent = { IconButtonEdit {} },
     )
 }
 
@@ -26,7 +26,7 @@ fun PanelRowStandardPreview() {
 fun PanelRowStandardWithoutValuePreview() {
     PanelRowStandard(
         valueLabel = stringResource(id = R.string.about),
-        afterContent = { IconButtonEditNoPadding {} },
+        afterContent = { IconButtonEdit {} },
     )
 }
 

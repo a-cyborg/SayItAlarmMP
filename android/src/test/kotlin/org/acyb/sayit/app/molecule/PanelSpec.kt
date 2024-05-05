@@ -10,7 +10,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import org.acyb.sayit.R
 import org.acyb.sayit.app.RoborazziTest
-import org.acyb.sayit.app.atom.IconButtonEditNoPadding
+import org.acyb.sayit.app.atom.IconButtonEdit
 import org.acyb.sayit.app.atom.PanelRowStandard
 import org.acyb.sayit.app.atom.PanelStandard
 import org.junit.Test
@@ -32,21 +32,21 @@ class PanelSpec : RoborazziTest() {
                         PanelRowStandard(
                             valueLabel = stringResource(id = R.string.timeout),
                             value = stringResource(id = R.string.minute_short, 180),
-                            afterContent = { IconButtonEditNoPadding {} },
+                            afterContent = { IconButtonEdit {} },
                         )
                     },
                     {
                         PanelRowStandard(
                             valueLabel = stringResource(id = R.string.snooze),
                             value = stringResource(id = R.string.minute_short, 15),
-                            afterContent = { IconButtonEditNoPadding {} },
+                            afterContent = { IconButtonEdit {} },
                         )
                     },
                     {
                         PanelRowStandard(
                             valueLabel = stringResource(id = R.string.theme),
                             value = "Light",
-                            afterContent = { IconButtonEditNoPadding {} },
+                            afterContent = { IconButtonEdit {} },
                         )
                     },
                 ),

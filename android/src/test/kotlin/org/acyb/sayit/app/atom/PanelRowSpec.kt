@@ -26,7 +26,7 @@ class PanelRowSpec : RoborazziTest() {
             PanelRowStandard(
                 valueLabel = stringResource(id = R.string.timeout),
                 value = stringResource(id = R.string.minute_short, 180),
-                afterContent = { IconButtonEditNoPadding {} },
+                afterContent = { IconButtonEdit {} },
             )
         }
     }
@@ -36,7 +36,7 @@ class PanelRowSpec : RoborazziTest() {
         subjectUnderTest.setContent {
             PanelRowStandard(
                 valueLabel = stringResource(id = R.string.about),
-                afterContent = { IconButtonEditNoPadding {} },
+                afterContent = { IconButtonEdit {} },
             )
         }
     }
