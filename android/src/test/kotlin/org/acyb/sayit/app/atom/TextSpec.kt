@@ -68,6 +68,13 @@ class TextSpec : RoborazziTest() {
     }
 
     @Test
+    fun `It renders TextTitleSubtleMedium`() {
+        subjectUnderTest.setContent {
+            TextTitleSubtleMedium(text = "TitleSubtleMedium")
+        }
+    }
+
+    @Test
     fun `It renders TextLabelAttentionLarge`() {
         subjectUnderTest.setContent {
             TextLabelAttentionLarge(text = "LabelAttentionLarge")
@@ -82,16 +89,16 @@ class TextSpec : RoborazziTest() {
     }
 
     @Test
-    fun `It renders TextBodyStandardMedium`() {
+    fun `It renders TextBodySubtleMedium`() {
         subjectUnderTest.setContent {
-            TextBodyStandardMedium(text = "BodyStandardMedium")
+            TextBodyStandardSmall(text = "BodySubtleMedium")
         }
     }
 
     @Test
-    fun `It renders TextBodySubtleLarge`() {
+    fun `It renders TextBodyStandardSmall`() {
         subjectUnderTest.setContent {
-            TextBodySubtleLarge(text = "BodySubtleLarge")
+            TextBodySubtleMedium(text = "BodyStandardSmall")
         }
     }
 }

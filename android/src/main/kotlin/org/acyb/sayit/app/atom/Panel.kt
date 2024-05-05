@@ -29,10 +29,8 @@ fun PanelStandard(
             .padding(horizontal = Spacing.m),
     ) {
         panelItems.forEach { item ->
-            SpacerMedium()
             item()
             DividerStandard()
         }
-        SpacerMedium()
     }
 }

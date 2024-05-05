@@ -43,7 +43,7 @@ fun <T> WheelPicker(
     onCancel: () -> Unit,
     onConfirm: (T) -> Unit,
 ) {
-    val itemRowHeight = Sizing.WheelPicker.small_row_height
+    val itemRowHeight = Sizing.WheelPicker.SmallRowHeight
     val visibleItemNum: Int = 5
     val pickerHeight = remember { itemRowHeight * visibleItemNum }
     val placeholderHeight = remember { itemRowHeight * (visibleItemNum / 2) }

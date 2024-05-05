@@ -10,6 +10,10 @@ import androidx.compose.ui.unit.dp
 
 object Sizing {
     object WheelPicker {
-        val small_row_height = 56.dp
+        val SmallRowHeight = 56.dp
+    }
+
+    object PanelRow {
+        val MinHeight = 40.dp
     }
 }
