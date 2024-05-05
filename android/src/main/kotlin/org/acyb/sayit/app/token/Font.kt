@@ -122,19 +122,19 @@ object Font {
         private val base = TextStyle(fontFamily = outfitFontFamily)
 
         val l = base.copy(
-            fontSize = 16.sp,
+            fontSize = 17.sp,
             lineHeight = 24.sp,
-            letterSpacing = 0.5.sp,
+            letterSpacing = 0.6.sp,
         )
 
         val m = base.copy(
-            fontSize = 14.sp,
+            fontSize = 15.sp,
             lineHeight = 20.sp,
             letterSpacing = 0.25.sp,
         )
 
         val s = base.copy(
-            fontSize = 12.sp,
+            fontSize = 14.sp,
             lineHeight = 16.sp,
             letterSpacing = 0.4.sp,
         )

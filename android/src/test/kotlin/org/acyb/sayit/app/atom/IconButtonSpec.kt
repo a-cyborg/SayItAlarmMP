@@ -141,30 +141,6 @@ class IconButtonSpec : RoborazziTest() {
     }
 
     @Test
-    fun `It renders a IconButtonEditNoPadding`() {
-        subjectUnderTest.setContent {
-            IconButtonEditNoPadding {}
-        }
-    }
-
-    @Test
-    fun `Given IconButtonEditNoPadding click is called it propagates the given action`() {
-        var hasBeenCalled = false
-
-        subjectUnderTest.setContent {
-            IconButtonEditNoPadding {
-                hasBeenCalled = true
-            }
-        }
-
-        subjectUnderTest
-            .onNodeWithContentDescription(getString(R.string.action_edit_alarm))
-            .performClick()
-
-        hasBeenCalled mustBe true
-    }
-
-    @Test
     fun `It renders a IconButtonSettings`() {
         subjectUnderTest.setContent {
             IconButtonSettings {}

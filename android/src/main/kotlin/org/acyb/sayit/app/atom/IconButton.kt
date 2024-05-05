@@ -6,13 +6,10 @@
 
 package org.acyb.sayit.app.atom
 
-import androidx.compose.foundation.layout.size
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
 import org.acyb.sayit.R
 import org.acyb.sayit.app.token.Color
 import org.acyb.sayit.app.token.Icon
@@ -69,20 +66,6 @@ fun IconButtonEditText(onClick: () -> Unit) {
 }
 
 @Composable
-fun IconButtonEditNoPadding(onClick: () -> Unit) {
-    IconButton(
-        onClick = onClick,
-        modifier = Modifier.then(Modifier.size(24.dp)),
-    ) {
-        Icon(
-            imageVector = Icon.arrowRight,
-            tint = Color.text.attention,
-            contentDescription = stringResource(id = R.string.action_edit_alarm),
-        )
-    }
-}
-
-@Composable
 fun IconButtonSettings(onClick: () -> Unit) {
     IconButton(onClick = onClick) {
         Icon(
@@ -107,7 +90,7 @@ fun IconButtonNavigateBack(onClick: () -> Unit) {
 @Composable
 fun IconButtonSaveText(onClick: () -> Unit) {
     IconButton(onClick = onClick) {
-        TextLabelAttentionLarge(text = stringResource(id = R.string.save))
+        TextTitleAttentionMedium(text = stringResource(id = R.string.save))
     }
 }
 

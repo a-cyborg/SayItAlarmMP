@@ -6,18 +6,18 @@
 
 package org.acyb.sayit.app.token
 
-import androidx.compose.ui.graphics.Color as ColorPalette
 import org.junit.jupiter.api.DynamicTest
 import org.junit.jupiter.api.DynamicTest.dynamicTest
 import org.junit.jupiter.api.TestFactory
 import tech.antibytes.util.test.mustBe
+import androidx.compose.ui.graphics.Color as ColorPalette
 
 class ColorSpec {
     @TestFactory
     fun `Color is initially in LightMode`(): List<DynamicTest> {
         return listOf(
             ColorModeTestSpec("text.standard", ColorPalette(0xFF000000)) { Color.text.standard },
-            ColorModeTestSpec("text.subtle", ColorPalette(0xFF7C6F64)) { Color.text.subtle },
+            ColorModeTestSpec("text.subtle", ColorPalette(0xFF7C7C7C)) { Color.text.subtle },
             ColorModeTestSpec("text.inverse", ColorPalette(0xFFFFFFFF)) { Color.text.inverse },
             ColorModeTestSpec("text.success", ColorPalette(0xFF79740E)) { Color.text.success },
             ColorModeTestSpec("text.info", ColorPalette(0xFF076678)) { Color.text.info },
@@ -26,8 +26,8 @@ class ColorSpec {
             ColorModeTestSpec("text.accent", ColorPalette(0xFFB57614)) { Color.text.accent },
             ColorModeTestSpec("text.attention", ColorPalette(0xFF427658)) { Color.text.attention },
             ColorModeTestSpec("surface.standard", ColorPalette(0xFFFFFFFF)) { Color.surface.standard },
-            ColorModeTestSpec("surface.subtle", ColorPalette(0xFFA89984)) { Color.surface.subtle },
-            ColorModeTestSpec("surface.strong", ColorPalette(0xFF928374)) { Color.surface.strong },
+            ColorModeTestSpec("surface.subtle", ColorPalette(0xFFADADAD)) { Color.surface.subtle },
+            ColorModeTestSpec("surface.strong", ColorPalette(0xFF999999)) { Color.surface.strong },
             ColorModeTestSpec("surface.success", ColorPalette(0xFF79740E)) { Color.surface.success },
             ColorModeTestSpec("surface.accent", ColorPalette(0xFFB57614)) { Color.surface.accent },
             ColorModeTestSpec("surface.attention", ColorPalette(0xFF427658)) { Color.surface.attention },
@@ -45,7 +45,7 @@ class ColorSpec {
 
         return listOf(
             ColorModeTestSpec("text.standard", ColorPalette(0xFFFFFFFF)) { Color.text.standard },
-            ColorModeTestSpec("text.subtle", ColorPalette(0xFFA89984)) { Color.text.subtle },
+            ColorModeTestSpec("text.subtle", ColorPalette(0xFF999999)) { Color.text.subtle },
             ColorModeTestSpec("text.inverse", ColorPalette(0xFF000000)) { Color.text.inverse },
             ColorModeTestSpec("text.success", ColorPalette(0xFF98971A)) { Color.text.success },
             ColorModeTestSpec("text.info", ColorPalette(0xFF458588)) { Color.text.info },
@@ -54,7 +54,7 @@ class ColorSpec {
             ColorModeTestSpec("text.accent", ColorPalette(0xFFD79921)) { Color.text.accent },
             ColorModeTestSpec("text.attention", ColorPalette(0xFF689D6A)) { Color.text.attention },
             ColorModeTestSpec("surface.standard", ColorPalette(0xFF282828)) { Color.surface.standard },
-            ColorModeTestSpec("surface.subtle", ColorPalette(0xFF7C6F64)) { Color.surface.subtle },
+            ColorModeTestSpec("surface.subtle", ColorPalette(0xFF7C7C7C)) { Color.surface.subtle },
             ColorModeTestSpec("surface.strong", ColorPalette(0xFF000000)) { Color.surface.strong },
             ColorModeTestSpec("surface.success", ColorPalette(0xFF98971A)) { Color.surface.success },
             ColorModeTestSpec("surface.accent", ColorPalette(0xFFD79921)) { Color.surface.accent },
@@ -73,7 +73,7 @@ class ColorSpec {
 
         return listOf(
             ColorModeTestSpec("text.standard", ColorPalette(0xFF000000)) { Color.text.standard },
-            ColorModeTestSpec("text.subtle", ColorPalette(0xFF7C6F64)) { Color.text.subtle },
+            ColorModeTestSpec("text.subtle", ColorPalette(0xFF7C7C7C)) { Color.text.subtle },
             ColorModeTestSpec("text.inverse", ColorPalette(0xFFFFFFFF)) { Color.text.inverse },
             ColorModeTestSpec("text.success", ColorPalette(0xFF79740E)) { Color.text.success },
             ColorModeTestSpec("text.info", ColorPalette(0xFF076678)) { Color.text.info },
@@ -82,8 +82,8 @@ class ColorSpec {
             ColorModeTestSpec("text.accent", ColorPalette(0xFFB57614)) { Color.text.accent },
             ColorModeTestSpec("text.attention", ColorPalette(0xFF427658)) { Color.text.attention },
             ColorModeTestSpec("surface.standard", ColorPalette(0xFFFFFFFF)) { Color.surface.standard },
-            ColorModeTestSpec("surface.subtle", ColorPalette(0xFFA89984)) { Color.surface.subtle },
-            ColorModeTestSpec("surface.strong", ColorPalette(0xFF928374)) { Color.surface.strong },
+            ColorModeTestSpec("surface.subtle", ColorPalette(0xFFADADAD)) { Color.surface.subtle },
+            ColorModeTestSpec("surface.strong", ColorPalette(0xFF999999)) { Color.surface.strong },
             ColorModeTestSpec("surface.success", ColorPalette(0xFF79740E)) { Color.surface.success },
             ColorModeTestSpec("surface.accent", ColorPalette(0xFFB57614)) { Color.surface.accent },
             ColorModeTestSpec("surface.attention", ColorPalette(0xFF427658)) { Color.surface.attention },
