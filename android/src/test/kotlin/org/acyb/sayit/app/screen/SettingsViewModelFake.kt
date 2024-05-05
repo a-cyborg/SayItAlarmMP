@@ -17,6 +17,7 @@ import org.a_cyb.sayit.entity.TimeOut
 import org.a_cyb.sayit.presentation.CommandContract
 import org.a_cyb.sayit.presentation.SettingsContract
 
+@Suppress("EmptyFunctionBlock")
 internal class SettingsViewModelFake(
     private val viewModelScope: CoroutineScope,
     private val initState: SettingsContract.SettingsState,

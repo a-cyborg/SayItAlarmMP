@@ -17,6 +17,7 @@ import org.a_cyb.sayit.entity.TimeOut
 import org.a_cyb.sayit.presentation.CommandContract
 import org.a_cyb.sayit.presentation.SettingsContract
 
+@Suppress("MatchingDeclarationName", "EmptyFunctionBlock")
 class SettingsViewModelFake(
     initState: SettingsContract.SettingsState,
 ) : SettingsContract.SettingsViewModel, ViewModel() {
