@@ -115,6 +115,6 @@ fun TextBodyStandardSmall(text: String) {
     Text(
         text = text,
         color = Color.text.standard,
-        style = Font.body.m,
+        style = Font.body.s,
     )
 }

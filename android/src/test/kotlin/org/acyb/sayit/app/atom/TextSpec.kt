@@ -91,14 +91,14 @@ class TextSpec : RoborazziTest() {
     @Test
     fun `It renders TextBodySubtleMedium`() {
         subjectUnderTest.setContent {
-            TextBodyStandardSmall(text = "BodySubtleMedium")
+            TextBodySubtleMedium(text = "BodySubtleMedium")
         }
     }
 
     @Test
-    fun `It renders TextBodySubtleLarge`() {
+    fun `It renders TextBodyStandardSmall`() {
         subjectUnderTest.setContent {
-            TextBodySubtleMedium(text = "BodySubtleLarge")
+            TextBodyStandardSmall(text = "BodyStandardSmall")
         }
     }
 }
