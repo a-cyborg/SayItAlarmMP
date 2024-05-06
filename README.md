@@ -1,4 +1,5 @@
-# SayIt Alarm
+# Title
+Short Title
 
 [![Latest release](https://raw.githubusercontent.com/bitPogo/repo/main/docs/src/assets/badge-release-latest.svg)](https://github.com/bitPogo/repo/releases)
 [![License](https://raw.githubusercontent.com/bitPogo/repo/main/docs/src/assets/badge-license.svg)](https://github.com/bitPogo/repo/blob/main/LICENSE)
@@ -18,10 +19,27 @@
 * Android 5.0 (API 21) to Android 13 (API 33)
 * [Java 17](https://adoptopenjdk.net/?variant=openjdk17&jvmVariant=hotspot)
 
+## Changelog
+
+See [changelog](https://github.com/bitPogo/repo/blob/main/CHANGELOG.md).
+
 ## Versioning
 
 This project uses [Semantic Versioning](http://semver.org/) as a guideline for our versioning.
 
-## Copyright and License
+## Contributing
 
-Apache License Version 2.0
+You want to help or share a proposal? You have a specific problem? Read the following:
+
+#### Convention
+##### Function
+* When function has return value use `=` instead of fun foo(): Type { return type }
+* When function has effect use {} instead of fun foo() = _state.update {..}
+
+* [Contribution Guide](https://github.com/bitPogo/repo/blob/main/CONTRIBUTING.md) for details about how to report bugs and propose features.
+
+## Releasing
+
+Please take a look [here](https://github.com/bitPogo/repo/tree/main/docs/src/development/releasing.md).
+
+## Copyright and License

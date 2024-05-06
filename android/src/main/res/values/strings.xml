@@ -31,7 +31,7 @@
     <string name="action_close">Close</string>
     <string name="action_add_alarm">Add alarm</string>
     <string name="action_delete_alarm">Delete alarm</string>
-    <string name="action_edit_alarm">Edit alarm</string>
+    <string name="action_edit">Edit item aligned</string>
     <string name="action_open_settings">Open settings</string>
     <string name="action_set_alarm_time">Set alarm time</string>
     <string name="action_navigate_back">Return to previous screen</string>

@@ -29,6 +29,8 @@ import org.a_cyb.sayit.entity.Snooze
 import org.a_cyb.sayit.entity.Theme
 import org.a_cyb.sayit.entity.TimeOut
 import org.a_cyb.sayit.presentation.SettingsContract
+import org.a_cyb.sayit.presentation.SettingsContract.SettingsStateWithContent
+import org.a_cyb.sayit.presentation.SettingsContract.SettingsViewModel
 import org.acyb.sayit.R
 import org.acyb.sayit.app.atom.IconButtonEdit
 import org.acyb.sayit.app.atom.IconButtonNavigateBack
@@ -41,6 +43,7 @@ import org.acyb.sayit.app.atom.TextBodyStandardSmall
 import org.acyb.sayit.app.atom.TextTitleStandardLarge
 import org.acyb.sayit.app.molecule.PopUpPickerStandardWheel
 import org.acyb.sayit.app.molecule.TextRowTimeDuration
+import org.acyb.sayit.app.molecule.TextRowWarning
 import org.acyb.sayit.app.molecule.TopAppBarGlobal
 import org.acyb.sayit.app.token.Color
 
@@ -62,7 +65,6 @@ fun PanelItemTimeOut(value: Int, onValueEdit: (Int) -> Unit) {
         valueLabel = stringResource(id = R.string.timeout),
         value = stringResource(id = R.string.minute_short, value),
     ) {
-        // IconButtonEditNoPadding(onClick = { showEditActionContent = true })
         IconButtonEdit { showEditActionContent = true }
     }
 
@@ -175,7 +177,7 @@ fun InfoPanel() {
 
 @Composable
 fun SettingsScreen(
-    viewModel: SettingsContract.SettingsViewModel,
+    viewModel: SettingsViewModel,
 ) {
     val state = viewModel.state.collectAsState()
 
@@ -190,15 +192,25 @@ fun SettingsScreen(
     ) {
         SettingsTopAppBar(onNavigateBack = {})
         SpacerLarge()
-        SettingsPanel(
-            timeOut = 180,
-            snooze = 15,
-            theme = Theme.LIGHT,
-            onTImeOutChange = { viewModel.setTimeOut(TimeOut(it)) },
-            onSnoozeChange = { viewModel.setSnooze(Snooze(it)) },
-            onThemeChange = { viewModel.setTheme(it) },
-        )
-        // ActionRowStatefulSave(enabled = stateChanged.value, onSave = viewModel::save)
+
+        when (state.value) {
+            is SettingsStateWithContent -> {
+                val settings = (state.value as SettingsStateWithContent)
+                SettingsPanel(
+                    timeOut = settings.timeOut.input,
+                    snooze = settings.snooze.input,
+                    theme = settings.theme,
+                    onTImeOutChange = { viewModel.setTimeOut(TimeOut(it)) },
+                    onSnoozeChange = { viewModel.setSnooze(Snooze(it)) },
+                    onThemeChange = { viewModel.setTheme(it) },
+                )
+            }
+
+            is SettingsContract.Error -> {
+                val errorMessage = (state.value as SettingsContract.Error).detail
+                TextRowWarning(text = errorMessage)
+            }
+        }
         SpacerXLarge()
         InfoPanel()
         Spacer(modifier = Modifier.weight(1f))

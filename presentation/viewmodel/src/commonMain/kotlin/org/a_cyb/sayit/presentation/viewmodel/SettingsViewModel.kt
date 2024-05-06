@@ -39,11 +39,11 @@ internal class SettingsViewModel(
 
     init {
         interactor.settings
-            .onEach(::updateState)
+            .onEach(::initState)
             .launchIn(scope)
     }
 
-    private fun updateState(settingsResult: Result<Settings>) {
+    private fun initState(settingsResult: Result<Settings>) {
         settingsResult
             .onSuccess { settings -> _state.update { settings.toStateWithContent() } }
             .onFailure { throwable -> _state.update { throwable.toErrorState(INITIAL_SETTINGS_UNRESOLVED) } }
@@ -55,6 +55,9 @@ internal class SettingsViewModel(
             snooze = snooze.toValidatedTimeInput(),
             theme = theme,
         )
+
+    private fun Throwable.toErrorState(settingsError: SettingsError): SettingsState =
+        Error(detail = "$settingsError message=$message, cause=$cause")
 
     @Suppress("MagicNumber")
     private fun TimeOut.toValidatedTimeInput(): TimeInput =
@@ -71,9 +74,6 @@ internal class SettingsViewModel(
         } else {
             ValidTimeInput(snooze)
         }
-
-    private fun Throwable.toErrorState(settingsError: SettingsError): SettingsState =
-        Error(detail = "$settingsError message=$message, cause=$cause")
 
     override fun setTimeOut(timeOut: TimeOut) {
         updateContentOrError { copy(timeOut = timeOut.toValidatedTimeInput()) }

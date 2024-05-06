@@ -24,11 +24,3 @@ fun CardStandardCenteredPreview() {
         TextDisplayStandardLarge(text = "CardStandardCentered")
     }
 }
-
-@Preview
-@Composable
-fun CardSubtlePreview() {
-    CardSubtle {
-        TextDisplayStandardLarge(text = "CardSubtle")
-    }
-}

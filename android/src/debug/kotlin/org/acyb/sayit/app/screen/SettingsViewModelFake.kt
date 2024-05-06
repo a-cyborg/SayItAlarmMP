@@ -6,11 +6,9 @@
 
 package org.acyb.sayit.app.screen
 
-import kotlinx.coroutines.CoroutineScope
+import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.update
-import kotlinx.coroutines.launch
 import org.a_cyb.sayit.entity.Snooze
 import org.a_cyb.sayit.entity.Theme
 import org.a_cyb.sayit.entity.TimeOut
@@ -18,27 +16,16 @@ import org.a_cyb.sayit.presentation.CommandContract
 import org.a_cyb.sayit.presentation.SettingsContract
 
 @Suppress("EmptyFunctionBlock")
-internal class SettingsViewModelFake(
-    private val viewModelScope: CoroutineScope,
-    private val initState: SettingsContract.SettingsState,
-) : SettingsContract.SettingsViewModel {
+class SettingsViewModelFake(
+    initState: SettingsContract.SettingsState,
+) : SettingsContract.SettingsViewModel, ViewModel() {
 
     private val _state: MutableStateFlow<SettingsContract.SettingsState> = MutableStateFlow(initState)
     override val state: StateFlow<SettingsContract.SettingsState> = _state
 
-    override fun setTimeOut(timeOut: TimeOut) {
-        viewModelScope.launch {
-            _state.update {
-                (_state.value as SettingsContract.SettingsStateWithContent)
-                    .copy(timeOut = SettingsContract.ValidTimeInput(timeOut.timeOut))
-            }
-        }
-    }
-
+    override fun setTimeOut(timeOut: TimeOut) {}
     override fun setSnooze(snooze: Snooze) {}
-
     override fun setTheme(theme: Theme) {}
-
     override fun save() {}
 
     override fun <T : CommandContract.CommandReceiver> runCommand(command: CommandContract.Command<T>) {}

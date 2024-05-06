@@ -9,10 +9,13 @@ package org.acyb.sayit.app.atom
 import androidx.activity.ComponentActivity
 import androidx.compose.ui.test.isDialog
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
+import androidx.compose.ui.test.onNodeWithContentDescription
+import androidx.compose.ui.test.onNodeWithText
 import androidx.test.espresso.Espresso
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.github.takahirom.roborazzi.RoborazziRule
 import com.github.takahirom.roborazzi.captureRoboImage
+import org.acyb.sayit.R
 import org.acyb.sayit.app.molecule.TopAppBarGlobal
 import org.acyb.sayit.app.roborazziOf
 import org.junit.Rule
@@ -32,6 +35,8 @@ class DialogSpec {
     @get:Rule
     val roborazziRule = roborazziOf(composeTestRule, RoborazziRule.CaptureType.None)
 
+    private fun getString(id: Int) = composeTestRule.activity.getString(id)
+
     @Test
     fun `It renders a DialogStandardFillMax`() {
         composeTestRule.setContent {
@@ -47,9 +52,12 @@ class DialogSpec {
             ) {}
         }
 
-        composeTestRule
-            .onNode(isDialog())
-            .captureRoboImage()
+        with(composeTestRule) {
+            onNodeWithText("Dialog").assertExists()
+            onNodeWithContentDescription(getString(R.string.action_close)).assertExists()
+
+            onNode(isDialog()).captureRoboImage()
+        }
     }
 
     @Test
@@ -79,16 +87,13 @@ class DialogSpec {
     @Test
     fun `It renders a DialogStandardFitContent`() {
         composeTestRule.setContent {
-            DialogStandardFitContent(
-                onDismiss = { },
-            ) {
+            DialogStandardFitContent(onDismiss = {}) {
                 TextTitleStandardLarge(text = "Dialog")
             }
         }
 
-        composeTestRule
-            .onNode(isDialog())
-            .captureRoboImage()
+        composeTestRule.onNodeWithText("Dialog").assertExists()
+        composeTestRule.onNode(isDialog()).captureRoboImage()
     }
 
     @Test

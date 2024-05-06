@@ -111,7 +111,7 @@ class IconButtonSpec : RoborazziTest() {
             }
         }
         subjectUnderTest
-            .onNodeWithContentDescription(getString(R.string.action_edit_alarm))
+            .onNodeWithContentDescription(getString(R.string.action_edit))
             .performClick()
 
         hasBeenCalled mustBe true

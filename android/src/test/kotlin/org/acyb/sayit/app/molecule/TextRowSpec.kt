@@ -64,4 +64,24 @@ class TextRowSpec : RoborazziTest() {
         subjectUnderTest.onNodeWithText("Title").assertExists()
         subjectUnderTest.onNodeWithText("Information").assertExists()
     }
+
+    @Test
+    fun `It renders TextRowInfo`() {
+        subjectUnderTest.setContent {
+            TextRowInfo(text = "TextRowInfo")
+        }
+
+        subjectUnderTest.onNodeWithText("TextRowInfo")
+            .assertExists()
+    }
+
+    @Test
+    fun `It renders TextRowWarning`() {
+        subjectUnderTest.setContent {
+            TextRowWarning(text = "TextRowWarning")
+        }
+
+        subjectUnderTest.onNodeWithText("TextRowWarning")
+            .assertExists()
+    }
 }

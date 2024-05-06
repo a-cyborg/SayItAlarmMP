@@ -42,16 +42,4 @@ class CardSpec : RoborazziTest() {
         subjectUnderTest.onNodeWithText("CardStandardCentered")
             .assertExists()
     }
-
-    @Test
-    fun `It renders CardSubtle with given content`() {
-        subjectUnderTest.setContent {
-            CardSubtle {
-                TextDisplayStandardLarge(text = "CardSubtle")
-            }
-        }
-
-        subjectUnderTest.onNodeWithText("CardSubtle")
-            .assertExists()
-    }
 }

@@ -12,5 +12,5 @@ import androidx.compose.ui.tooling.preview.Preview
 @Preview
 @Composable
 fun InfoTextCardPreview() {
-    InfoTextCard(text = "TextCardStandardHeadline")
+    TextRowInfo(text = "TextCardStandardHeadline")
 }

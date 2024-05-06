@@ -10,6 +10,8 @@ import androidx.activity.ComponentActivity
 import androidx.compose.ui.test.isDialog
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.compose.ui.test.onNodeWithContentDescription
+import androidx.compose.ui.test.onNodeWithText
+import androidx.compose.ui.test.performClick
 import androidx.test.espresso.Espresso
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.github.takahirom.roborazzi.RoborazziRule
@@ -58,8 +60,74 @@ class PopUpPickerSpec {
         }
 
         composeTestRule
+            .onNodeWithContentDescription(getString(R.string.component_wheel_picker))
+            .assertExists()
+
+        composeTestRule
             .onNode(isDialog())
             .captureRoboImage()
+    }
+
+    @Test
+    fun `Given PopUpPickerStandardWheel confirm click it propagates the given onConfirm and onDismiss action`() {
+        var onConfirmHasBeenCalled = false
+        var onCancelHasBeenConfirmed = false
+
+        // Given
+        composeTestRule.setContent {
+            PopUpPickerStandardWheel(
+                title = "Colors",
+                info = "My favorite color is",
+                pickerValues = colors,
+                pickerItemRow = { TextDisplayStandardSmall(it) },
+                onDismiss = {
+                    onCancelHasBeenConfirmed = true
+                },
+                onConfirm = { _ ->
+                    onConfirmHasBeenCalled = true
+                },
+            )
+        }
+
+        // When
+        composeTestRule
+            .onNodeWithText(getString(R.string.confirm))
+            .performClick()
+
+        // Then
+        onConfirmHasBeenCalled mustBe true
+        onCancelHasBeenConfirmed mustBe true
+    }
+
+    @Test
+    fun `Given PopUpPickerStandardWheel cancel click it propagates the given onDismiss action`() {
+        var onConfirmHasBeenCalled = false
+        var onCancelHasBeenConfirmed = false
+
+        // Given
+        composeTestRule.setContent {
+            PopUpPickerStandardWheel(
+                title = "Colors",
+                info = "My favorite color is",
+                pickerValues = colors,
+                pickerItemRow = { TextDisplayStandardSmall(it) },
+                onDismiss = {
+                    onCancelHasBeenConfirmed = true
+                },
+                onConfirm = { _ ->
+                    onConfirmHasBeenCalled = true
+                },
+            )
+        }
+
+        // When
+        composeTestRule
+            .onNodeWithText(getString(R.string.cancel))
+            .performClick()
+
+        // Then
+        onConfirmHasBeenCalled mustBe false
+        onCancelHasBeenConfirmed mustBe true
     }
 
     @Test
@@ -82,23 +150,5 @@ class PopUpPickerSpec {
         Espresso.pressBack()
 
         hasBeenCalled mustBe true
-    }
-
-    @Test
-    fun `Given PopUpPickerStandardWheel displays wheel picker`() {
-        composeTestRule.setContent {
-            PopUpPickerStandardWheel(
-                title = "Colors",
-                info = "My favorite color is",
-                pickerValues = colors,
-                pickerItemRow = { TextDisplayStandardSmall(it) },
-                onDismiss = {},
-                onConfirm = { _ -> },
-            )
-        }
-
-        composeTestRule
-            .onNodeWithContentDescription(getString(R.string.component_wheel_picker))
-            .assertExists()
     }
 }

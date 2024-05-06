@@ -20,3 +20,15 @@ fun TextRowTimeDurationPreview() {
 fun TextRowTitleAndInfoPreview() {
     TextRowTitleAndInfo(title = "Title", info = "Additional information.")
 }
+
+@Preview
+@Composable
+fun TextRowInfoPreview() {
+    TextRowInfo(text = "TextRowInfo")
+}
+
+@Preview
+@Composable
+fun TextRowWarningPreview() {
+    TextRowWarning(text = "TextRowInfo")
+}

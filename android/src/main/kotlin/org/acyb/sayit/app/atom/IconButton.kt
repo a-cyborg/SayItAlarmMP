@@ -53,7 +53,7 @@ fun IconButtonEdit(onClick: () -> Unit) {
         Icon(
             imageVector = Icon.arrowRight,
             tint = Color.text.attention,
-            contentDescription = stringResource(id = R.string.action_edit_alarm),
+            contentDescription = stringResource(id = R.string.action_edit),
         )
     }
 }

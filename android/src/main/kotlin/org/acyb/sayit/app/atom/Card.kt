@@ -39,29 +39,13 @@ fun CardStandardCentered(content: @Composable () -> Unit) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = Spacing.l, vertical = Spacing.l),
+            .padding(Spacing.l),
         shape = Shape.Card.primary,
         backgroundColor = Color.surface.standard,
         elevation = Elevation.secondLevel,
     ) {
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-        ) {
+        Column(horizontalAlignment = Alignment.CenterHorizontally) {
             content()
         }
-    }
-}
-
-@Composable
-fun CardSubtle(content: @Composable () -> Unit) {
-    Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = Spacing.m, vertical = Spacing.l),
-        shape = Shape.Card.primary,
-        backgroundColor = Color.surface.subtle,
-        elevation = Elevation.secondLevel,
-    ) {
-        content()
     }
 }
