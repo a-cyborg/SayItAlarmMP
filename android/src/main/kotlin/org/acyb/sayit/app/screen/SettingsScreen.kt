@@ -207,7 +207,7 @@ fun SettingsScreen(
             }
 
             is SettingsContract.Error -> {
-                val errorMessage = (state.value as SettingsContract.Error).detail
+                val errorMessage = (state.value as SettingsContract.Error).error.name
                 TextRowWarning(text = errorMessage)
             }
         }

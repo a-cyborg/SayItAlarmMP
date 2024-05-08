@@ -39,7 +39,5 @@ internal class SettingsViewModelFake(
 
     override fun setTheme(theme: Theme) {}
 
-    override fun save() {}
-
     override fun <T : CommandContract.CommandReceiver> runCommand(command: CommandContract.Command<T>) {}
 }

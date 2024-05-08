@@ -146,7 +146,7 @@ class SettingsScreenSpec {
     @Test
     fun `Given viewModel state error it displays error message`() = runTest {
         // Given
-        val error = SettingsContract.SettingsError.INITIAL_SETTINGS_UNRESOLVED.name
+        val error = SettingsContract.SettingsError.INITIAL_SETTINGS_UNRESOLVED
         val state = SettingsContract.Error(error)
         val viewModel = SettingsViewModelFake(this, state)
 
@@ -160,7 +160,7 @@ class SettingsScreenSpec {
             onNodeWithText(getString(R.string.settings)).assertExists()
             onNodeWithContentDescription(getString(R.string.action_navigate_back)).assertExists()
 
-            onNodeWithText(error).assertExists()
+            onNodeWithText(error.name).assertExists()
 
             onNodeWithText(getString(R.string.about)).assertExists()
             onNodeWithText(getString(R.string.version)).assertExists()

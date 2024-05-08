@@ -22,10 +22,6 @@ interface SettingsCommandContract {
     fun interface SetTheme : CommandContract.CommandReceiver {
         fun setTheme(theme: Theme)
     }
-
-    fun interface Save : CommandContract.CommandReceiver {
-        fun save()
-    }
 }
 
 data class SetTimeOutCommand(val timeOut: Int) : CommandContract.Command<SettingsCommandContract.SetTimeOut> {
@@ -43,11 +39,5 @@ data class SetSnoozeCommand(val snooze: Int) : CommandContract.Command<SettingsC
 data class SetThemeCommand(val theme: Theme) : CommandContract.Command<SettingsCommandContract.SetTheme> {
     override fun execute(receiver: SettingsCommandContract.SetTheme) {
         receiver.setTheme(theme)
-    }
-}
-
-data object SaveCommand : CommandContract.Command<SettingsCommandContract.Save> {
-    override fun execute(receiver: SettingsCommandContract.Save) {
-        receiver.save()
     }
 }

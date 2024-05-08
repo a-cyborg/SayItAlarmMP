@@ -29,7 +29,7 @@ fun SettingsScreenPreview() {
 @Composable
 fun SettingsScreenErrorStatePreview() {
     val settingsStateWithContent = SettingsContract.Error(
-        SettingsContract.SettingsError.INITIAL_SETTINGS_UNRESOLVED.name,
+        SettingsContract.SettingsError.INITIAL_SETTINGS_UNRESOLVED,
     )
 
     SettingsScreen(

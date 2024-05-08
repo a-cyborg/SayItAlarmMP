@@ -9,7 +9,7 @@
     <string name="app_name">SayIt</string>
     <!-- Informational Text -->
     <string name="info_next_alarm_time">After %s hours and %s minutes,\n the alarm will go off.</string>
-    <string name="info_timeout">The alarm will stop after ringing for</string>
+    <string name="info_timeout">The alarm will stop ringing after</string>
     <string name="info_snooze">Alarm will ring again after"</string>
     <!-- Label -->
     <string name="alarms">Alarms</string>

@@ -8,24 +8,23 @@ package org.a_cyb.sayit.presentation
 
 import kotlinx.coroutines.flow.StateFlow
 import org.a_cyb.sayit.entity.Theme
-import org.a_cyb.sayit.presentation.SettingsCommandContract.Save
 import org.a_cyb.sayit.presentation.SettingsCommandContract.SetSnooze
 import org.a_cyb.sayit.presentation.SettingsCommandContract.SetTheme
 import org.a_cyb.sayit.presentation.SettingsCommandContract.SetTimeOut
 
 interface SettingsContract {
-    interface SettingsViewModel : SetTimeOut, SetSnooze, SetTheme, Save, CommandContract.CommandExecutor {
+    interface SettingsViewModel : SetTimeOut, SetSnooze, SetTheme, CommandContract.CommandExecutor {
         val state: StateFlow<SettingsState>
     }
 
     enum class SettingsError {
         INITIAL_SETTINGS_UNRESOLVED,
-        UNABLE_RESOLVE_SETTINGS_STATE_WITH_CONTENT,
+        SETTINGS_STATE_WITH_CONTENT_UNRESOLVED,
     }
 
     interface SettingsState
     data object Initial : SettingsState
-    data class Error(val detail: String) : SettingsState
+    data class Error(val error: SettingsError) : SettingsState
 
     interface TimeInput {
         val input: Int

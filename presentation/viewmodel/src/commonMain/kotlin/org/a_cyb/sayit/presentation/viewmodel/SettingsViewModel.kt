@@ -23,7 +23,7 @@ import org.a_cyb.sayit.presentation.SettingsContract.Initial
 import org.a_cyb.sayit.presentation.SettingsContract.InvalidTimeInput
 import org.a_cyb.sayit.presentation.SettingsContract.SettingsError
 import org.a_cyb.sayit.presentation.SettingsContract.SettingsError.INITIAL_SETTINGS_UNRESOLVED
-import org.a_cyb.sayit.presentation.SettingsContract.SettingsError.UNABLE_RESOLVE_SETTINGS_STATE_WITH_CONTENT
+import org.a_cyb.sayit.presentation.SettingsContract.SettingsError.SETTINGS_STATE_WITH_CONTENT_UNRESOLVED
 import org.a_cyb.sayit.presentation.SettingsContract.SettingsState
 import org.a_cyb.sayit.presentation.SettingsContract.SettingsStateWithContent
 import org.a_cyb.sayit.presentation.SettingsContract.TimeInput
@@ -39,11 +39,11 @@ internal class SettingsViewModel(
 
     init {
         interactor.settings
-            .onEach(::initState)
+            .onEach(::updateState)
             .launchIn(scope)
     }
 
-    private fun initState(settingsResult: Result<Settings>) {
+    private fun updateState(settingsResult: Result<Settings>) {
         settingsResult
             .onSuccess { settings -> _state.update { settings.toStateWithContent() } }
             .onFailure { throwable -> _state.update { throwable.toErrorState(INITIAL_SETTINGS_UNRESOLVED) } }
@@ -57,7 +57,7 @@ internal class SettingsViewModel(
         )
 
     private fun Throwable.toErrorState(settingsError: SettingsError): SettingsState =
-        Error(detail = "$settingsError message=$message, cause=$cause")
+        Error(error = settingsError)
 
     @Suppress("MagicNumber")
     private fun TimeOut.toValidatedTimeInput(): TimeInput =
@@ -76,40 +76,26 @@ internal class SettingsViewModel(
         }
 
     override fun setTimeOut(timeOut: TimeOut) {
-        updateContentOrError { copy(timeOut = timeOut.toValidatedTimeInput()) }
+        updateContentOrError { interactor.setTimeOut(timeOut, scope) }
     }
 
     override fun setSnooze(snooze: Snooze) {
-        updateContentOrError { copy(snooze = snooze.toValidatedTimeInput()) }
+        updateContentOrError { interactor.setSnooze(snooze, scope) }
     }
 
     override fun setTheme(theme: Theme) {
-        updateContentOrError { copy(theme = theme) }
+        updateContentOrError { interactor.setTheme(theme, scope) }
     }
 
-    private fun updateContentOrError(updateAction: SettingsStateWithContent.() -> SettingsStateWithContent) {
-        _state.update {
-            (state.value as? SettingsStateWithContent)
-                ?.updateAction()
-                ?: IllegalStateException().toErrorState(UNABLE_RESOLVE_SETTINGS_STATE_WITH_CONTENT)
+    private fun updateContentOrError(updateContent: () -> Unit) {
+        if (state.value !is SettingsStateWithContent) {
+            _state.update {
+                IllegalStateException().toErrorState(SETTINGS_STATE_WITH_CONTENT_UNRESOLVED)
+            }
+        } else {
+            updateContent()
         }
     }
-
-    override fun save() {
-        if (state.value is SettingsStateWithContent) {
-            interactor.save(
-                settings = (state.value as SettingsStateWithContent).toSettings(),
-                scope = scope,
-            )
-        }
-    }
-
-    private fun SettingsStateWithContent.toSettings() =
-        Settings(
-            timeOut = TimeOut(timeOut.input),
-            snooze = Snooze(snooze.input),
-            theme = theme,
-        )
 
     override fun <T : CommandContract.CommandReceiver> runCommand(command: CommandContract.Command<T>) {
         @Suppress("UNCHECKED_CAST")

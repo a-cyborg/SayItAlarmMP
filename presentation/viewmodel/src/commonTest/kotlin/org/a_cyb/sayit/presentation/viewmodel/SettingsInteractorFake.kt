@@ -11,24 +11,46 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.launch
 import org.a_cyb.sayit.entity.Settings
+import org.a_cyb.sayit.entity.Snooze
+import org.a_cyb.sayit.entity.Theme
+import org.a_cyb.sayit.entity.TimeOut
 import org.a_cyb.sayit.presentation.interactor.SettingsInteractorContract
 
 class SettingsInteractorFake(
-    private val initialSettings: Result<Settings>,
+    results: List<Result<Settings>>,
+    scope: CoroutineScope,
 ) : SettingsInteractorContract {
+
+    private val results = results.toMutableList()
 
     private val _settings: MutableSharedFlow<Result<Settings>> = MutableSharedFlow()
     override val settings: SharedFlow<Result<Settings>> = _settings
 
+    init {
+        scope.launch { load(this) }
+    }
+
     override fun load(scope: CoroutineScope) {
         scope.launch {
-            _settings.emit(initialSettings)
+            _settings.emit(results.removeFirst())
         }
     }
 
-    override fun save(settings: Settings, scope: CoroutineScope) {
+    override fun setTimeOut(timeOut: TimeOut, scope: CoroutineScope) {
         scope.launch {
-            _settings.emit(Result.success(settings))
+            _settings.emit(results.removeFirst())
+        }
+    }
+
+    override fun setSnooze(snooze: Snooze, scope: CoroutineScope) {
+        scope.launch {
+            _settings.emit(results.removeFirst())
+        }
+    }
+
+    override fun setTheme(theme: Theme, scope: CoroutineScope) {
+        scope.launch {
+            _settings.emit(results.removeFirst())
         }
     }
 }

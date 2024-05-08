@@ -26,7 +26,6 @@ class SettingsViewModelFake(
     override fun setTimeOut(timeOut: TimeOut) {}
     override fun setSnooze(snooze: Snooze) {}
     override fun setTheme(theme: Theme) {}
-    override fun save() {}
 
     override fun <T : CommandContract.CommandReceiver> runCommand(command: CommandContract.Command<T>) {}
 }
