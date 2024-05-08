@@ -25,9 +25,12 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import org.a_cyb.sayit.entity.Snooze
 import org.a_cyb.sayit.entity.Theme
-import org.a_cyb.sayit.entity.TimeOut
+import org.a_cyb.sayit.presentation.CommandContract.Command
+import org.a_cyb.sayit.presentation.CommandContract.CommandReceiver
+import org.a_cyb.sayit.presentation.SetSnoozeCommand
+import org.a_cyb.sayit.presentation.SetThemeCommand
+import org.a_cyb.sayit.presentation.SetTimeOutCommand
 import org.a_cyb.sayit.presentation.SettingsContract
 import org.a_cyb.sayit.presentation.SettingsContract.SettingsStateWithContent
 import org.a_cyb.sayit.presentation.SettingsContract.SettingsViewModel
@@ -58,76 +61,76 @@ private fun SettingsTopAppBar(onNavigateBack: () -> Unit) {
 
 @Suppress("MagicNumber")
 @Composable
-fun PanelItemTimeOut(value: Int, onValueEdit: (Int) -> Unit) {
+fun PanelItemTimeOut(value: Int, execute: (Command<out CommandReceiver>) -> Unit) {
     val timeOuts = (30..300).toList()
-    var showEditActionContent by remember { mutableStateOf(false) }
+    var showPopUpPicker by remember { mutableStateOf(false) }
 
     PanelRowStandard(
         valueLabel = stringResource(id = R.string.timeout),
         value = stringResource(id = R.string.minute_short, value),
     ) {
-        IconButtonEdit { showEditActionContent = true }
+        IconButtonEdit { showPopUpPicker = true }
     }
 
-    if (showEditActionContent) {
+    if (showPopUpPicker) {
         PopUpPickerStandardWheel(
             title = stringResource(id = R.string.timeout),
             info = stringResource(id = R.string.info_timeout),
             pickerValues = (30..300).toList(),
             pickerInitIdx = timeOuts.indexOf(value),
             pickerItemRow = { TextRowTimeDuration(minutes = it) },
-            onDismiss = { showEditActionContent = false },
-            onConfirm = { onValueEdit(it) },
+            onDismiss = { showPopUpPicker = false },
+            onConfirm = { execute(SetTimeOutCommand(it)) },
         )
     }
 }
 
 @Suppress("MagicNumber")
 @Composable
-fun PanelItemSnooze(value: Int, onValueEdit: (Int) -> Unit) {
+fun PanelItemSnooze(value: Int, execute: (Command<out CommandReceiver>) -> Unit) {
     val snoozes = (5..60).toList()
-    var showEditActionContent by remember { mutableStateOf(false) }
+    var showPopUpPicker by remember { mutableStateOf(false) }
 
     PanelRowStandard(
         valueLabel = stringResource(id = R.string.snooze),
         value = stringResource(id = R.string.minute_short, value),
     ) {
-        IconButtonEdit { showEditActionContent = true }
+        IconButtonEdit { showPopUpPicker = true }
     }
 
-    if (showEditActionContent) {
+    if (showPopUpPicker) {
         PopUpPickerStandardWheel(
             title = stringResource(id = R.string.snooze),
             info = stringResource(id = R.string.info_snooze),
             pickerValues = snoozes,
             pickerInitIdx = snoozes.indexOf(value),
             pickerItemRow = { TextRowTimeDuration(minutes = it) },
-            onDismiss = { showEditActionContent = false },
-            onConfirm = { onValueEdit(it) },
+            onDismiss = { showPopUpPicker = false },
+            onConfirm = { execute(SetSnoozeCommand(it)) },
         )
     }
 }
 
 @Composable
-fun PanelItemTheme(value: Theme, onValueEdit: (Theme) -> Unit) {
+fun PanelItemTheme(value: Theme, execute: (Command<out CommandReceiver>) -> Unit) {
     val themes = Theme.entries.map { it.name.toCamelCase() }
-    var showEditActionContent by remember { mutableStateOf(false) }
+    var displayPopUpPicker by remember { mutableStateOf(false) }
 
     PanelRowStandard(
         valueLabel = stringResource(id = R.string.theme),
         value = value.name.toCamelCase(),
     ) {
-        IconButtonEdit { showEditActionContent = true }
+        IconButtonEdit { displayPopUpPicker = true }
     }
 
-    if (showEditActionContent) {
+    if (displayPopUpPicker) {
         PopUpPickerStandardWheel(
             title = stringResource(id = R.string.theme),
             pickerValues = themes,
             pickerInitIdx = themes.indexOf(value.name.toCamelCase()),
             pickerItemRow = { TextTitleStandardLarge(it) },
-            onDismiss = { showEditActionContent = false },
-            onConfirm = { onValueEdit(Theme.valueOf(it.uppercase())) },
+            onDismiss = { displayPopUpPicker = false },
+            onConfirm = { execute(SetThemeCommand(Theme.valueOf(it.uppercase()))) },
         )
     }
 }
@@ -139,15 +142,13 @@ fun SettingsPanel(
     timeOut: Int,
     snooze: Int,
     theme: Theme,
-    onTImeOutChange: (Int) -> Unit,
-    onSnoozeChange: (Int) -> Unit,
-    onThemeChange: (Theme) -> Unit,
+    executor: (Command<out CommandReceiver>) -> Unit,
 ) {
     PanelStandard(
         panelItems = listOf(
-            { PanelItemTimeOut(value = timeOut, onValueEdit = onTImeOutChange) },
-            { PanelItemSnooze(value = snooze, onValueEdit = onSnoozeChange) },
-            { PanelItemTheme(value = theme, onValueEdit = onThemeChange) },
+            { PanelItemTimeOut(value = timeOut, execute = executor) },
+            { PanelItemSnooze(value = snooze, execute = executor) },
+            { PanelItemTheme(value = theme, execute = executor) },
         ),
     )
 }
@@ -165,7 +166,7 @@ fun PanelItemAbout() {
 fun PanelItemVersion() {
     PanelRowStandard(
         valueLabel = stringResource(id = R.string.version),
-        value = BuildConfig.VERSION_NAME
+        value = BuildConfig.VERSION_NAME,
     )
 }
 
@@ -204,9 +205,7 @@ fun SettingsScreen(
                     timeOut = settings.timeOut.input,
                     snooze = settings.snooze.input,
                     theme = settings.theme,
-                    onTImeOutChange = { viewModel.setTimeOut(TimeOut(it)) },
-                    onSnoozeChange = { viewModel.setSnooze(Snooze(it)) },
-                    onThemeChange = { viewModel.setTheme(it) },
+                    executor = { viewModel.runCommand(it) },
                 )
             }
 

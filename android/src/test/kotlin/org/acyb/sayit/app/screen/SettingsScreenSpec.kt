@@ -10,13 +10,18 @@ import androidx.activity.ComponentActivity
 import androidx.compose.ui.test.isRoot
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.compose.ui.test.onAllNodesWithContentDescription
+import androidx.compose.ui.test.onAllNodesWithText
 import androidx.compose.ui.test.onLast
 import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
+import androidx.compose.ui.test.onParent
 import androidx.compose.ui.test.performClick
+import androidx.compose.ui.test.performScrollToIndex
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.github.takahirom.roborazzi.RoborazziRule
 import com.github.takahirom.roborazzi.captureRoboImage
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.runTest
 import org.a_cyb.sayit.entity.Theme
 import org.a_cyb.sayit.presentation.SettingsContract
@@ -30,6 +35,7 @@ import org.robolectric.annotation.Config
 import org.robolectric.annotation.GraphicsMode
 import tech.antibytes.util.test.mustBe
 
+@OptIn(ExperimentalCoroutinesApi::class)
 @RunWith(AndroidJUnit4::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
 @Config(sdk = [33])
@@ -50,7 +56,7 @@ class SettingsScreenSpec {
     private fun getString(id: Int) = composeTestRule.activity.getString(id)
 
     @Test
-    fun `Given viewModel state settingsStateWithContent it displays all content`() = runTest {
+    fun `Given the viewModel state settingsStateWithContent it displays all content`() = runTest {
         // Given
         val viewModel = SettingsViewModelFake(this, stateWithContent)
 
@@ -74,15 +80,15 @@ class SettingsScreenSpec {
             onNodeWithText("15 Min").assertExists()
             onNodeWithText("Light").assertExists()
 
-            onAllNodesWithContentDescription(getString(R.string.action_edit))
-                .fetchSemanticsNodes().size mustBe 4
+            onAllNodesWithContentDescription(getString(R.string.action_edit)).fetchSemanticsNodes().size mustBe 4
 
             onNode(isRoot()).captureRoboImage()
         }
     }
 
+    // PanelItem : TimeOut
     @Test
-    fun `Given timeout edit click it displays PopUpPickerStandardWheel`() = runTest {
+    fun `Given panelItemTimeOut edit button click it displays PopUpPickerStandardWheel`() = runTest {
         // Given
         val viewModel = SettingsViewModelFake(this, stateWithContent)
 
@@ -90,13 +96,11 @@ class SettingsScreenSpec {
             SettingsScreen(viewModel = viewModel)
         }
 
-        // When
-        composeTestRule
-            .onAllNodesWithContentDescription(getString(R.string.action_edit))[0]
-            .performClick()
-
-        // Then
         with(composeTestRule) {
+            // When
+            onAllNodesWithContentDescription(getString(R.string.action_edit))[0].performClick()
+
+            // Then
             onNodeWithText(getString(R.string.info_timeout)).assertExists()
             onNodeWithContentDescription(getString(R.string.component_wheel_picker)).assertExists()
 
@@ -105,7 +109,7 @@ class SettingsScreenSpec {
     }
 
     @Test
-    fun `Given snooze edit click it displays PopUpPickerStandardWheel`() = runTest {
+    fun `Given timeOut popUpPicker is displayed and onConfirm click it executes setTimeOutCommand`() = runTest {
         // Given
         val viewModel = SettingsViewModelFake(this, stateWithContent)
 
@@ -113,20 +117,42 @@ class SettingsScreenSpec {
             SettingsScreen(viewModel = viewModel)
         }
 
-        // When
-        composeTestRule
-            .onAllNodesWithContentDescription(getString(R.string.action_edit))[1]
-            .performClick()
-
-        // Then
         with(composeTestRule) {
+            onAllNodesWithContentDescription(getString(R.string.action_edit))[0].performClick()
+
+            // When
+            // Scroll up to 44 min
+            onAllNodesWithText(getString(R.string.hour_abbr))[0].onParent().performScrollToIndex(13)
+            onNodeWithText(getString(R.string.confirm)).performClick()
+            advanceUntilIdle()
+
+            // Then
+            viewModel.executed mustBe SettingsViewModelFake.ExecutedCommand.SET_TIMEOUT
+            onNodeWithText("44 Min").assertExists()
+        }
+    }
+
+    // PanelItem : Snooze
+    @Test
+    fun `Given panelItemSnooze edit button click it displays PopUpPickerStandardWheel`() = runTest {
+        // Given
+        val viewModel = SettingsViewModelFake(this, stateWithContent)
+
+        composeTestRule.setContent {
+            SettingsScreen(viewModel = viewModel)
+        }
+
+        with(composeTestRule) {
+            // When
+            onAllNodesWithContentDescription(getString(R.string.action_edit))[1].performClick()
+
+            // Then
             onNodeWithText(getString(R.string.info_snooze)).assertExists()
             onNodeWithContentDescription(getString(R.string.component_wheel_picker)).assertExists()
         }
     }
 
-    @Test
-    fun `Given theme edit click it displays PopUpPickerStandardWheel`() = runTest {
+    fun `Given snooze popUpPicker is displayed and onConfirm click it executes setSnoozeCommand`() = runTest {
         // Given
         val viewModel = SettingsViewModelFake(this, stateWithContent)
 
@@ -134,15 +160,55 @@ class SettingsScreenSpec {
             SettingsScreen(viewModel = viewModel)
         }
 
-        // When
-        composeTestRule
-            .onAllNodesWithContentDescription(getString(R.string.action_edit))[2]
-            .performClick()
-
-        // Then
         with(composeTestRule) {
+            onAllNodesWithContentDescription(getString(R.string.action_edit))[1].performClick()
+
+            // When
+            onNodeWithText(getString(R.string.confirm)).performClick()
+            advanceUntilIdle()
+
+            // Then
+            viewModel.executed mustBe SettingsViewModelFake.ExecutedCommand.SET_SNOOZE
+        }
+    }
+
+    // PanelItem : Theme
+    @Test
+    fun `Given panelItemTheme edit button click it displays PopUpPickerStandardWheel`() = runTest {
+        // Given
+        val viewModel = SettingsViewModelFake(this, stateWithContent)
+
+        composeTestRule.setContent {
+            SettingsScreen(viewModel = viewModel)
+        }
+
+        with(composeTestRule) {
+            // When
+            onAllNodesWithContentDescription(getString(R.string.action_edit))[2].performClick()
+
+            // Then
             onNodeWithText("Dark").assertExists()
             onNodeWithContentDescription(getString(R.string.component_wheel_picker)).assertExists()
+        }
+    }
+
+    fun `Given theme popUpPicker is displayed and onConfirm click it executes setSnoozeCommand`() = runTest {
+        // Given
+        val viewModel = SettingsViewModelFake(this, stateWithContent)
+
+        composeTestRule.setContent {
+            SettingsScreen(viewModel = viewModel)
+        }
+
+        with(composeTestRule) {
+            onAllNodesWithContentDescription(getString(R.string.action_edit))[2].performClick()
+
+            // When
+            onNodeWithText(getString(R.string.confirm)).performClick()
+            advanceUntilIdle()
+
+            // Then
+            viewModel.executed mustBe SettingsViewModelFake.ExecutedCommand.SET_THEME
         }
     }
 

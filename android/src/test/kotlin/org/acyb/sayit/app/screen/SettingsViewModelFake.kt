@@ -26,7 +26,13 @@ internal class SettingsViewModelFake(
     private val _state: MutableStateFlow<SettingsContract.SettingsState> = MutableStateFlow(initState)
     override val state: StateFlow<SettingsContract.SettingsState> = _state
 
+    private var _executedCommand = ExecutedCommand.NONE
+    val executed: ExecutedCommand
+        get() = _executedCommand
+
     override fun setTimeOut(timeOut: TimeOut) {
+        _executedCommand = ExecutedCommand.SET_TIMEOUT
+
         viewModelScope.launch {
             _state.update {
                 (_state.value as SettingsContract.SettingsStateWithContent)
@@ -35,9 +41,23 @@ internal class SettingsViewModelFake(
         }
     }
 
-    override fun setSnooze(snooze: Snooze) {}
+    override fun setSnooze(snooze: Snooze) {
+        _executedCommand = ExecutedCommand.SET_SNOOZE
+    }
 
-    override fun setTheme(theme: Theme) {}
+    override fun setTheme(theme: Theme) {
+        _executedCommand = ExecutedCommand.SET_THEME
+    }
 
-    override fun <T : CommandContract.CommandReceiver> runCommand(command: CommandContract.Command<T>) {}
+    override fun <T : CommandContract.CommandReceiver> runCommand(command: CommandContract.Command<T>) {
+        @Suppress("UNCHECKED_CAST")
+        command.execute(this as T)
+    }
+
+    enum class ExecutedCommand {
+        NONE,
+        SET_TIMEOUT,
+        SET_SNOOZE,
+        SET_THEME,
+    }
 }
