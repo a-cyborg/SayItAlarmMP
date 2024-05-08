@@ -1,0 +1,63 @@
+name: Periodic test
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test-mutation:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Cache Gradle
+        uses: gradle/actions/setup-gradle@v3
+        with:
+          cache-read-only: false
+
+      - name: Validate Gradle Wrapper
+        uses: gradle/wrapper-validation-action@v2
+
+      - name: Cache Konan
+        uses: actions/cache@v4
+        with:
+          path: ~/.konan
+          key: ${{ runner.os }}-konan-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-konan-${{ github.sha }}
+            ${{ runner.os }}-konan-
+
+      - name: Cache BuildCache
+        uses: actions/cache@v4
+        with:
+          path: '**/.gradle/build-cache/**'
+          key: ${{ runner.os }}-build-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ github.sha }}
+            ${{ runner.os }}-build-
+
+      - name: Run Owasp Dependency Check
+        run: ./gradlew dependencyCheckAnalyze
+
+      - name: Sonarcloud
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: ./gradlew sonar --info --stacktrace
+
+      - name: Cache Reports
+        uses: actions/cache/save@v4
+        with:
+          path: |
+            **/reports/detekt/**/*.xml
+            **/reports/jacoco/**/*.xml
+            **/reports/security-report/*
+            **/test-results/**/*
+          key: reports-android-${{ github.sha }}

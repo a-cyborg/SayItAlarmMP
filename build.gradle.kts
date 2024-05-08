@@ -14,6 +14,7 @@ import tech.antibytes.gradle.quality.api.CodeAnalysisConfiguration
 
 plugins {
     id("tech.antibytes.gradle.setup")
+    id("org.owasp.dependencycheck") version "9.1.0" apply false
 
     alias(antibytesCatalog.plugins.gradle.antibytes.dependencyHelper)
     alias(antibytesCatalog.plugins.gradle.antibytes.quality)
@@ -44,10 +45,13 @@ allprojects {
 }
 
 allprojects {
+    apply(plugin = "org.owasp.dependencycheck")
+
     afterEvaluate {
         extensions.configure(SonarExtension::class.java) {
             properties {
                 property("sonar.organization", "a-cyborg")
+                property("sonar.exclude", setOf("**/*Contract.kt"))
             }
         }
     }
@@ -56,4 +60,9 @@ allprojects {
 tasks.named<Wrapper>("wrapper") {
     gradleVersion = antibytesCatalog.versions.gradle.gradle.get()
     distributionType = Wrapper.DistributionType.ALL
+}
+
+configure<org.owasp.dependencycheck.gradle.extension.DependencyCheckExtension> {
+    format = org.owasp.dependencycheck.reporting.ReportGenerator.Format.ALL.toString()
+    outputDirectory = "$buildDir/security-report"
 }
