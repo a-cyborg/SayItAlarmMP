@@ -20,6 +20,7 @@ import com.github.takahirom.roborazzi.captureRoboImage
 import kotlinx.coroutines.test.runTest
 import org.a_cyb.sayit.entity.Theme
 import org.a_cyb.sayit.presentation.SettingsContract
+import org.acyb.sayit.BuildConfig
 import org.acyb.sayit.R
 import org.acyb.sayit.app.roborazziOf
 import org.junit.Rule
@@ -140,6 +141,24 @@ class SettingsScreenSpec {
         with(composeTestRule) {
             onNodeWithText("Dark").assertExists()
             onNodeWithContentDescription(getString(R.string.component_wheel_picker)).assertExists()
+        }
+    }
+
+    @Test
+    fun `It displays version name`() = runTest {
+        // Given
+        val viewModel = SettingsViewModelFake(this, stateWithContent)
+        var versionName = ""
+
+        composeTestRule.setContent {
+            // When
+            SettingsScreen(viewModel = viewModel)
+            versionName = BuildConfig.VERSION_NAME
+        }
+
+        // Then
+        with(composeTestRule) {
+            onNodeWithText(versionName).assertExists()
         }
     }
 

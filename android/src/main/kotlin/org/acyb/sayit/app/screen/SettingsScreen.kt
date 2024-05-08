@@ -31,6 +31,7 @@ import org.a_cyb.sayit.entity.TimeOut
 import org.a_cyb.sayit.presentation.SettingsContract
 import org.a_cyb.sayit.presentation.SettingsContract.SettingsStateWithContent
 import org.a_cyb.sayit.presentation.SettingsContract.SettingsViewModel
+import org.acyb.sayit.BuildConfig
 import org.acyb.sayit.R
 import org.acyb.sayit.app.atom.IconButtonEdit
 import org.acyb.sayit.app.atom.IconButtonNavigateBack
@@ -162,7 +163,10 @@ fun PanelItemAbout() {
 
 @Composable
 fun PanelItemVersion() {
-    PanelRowStandard(valueLabel = stringResource(id = R.string.version), value = "")
+    PanelRowStandard(
+        valueLabel = stringResource(id = R.string.version),
+        value = BuildConfig.VERSION_NAME
+    )
 }
 
 @Composable
