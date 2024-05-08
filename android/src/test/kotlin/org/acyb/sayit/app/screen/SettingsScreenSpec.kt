@@ -76,6 +76,8 @@ class SettingsScreenSpec {
 
             onAllNodesWithContentDescription(getString(R.string.action_edit))
                 .fetchSemanticsNodes().size mustBe 4
+
+            onNode(isRoot()).captureRoboImage()
         }
     }
 
