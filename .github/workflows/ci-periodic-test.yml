@@ -2,9 +2,11 @@ name: Periodic test
 
 on:
   workflow_dispatch:
+  schedule:
+    - cron: '30 5 * * 4'
 
 jobs:
-  test-mutation:
+  test-periodic:
     runs-on: ubuntu-latest
 
     steps:
