@@ -51,7 +51,6 @@ allprojects {
         extensions.configure(SonarExtension::class.java) {
             properties {
                 property("sonar.organization", "a-cyborg")
-                property("sonar.exclude", setOf("**/*Contract.kt"))
             }
         }
     }
