@@ -50,7 +50,7 @@ kotlin {
                 implementation(antibytesCatalog.common.kotlinx.coroutines.core)
                 implementation(projects.entity)
                 implementation(projects.presentation)
-                implementation(projects.presentation.interactor)
+                implementation(projects.presentation.tasker)
             }
         }
         val commonTest by getting {

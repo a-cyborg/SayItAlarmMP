@@ -7,28 +7,8 @@
 package org.a_cyb.sayit.presentation
 
 interface ListCommandContract {
-    fun interface LoadAlarms : CommandContract.CommandReceiver {
-        fun loadAlarms()
-    }
-
-    fun interface FetchAlarm : CommandContract.CommandReceiver {
-        fun fetchAlarm(id: Long)
-    }
-
     fun interface DeleteAlarm : CommandContract.CommandReceiver {
-        fun deleteAlarm(id: Long): Int
-    }
-}
-
-object LoadAlarmsCommand : CommandContract.Command<ListCommandContract.LoadAlarms> {
-    override fun execute(receiver: ListCommandContract.LoadAlarms) {
-        receiver.loadAlarms()
-    }
-}
-
-data class FetchAlarmCommand(val id: Long) : CommandContract.Command<ListCommandContract.FetchAlarm> {
-    override fun execute(receiver: ListCommandContract.FetchAlarm) {
-        receiver.fetchAlarm(id)
+        fun deleteAlarm(id: Long)
     }
 }
 

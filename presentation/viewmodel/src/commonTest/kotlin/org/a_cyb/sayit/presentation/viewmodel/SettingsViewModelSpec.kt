@@ -42,7 +42,7 @@ class SettingsViewModelSpec {
         theme = Theme.LIGHT,
     )
     private val fixture = kotlinFixture()
-    private val interactor = SettingsInteractorFake(listOf(Result.success(settings)), TestScope())
+    private val taskerFake = SettingsTaskerFake(listOf(Result.success(settings)), TestScope())
 
     @BeforeTest
     fun setup() {
@@ -56,20 +56,20 @@ class SettingsViewModelSpec {
 
     @Test
     fun `It fulfils SettingsViewModel`() {
-        SettingsViewModel(interactor) fulfils SettingsContract.SettingsViewModel::class
+        SettingsViewModel(taskerFake) fulfils SettingsContract.SettingsViewModel::class
     }
 
     @Test
     fun `It is in the initial state`() {
-        SettingsViewModel(interactor).state.value mustBe Initial
+        SettingsViewModel(taskerFake).state.value mustBe Initial
     }
 
     @Test
-    fun `Given interactor load result success it propagates SettingsStateWithContent state`() = runTest {
+    fun `Given tasker load result success it propagates SettingsStateWithContent state`() = runTest {
         // Given
         val results = listOf(Result.success(settings))
-        val interactor = SettingsInteractorFake(results, this)
-        val viewModel = SettingsViewModel(interactor)
+        val taskerFake = SettingsTaskerFake(results, this)
+        val viewModel = SettingsViewModel(taskerFake)
 
         viewModel.state.test {
             // When
@@ -87,8 +87,8 @@ class SettingsViewModelSpec {
     @Test
     fun `Given interactor load result fail it propagates INITIAL_SETTINGS_UNRESOLVED error state`() = runTest {
         val result = listOf(Result.failure<Settings>(RuntimeException()))
-        val interactor = SettingsInteractorFake(result, this)
-        val viewModel = SettingsViewModel(interactor)
+        val taskerFake = SettingsTaskerFake(result, this)
+        val viewModel = SettingsViewModel(taskerFake)
 
         viewModel.state.test {
             // When
@@ -107,8 +107,8 @@ class SettingsViewModelSpec {
             Result.success(settings),
             Result.success(settings.copy(timeOut = TimeOut(timeOut))),
         )
-        val interactor = SettingsInteractorFake(results, this)
-        val viewModel = SettingsViewModel(interactor)
+        val taskerFake = SettingsTaskerFake(results, this)
+        val viewModel = SettingsViewModel(taskerFake)
 
         viewModel.state.test {
             // When
@@ -133,8 +133,8 @@ class SettingsViewModelSpec {
                 Result.failure(RuntimeException()),
                 Result.failure(IllegalStateException()),
             )
-            val interactor = SettingsInteractorFake(result, this)
-            val viewModel = SettingsViewModel(interactor)
+            val taskerFake = SettingsTaskerFake(result, this)
+            val viewModel = SettingsViewModel(taskerFake)
 
             viewModel.state.test {
                 // When
@@ -154,8 +154,8 @@ class SettingsViewModelSpec {
             Result.success(settings),
             Result.success(settings.copy(snooze = Snooze(snooze))),
         )
-        val interactor = SettingsInteractorFake(results, this)
-        val viewModel = SettingsViewModel(interactor)
+        val taskerFake = SettingsTaskerFake(results, this)
+        val viewModel = SettingsViewModel(taskerFake)
 
         viewModel.state.test {
             // When
@@ -180,8 +180,8 @@ class SettingsViewModelSpec {
                 Result.failure(RuntimeException()),
                 Result.failure(IllegalStateException()),
             )
-            val interactor = SettingsInteractorFake(result, this)
-            val viewModel = SettingsViewModel(interactor)
+            val taskerFake = SettingsTaskerFake(result, this)
+            val viewModel = SettingsViewModel(taskerFake)
 
             viewModel.state.test {
                 // When
@@ -200,8 +200,8 @@ class SettingsViewModelSpec {
             Result.success(settings),
             Result.success(settings.copy(theme = Theme.DARK)),
         )
-        val interactor = SettingsInteractorFake(results, this)
-        val viewModel = SettingsViewModel(interactor)
+        val taskerFake = SettingsTaskerFake(results, this)
+        val viewModel = SettingsViewModel(taskerFake)
 
         viewModel.state.test {
             // When

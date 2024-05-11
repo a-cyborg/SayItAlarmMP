@@ -28,17 +28,17 @@ import org.a_cyb.sayit.presentation.SettingsContract.SettingsState
 import org.a_cyb.sayit.presentation.SettingsContract.SettingsStateWithContent
 import org.a_cyb.sayit.presentation.SettingsContract.TimeInput
 import org.a_cyb.sayit.presentation.SettingsContract.ValidTimeInput
-import org.a_cyb.sayit.presentation.interactor.SettingsInteractorContract
+import org.a_cyb.sayit.presentation.interactor.SettingsTaskerContract
 
 internal class SettingsViewModel(
-    private val interactor: SettingsInteractorContract,
+    private val tasker: SettingsTaskerContract,
 ) : SettingsContract.SettingsViewModel, ViewModel() {
 
     private var _state: MutableStateFlow<SettingsState> = MutableStateFlow(Initial)
     override val state: StateFlow<SettingsState> = _state.asStateFlow()
 
     init {
-        interactor.settings
+        tasker.settings
             .onEach(::updateState)
             .launchIn(scope)
     }
@@ -76,15 +76,15 @@ internal class SettingsViewModel(
         }
 
     override fun setTimeOut(timeOut: TimeOut) {
-        updateContentOrError { interactor.setTimeOut(timeOut, scope) }
+        updateContentOrError { tasker.setTimeOut(timeOut, scope) }
     }
 
     override fun setSnooze(snooze: Snooze) {
-        updateContentOrError { interactor.setSnooze(snooze, scope) }
+        updateContentOrError { tasker.setSnooze(snooze, scope) }
     }
 
     override fun setTheme(theme: Theme) {
-        updateContentOrError { interactor.setTheme(theme, scope) }
+        updateContentOrError { tasker.setTheme(theme, scope) }
     }
 
     private fun updateContentOrError(updateContent: () -> Unit) {

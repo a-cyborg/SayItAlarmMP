@@ -13,7 +13,7 @@ import org.a_cyb.sayit.entity.Snooze
 import org.a_cyb.sayit.entity.Theme
 import org.a_cyb.sayit.entity.TimeOut
 
-interface SettingsInteractorContract {
+interface SettingsTaskerContract {
     val settings: SharedFlow<Result<Settings>>
 
     fun load(scope: CoroutineScope)

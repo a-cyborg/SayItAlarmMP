@@ -14,12 +14,12 @@ import org.a_cyb.sayit.entity.Settings
 import org.a_cyb.sayit.entity.Snooze
 import org.a_cyb.sayit.entity.Theme
 import org.a_cyb.sayit.entity.TimeOut
-import org.a_cyb.sayit.presentation.interactor.SettingsInteractorContract
+import org.a_cyb.sayit.presentation.interactor.SettingsTaskerContract
 
-class SettingsInteractorFake(
+class SettingsTaskerFake(
     results: List<Result<Settings>>,
     scope: CoroutineScope,
-) : SettingsInteractorContract {
+) : SettingsTaskerContract {
 
     private val results = results.toMutableList()
 
