@@ -22,7 +22,7 @@ import org.a_cyb.sayit.presentation.ListContract.ListError.DELETE_ALARM_FAILED
 import org.a_cyb.sayit.presentation.ListContract.ListError.LOAD_ALARMS_FAILED
 import org.a_cyb.sayit.presentation.ListContract.ListState
 import org.a_cyb.sayit.presentation.ListContract.Loaded
-import org.a_cyb.sayit.presentation.interactor.ListTaskerContract
+import org.a_cyb.sayit.presentation.tasker.ListTaskerContract
 
 internal class ListViewModel(
     private val tasker: ListTaskerContract,

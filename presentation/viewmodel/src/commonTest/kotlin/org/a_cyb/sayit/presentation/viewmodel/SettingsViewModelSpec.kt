@@ -29,6 +29,7 @@ import org.a_cyb.sayit.presentation.SettingsContract.Initial
 import org.a_cyb.sayit.presentation.SettingsContract.SettingsError
 import org.a_cyb.sayit.presentation.SettingsContract.SettingsStateWithContent
 import org.a_cyb.sayit.presentation.SettingsContract.ValidTimeInput
+import org.a_cyb.sayit.presentation.viewmodel.TaskerFake.SettingsTaskerFake
 import tech.antibytes.kfixture.fixture
 import tech.antibytes.kfixture.kotlinFixture
 import tech.antibytes.util.test.fulfils

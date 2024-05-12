@@ -28,7 +28,7 @@ import org.a_cyb.sayit.presentation.SettingsContract.SettingsState
 import org.a_cyb.sayit.presentation.SettingsContract.SettingsStateWithContent
 import org.a_cyb.sayit.presentation.SettingsContract.TimeInput
 import org.a_cyb.sayit.presentation.SettingsContract.ValidTimeInput
-import org.a_cyb.sayit.presentation.interactor.SettingsTaskerContract
+import org.a_cyb.sayit.presentation.tasker.SettingsTaskerContract
 
 internal class SettingsViewModel(
     private val tasker: SettingsTaskerContract,

@@ -4,7 +4,7 @@
  * Use of this source code is governed by Apache v2.0
  */
 
-package org.a_cyb.sayit.presentation.viewmodel
+package org.a_cyb.sayit.presentation.viewmodel.TaskerFake
 
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -14,7 +14,7 @@ import org.a_cyb.sayit.entity.Settings
 import org.a_cyb.sayit.entity.Snooze
 import org.a_cyb.sayit.entity.Theme
 import org.a_cyb.sayit.entity.TimeOut
-import org.a_cyb.sayit.presentation.interactor.SettingsTaskerContract
+import org.a_cyb.sayit.presentation.tasker.SettingsTaskerContract
 
 class SettingsTaskerFake(
     results: List<Result<Settings>>,

@@ -6,24 +6,12 @@
 
 package org.acyb.sayit.app.screen
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.safeDrawing
-import androidx.compose.foundation.layout.windowInsetsPadding
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import org.a_cyb.sayit.entity.Theme
 import org.a_cyb.sayit.presentation.CommandContract.Command
@@ -36,20 +24,18 @@ import org.a_cyb.sayit.presentation.SettingsContract.SettingsStateWithContent
 import org.a_cyb.sayit.presentation.SettingsContract.SettingsViewModel
 import org.acyb.sayit.BuildConfig
 import org.acyb.sayit.R
+import org.acyb.sayit.app.atom.ColumnScreenStandard
 import org.acyb.sayit.app.atom.IconButtonEdit
 import org.acyb.sayit.app.atom.IconButtonNavigateBack
 import org.acyb.sayit.app.atom.PanelRowStandard
 import org.acyb.sayit.app.atom.PanelStandard
 import org.acyb.sayit.app.atom.SpacerLarge
-import org.acyb.sayit.app.atom.SpacerMedium
 import org.acyb.sayit.app.atom.SpacerXLarge
-import org.acyb.sayit.app.atom.TextBodyStandardSmall
 import org.acyb.sayit.app.atom.TextTitleStandardLarge
 import org.acyb.sayit.app.molecule.PopUpPickerStandardWheel
 import org.acyb.sayit.app.molecule.TextRowTimeDuration
 import org.acyb.sayit.app.molecule.TextRowWarning
 import org.acyb.sayit.app.molecule.TopAppBarGlobal
-import org.acyb.sayit.app.token.Color
 
 @Composable
 private fun SettingsTopAppBar(onNavigateBack: () -> Unit) {
@@ -181,20 +167,10 @@ fun InfoPanel() {
 }
 
 @Composable
-fun SettingsScreen(
-    viewModel: SettingsViewModel,
-) {
+fun SettingsScreen(viewModel: SettingsViewModel) {
     val state = viewModel.state.collectAsState()
 
-    Column(
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Top,
-        modifier = Modifier
-            .fillMaxSize()
-            .windowInsetsPadding(WindowInsets.safeDrawing)
-            .verticalScroll(rememberScrollState())
-            .background(Color.surface.standard),
-    ) {
+    ColumnScreenStandard {
         SettingsTopAppBar(onNavigateBack = {})
         SpacerLarge()
 
@@ -216,8 +192,5 @@ fun SettingsScreen(
         }
         SpacerXLarge()
         InfoPanel()
-        Spacer(modifier = Modifier.weight(1f))
-        TextBodyStandardSmall(text = stringResource(R.string.app_name))
-        SpacerMedium()
     }
 }

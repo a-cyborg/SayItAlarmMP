@@ -4,14 +4,14 @@
  * Use of this source code is governed by Apache v2.0
  */
 
-package org.a_cyb.sayit.presentation.viewmodel
+package org.a_cyb.sayit.presentation.viewmodel.TaskerFake
 
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.launch
 import org.a_cyb.sayit.entity.Alarm
-import org.a_cyb.sayit.presentation.interactor.ListTaskerContract
+import org.a_cyb.sayit.presentation.tasker.ListTaskerContract
 
 class ListTaskerFake(
     results: List<Result<List<Alarm>>>,
